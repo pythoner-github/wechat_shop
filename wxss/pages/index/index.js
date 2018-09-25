@@ -27,6 +27,7 @@ Page ({
 
     var latitude = options.latitude;
     var longitude = options.longitude;
+    var address = options.address;
 
     if (!latitude || !longitude) {
       wx.getLocation({
@@ -39,7 +40,7 @@ Page ({
           longitude = res.longitude;
 
           that.setDistance(latitude, longitude);
-          that.setAddress(latitude, longitude);
+          that.setAddress(latitude, longitude, address);
         },
 
         fail: function() {
@@ -50,7 +51,7 @@ Page ({
       });
     } else {
       that.setDistance(latitude, longitude);
-      that.setAddress(latitude, longitude);
+      that.setAddress(latitude, longitude, address);
     }
 
     wx.request({
@@ -226,7 +227,7 @@ Page ({
     });
   },
 
-  setAddress: function(latitude, longitude) {
+  setAddress: function(latitude, longitude, address) {
     var that = this;
 
     qqmapwx.reverseGeocoder({
@@ -241,7 +242,11 @@ Page ({
         app.globalData.province = res.result.address_component.province;
         app.globalData.city = res.result.address_component.city;
 
-        that.setData({address: res.result.address_reference.landmark_l2.title});
+        if (!address) {
+          address = res.result.address_reference.landmark_l2.title
+        }
+
+        that.setData({address: address});
       },
 
       fail: function(res) {
