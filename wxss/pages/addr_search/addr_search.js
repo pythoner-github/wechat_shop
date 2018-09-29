@@ -51,12 +51,5 @@ Page ({
     this.setData({
       addrValue : value,
     });
-
-    if (!value && this.data.productData.length == 0) {
-      this.setData({
-        hotKeyShow: false,
-        historyKeyShow: false,
-      });
-    }
   }
 });
