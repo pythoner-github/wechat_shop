@@ -40,10 +40,12 @@ class ProductController extends PublicController {
 
 		//处理产品属性
 		$catlist=array();
+    $commodityAttr=array();//产品库还剩下的产品规格
+	  $attrValueList=array();//产品所有的产品规格
+
 		if($pro['pro_buff']){//如果产品属性有值才进行数据组装
 			$pro_buff = explode(',',$pro['pro_buff']);
-			$commodityAttr=array();//产品库还剩下的产品规格
-			$attrValueList=array();//产品所有的产品规格
+
 			foreach($pro_buff as $key=>$val){
 				$attr_name = M('attribute')->where('id='.intval($val))->getField('attr_name');
 				$guigelist=M('guige')->where("attr_id=".intval($val).' AND pid='.intval($pro['id']))->field("id,name")->select();
