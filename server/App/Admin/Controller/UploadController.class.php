@@ -23,7 +23,7 @@ class UploadController extends PublicController{
 		//上传图片类型
 		switch($type)
 		{
-		   
+
 		   case 'img1':  //活动/商品图片
 		      $array=array(
 			          array(600),
@@ -53,21 +53,21 @@ class UploadController extends PublicController{
 		   break;
 		   default:
 		      $array=array(array((int)$_GET['width'],(int)$_GET['height']));
-		   break;	
+		   break;
 		}
 		try
 		{
 			if($file==''){
 			   throw new \Exception('上传文件不能为空！');
 			}
-			
+
 			if(!$array){
 			   throw new \Exception('没有定义图片尺寸！');
 			}
 			if(!in_array($suffix,$valid_suffix)){
 				 throw new \Exception('不支持该格式的文件上传！');
 				 }
-				 
+
 			$time=time();
 		    $file_url='Data/cache/'.$time.rand(00,99).'.'.$suffix;
 			//dump($file_url);exit;
@@ -77,9 +77,9 @@ class UploadController extends PublicController{
 			   throw new \Exception('文件移动失败！');
 			}
 
-			 
+
 			 $img=new \Org\Util\ImageResize;
-			 
+
 			 // $img_patsh = '../../'.__UPLOAD__.'/';
 			 $dir= __UPLOADAPP__.'UploadFiles/%s/'.date("Ym").'/'.date("d");
 			 //dump($dir);exit;
@@ -87,13 +87,13 @@ class UploadController extends PublicController{
 				 $isdir=sprintf($dir,$i);
 				 if(!is_dir($isdir)) mkdir($isdir,0700,1);
 			 }
-		   
+
 			 $ok=$img->load($file_url);
 			 if(!$ok){
 				 unlink($file_url);
 				 throw new \Exception('错误的图片格式！');
 				}
-			
+
 			 $photo_string='';
 			 $i=0;
 			 foreach($array as $key=>$val){
@@ -102,7 +102,7 @@ class UploadController extends PublicController{
 				}
 				 $photo = sprintf($dir,$i).'/'.$time.'.'.$suffix;
 				 $img->resize($val[0],$val[1]);
-				
+
 				 $img->save($photo);
 				 $photo_string .= $photo.',';
 				 if($type=='img1' and $key==1){
@@ -111,18 +111,18 @@ class UploadController extends PublicController{
 				 $i+=1;
 			 }
 			 $photo_string = str_replace(__UPLOADAPP__,'',trim($photo_string,','));
-			 
+
 			 //释放图片变量
 			 $img->destroy();
-			 
+
 			 //删除缓存
 			 @unlink($file_url);
-			 
+
 			 $json=array(
 			        'returns'=>true,
 					'message'=>$photo_string,
 			        );
-			
+
 		}
 		catch(\Exception $e)
 		{
@@ -157,11 +157,11 @@ class UploadController extends PublicController{
 		$this->assign('img',$img);
 		$this->assign('images_string',$images_string);
 		$this->assign('type',$type);
-		$this->display();	
+		$this->display();
 	}
 	public function img(){
-		
-		$this->display();	
+
+		$this->display();
 	}
 	public function photo_add(){
 		if($_POST['submit']==true){
@@ -170,19 +170,19 @@ class UploadController extends PublicController{
 		  $id=$_GET['id'];
 		  $width=$_GET['width'];
 		  $height=$_GET['height'];
-		  
+
 		  $suffix = strtolower(substr($file['name'],-3));
 		  $valid_suffix = $_GET['type']=='' ? array('png','gif','jpg') : array('.'.$_GET['type']);
 		  //$dir= __UPLOADAPP__.'UploadFiles/%s/'.date("Ym").'/'.date("d");
 		  $dir=$_POST['dir']=='' ? __UPLOADAPP__.'UploadFiles' : __UPLOADAPP__.$_POST['dir'];
-		  
+
 		  try
 		  {
-			 
+
 			 if(!in_array($suffix,$valid_suffix) || $id==''){
 				 throw new \Exception('不支持该格式的文件上传！');
 				 }
-				 
+
 		     if($file['size']>2048000){
 				  throw new \Exception("上传文件大小不能超过2m");
 			  }
@@ -193,11 +193,11 @@ class UploadController extends PublicController{
 			  if(!$v){
 				  throw new \Exception('目录创建失败！');
 			  }
-			  
+
 			  //上传文件名称
 			  $name=date('His').'.'.$suffix;
 			  $url=dir.'/'.$name;
-			  
+
 			  //移动文件
 			  $v=@move_uploaded_file($file['tmp_name'],$url);
 			  if(!$v){
@@ -216,17 +216,17 @@ class UploadController extends PublicController{
 					// throw new Exception('图片的尺寸不符合要求，请按照长:'.$width.'、宽:'.$height.'上传！');
 					  }
 				  $img->destroy();
-				  
+
 				  echo '<script>
 						   parent.document.getElementById("'.$id.'").value="'.str_replace(__UPLOADAPP__,'',$url).'"
 						</script>
-						
+
 						<style>*{margin:0;padding:0;}</style>
-						<font style="font-size:12px; color:#666;">上传成功</font> 
+						<font style="font-size:12px; color:#666;">上传成功</font>
 						<a href="javascript:history.go(-1)" style="font-size:12px; color:#666; text-decoration:none;">重新上传</a>
-						'; 
+						';
 			   }
-			  
+
 		  }
 		  catch(\Exception $e)
 		  {
@@ -239,7 +239,7 @@ class UploadController extends PublicController{
 		}
 		$this->display();
 	}
-	
+
 	public function xheditor(){
 		$inputName='filedata';//表单文件域name
 		$attachDir='./Data/UploadFiles/Uploads';//上传文件保存路径，结尾不要带/
@@ -321,10 +321,10 @@ class UploadController extends PublicController{
 					PHP_VERSION < '4.2.0' && mt_srand((double)microtime() * 1000000);
 					$newFilename=date("YmdHis").mt_rand(1000,9999).'.'.$extension;
 					$targetPath = $attachDir.'/'.$newFilename;
-					
+
 					rename($tempPath,$targetPath);
 					@chmod($targetPath,0755);
-					$targetPath=$this->jsonString(str_replace('./Data','/Data',__ROOT__.$targetPath));
+					$targetPath=$this->jsonString(str_replace('./Data','https://scwhbs.com/Data',__ROOT__.$targetPath));
 					if($immediate=='1')$targetPath='!'.$targetPath;
 					if($msgType==1)$msg="'$targetPath'";
 					else $msg="{'url':'".$targetPath."','localname':'".$this->jsonString($localName)."','id':'1'}";//id参数固定不变，仅供演示，实际项目中可以是数据库ID
@@ -352,5 +352,5 @@ class UploadController extends PublicController{
 			$bytes = $bytes . 'Bytes';
 		}
 		return $bytes;
-	}	
+	}
 }
