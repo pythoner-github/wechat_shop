@@ -136,6 +136,7 @@ App ({
         }
 
         that.d.userId = userId;
+        that.getOrderInfo();
       },
 
       fail: function (e) {
@@ -159,5 +160,31 @@ App ({
 
   onPullDownRefresh: function () {
     wx.stopPullDownRefresh();
+  },
+
+  getOrderInfo: function() {
+    var that = this;
+
+    wx.request({
+      url   : that.d.apiUrl + 'Order/index',
+      method: 'post',
+      data  : {
+        uid       : that.d.userId,
+        order_type: 'receive'
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+
+      success: function(res) {
+        if (res.data.ord.length > 0) {
+          wx.showToast({
+            title: "您的订单已发货，请注意查收!",
+            icon: "none",
+            duration: 3000
+          });
+        }
+      }
+    });
   }
 });

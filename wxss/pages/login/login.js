@@ -2,7 +2,7 @@ var app = getApp();
 
 Page ({
   data: {
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse : wx.canIUse('button.open-type.getUserInfo')
   },
 
   onLoad: function() {
@@ -22,8 +22,6 @@ Page ({
   },
 
   bindGetUserInfo: function(e) {
-    console.log(e.detail.userInfo)
-
     app.globalData.userInfo = e.detail.userInfo;
     typeof cb == "function" && cb(app.globalData.userInfo);
 
