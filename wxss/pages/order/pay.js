@@ -124,6 +124,15 @@ Page ({
     // 创建订单
     var that = this;
 
+    if (that.data.addrId == 0) {
+      wx.showToast({
+         title    : "请选择收获地址！",
+         duration : 3000
+      });
+
+      return;
+    }
+
     wx.request({
       url   : app.d.apiUrl + 'Payment/payment',
       method: 'post',
