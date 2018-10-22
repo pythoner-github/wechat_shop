@@ -15,7 +15,10 @@ Page ({
     productData   : [],
     proCat        : [],
     page          : 2,
-    brand         : []
+    brand         : [],
+
+    time          : 0,
+    order_msg     : ''
   },
 
   onLoad: function (options) {
@@ -257,5 +260,40 @@ Page ({
         console.log(res);
       }
     });
+  },
+
+  getOrdermsg: function() {
+    var that = this;
+
+    wx.request({
+      url   : app.d.apiUrl + 'Index/ordermsg',
+      method: 'post',
+      data  : {
+        time: that.data.time
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+
+      success: function (res) {
+        var time = res.data.time;
+        var orders = res.data.order;
+
+        var msg = "";
+
+        for (order in orders ) {
+          if (msg != "") {
+            msg += "  ";
+          }
+
+          msg += "用户" + order.username + "已下单" + order.productname;
+        }
+
+        that.setData({
+          time     : time,
+          order_msg: msg
+        });
+      }
+    })
   }
 });
