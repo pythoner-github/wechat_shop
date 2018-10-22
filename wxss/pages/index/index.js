@@ -87,6 +87,8 @@ Page ({
         });
       },
     })
+
+    that.getOrdermsg();
   },
 
   onShareAppMessage: function() {
@@ -265,35 +267,37 @@ Page ({
   getOrdermsg: function() {
     var that = this;
 
-    wx.request({
-      url   : app.d.apiUrl + 'Index/ordermsg',
-      method: 'post',
-      data  : {
-        time: that.data.time
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
+    setInterval(function() {
+      wx.request({
+        url   : app.d.apiUrl + 'Index/ordermsg',
+        method: 'post',
+        data  : {
+          time: that.data.time
+        },
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
 
-      success: function (res) {
-        var time = res.data.time;
-        var orders = res.data.order;
+        success: function (res) {
+          var time = res.data.time;
+          var orders = res.data.order;
 
-        var msg = "";
+          var msg = "";
 
-        for (order in orders ) {
-          if (msg != "") {
-            msg += "  ";
+          for (order in orders ) {
+            if (msg != "") {
+              msg += "  ";
+            }
+
+            msg += "用户" + order.username + "已下单" + order.productname;
           }
 
-          msg += "用户" + order.username + "已下单" + order.productname;
+          that.setData({
+            time     : time,
+            order_msg: msg
+          });
         }
-
-        that.setData({
-          time     : time,
-          order_msg: msg
-        });
-      }
-    })
+      })
+    }, 5000);
   }
 });
