@@ -282,14 +282,18 @@ Page ({
           var time = res.data.time;
           var orders = res.data.order;
 
+          //console.log(res.data);
+
           var msg = "";
 
           for (order in orders ) {
-            if (msg != "") {
-              msg += "  ";
-            }
+            if (app.globalData.userInfo != null && order.username != app.globalData.userInfo.nickName) {
+              if (msg != "") {
+                msg += "  ";
+              }
 
-            msg += "用户" + order.username + "已下单" + order.productname;
+              msg += "用户" + order.username + "已下单" + order.productname;
+            }
           }
 
           that.setData({
