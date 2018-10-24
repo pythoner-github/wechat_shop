@@ -89,17 +89,20 @@ class IndexController extends PublicController {
       $orderp=M("order_product");
       $users=M("user");
 
-      $order = $orders->where('addtime>'.$t)->field('id,uid');
+      $order = $orders->where('addtime>'.$t)->field('id,uid')->select();
 
       $order_list = array();
 
       foreach ($order as $n=>$v) {
         $username = $users->where('id='.intval($v['uid']))->getField('name');
-        $prolist = $orderp->where('order_id='.intval($v['id']))->field('name');
+        $prolist = $orderp->where('order_id='.intval($v['id']))->field('name')->select();
 
         foreach ($prolist as $m=>$x) {
-          $order_list['username'] = $username;
-          $order_list['productname'] = $x['name'];
+          $arr = array();
+          $arr['username'] = $username;
+          $arr['productname'] = $x['name'];
+
+          array_push($order_list, $arr);
         }
       }
 
