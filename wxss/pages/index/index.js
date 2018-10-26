@@ -272,7 +272,7 @@ Page ({
         url   : app.d.apiUrl + 'Index/ordermsg',
         method: 'post',
         data  : {
-          time: that.data.time
+          time: this.data.time
         },
         header: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -282,15 +282,21 @@ Page ({
           var time = res.data.time;
           var orders = res.data.order;
 
+          //console.log(res.data);
+
           var msg = "";
 
-          for (order in orders ) {
-            if (msg != "") {
-              msg += "  ";
-            }
+          for (var i = 0; i < orders.length; i++) {
+            if (app.globalData.userInfo != null && orders[i].username != app.globalData.userInfo.nickName) {
+              if (msg != "") {
+                msg += "  ";
+              }
 
-            msg += "用户" + order.username + "已下单" + order.productname;
+              msg += "用户" + orders[i].username + "已下单" + orders[i].productname;
+            }
           }
+
+          //console.log(msg);
 
           that.setData({
             time     : time,
@@ -298,6 +304,6 @@ Page ({
           });
         }
       })
-    }, 5000);
+    }, 300000);
   }
 });

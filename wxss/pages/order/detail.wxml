@@ -7,8 +7,8 @@
     </view>
 
     <view class="df_1">
-      <view class="font_14 mt5 ovh1">{{item.name}}</view>
-      <text class="gm_ovh_1h red pt10">¥{{item.price}}</text>
+      <view class="font_16 mt5 ovh1">{{item.name}}</view>
+      <text class="font_12  pt9">单价：¥{{item.price}}</text>
       <view class="sl">数量：{{item.num}}</view>
     </view>
   </view>
@@ -32,7 +32,13 @@
     <textarea class="min_60" auto-height name="remark" disabled="{{true}}" placeholder="订单备注" value="{{orderData.remark?orderData.remark:'未备注'}}"/>
   </view>
 
-	<view class="zhifu mt10 tc">金额：<span class="font_20 red">¥ {{orderData.price}}</span></view>
+
+	<view class="zhifu mt10 tc">总金额：<span class="font_20 red">¥ {{orderData.price}}</span></view>
+
+  <view class="tishi bg_white mt10 c6 l_h10  font_10 color_blue">
+    提示: 客户您好，您的订单金额仅为预估金额，实际支付金额以称重后为准。
+  </view>
+
 
 	<view class="p_all mt10">
 		<view class="btnGreen">

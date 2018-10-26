@@ -93,6 +93,16 @@
   color         : #666;
 }
 
+.tishi {
+  background    : #fff;
+  margin-bottom : 1px;
+  padding       : 4%;
+  width         : 92%;
+  font-size     : 11px;
+  color         : rgb(57, 69, 236);
+}
+
+
 .font_20 {
   font-size     : 20px;
   font-weight   : bold;
