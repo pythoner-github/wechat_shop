@@ -105,13 +105,6 @@ Page ({
       paytype : 'cash',
     });
 
-    wx.showToast({
-      title: "请您与客服确认!",
-      duration: 3000
-    });
-
-    return false;
-
     this.createProductOrder();
   },
 
@@ -157,16 +150,14 @@ Page ({
           // 创建订单成功
           if (data.arr.pay_type == 'cash') {
               wx.showToast({
-                 title    : "请自行联系商家进行发货!",
+                 title    : "请等待商家发货!",
                  duration : 3000
               });
-
-              return false;
-          }
-
-          if (data.arr.pay_type == 'weixin') {
-            // 微信支付
-            that.wxpay(data.arr);
+          } else {
+            if (data.arr.pay_type == 'weixin') {
+              // 微信支付
+              that.wxpay(data.arr);
+            }
           }
         } else {
           wx.showToast({
