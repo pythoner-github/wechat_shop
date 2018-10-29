@@ -151,7 +151,7 @@ Page ({
           if (data.arr.pay_type == 'cash') {
               wx.showToast({
                  title    : "请等待商家发货!",
-                 duration : 3000
+                 duration : 2000
               });
 
               setTimeout(function() {
