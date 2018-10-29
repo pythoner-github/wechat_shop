@@ -153,6 +153,12 @@ Page ({
                  title    : "请等待商家发货!",
                  duration : 3000
               });
+
+              setTimeout(function() {
+                wx.navigateTo({
+                  url : '/pages/user/dingdan?currentTab=0&otype=pay',
+                });
+              }, 2500);
           } else {
             if (data.arr.pay_type == 'weixin') {
               // 微信支付
