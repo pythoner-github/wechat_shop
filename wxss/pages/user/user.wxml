@@ -64,21 +64,21 @@
 
     <view class="qbdd mt10">
       <navigator url="/pages/address/user-address/user-address">
-        <span class="font_14 c3">地址管理</span>
+        <span class="font_17 c3">地址管理</span>
         <span class="fl_r c9 font_13 l_h20" hover-class="none"> ></span>
       </navigator>
     </view>
 
     <view class="qbdd mt10">
       <navigator url="../rituall/rituall">
-        <span class="font_14 c3">优惠劵</span>
+        <span class="font_17 c3">优惠劵</span>
         <span class="fl_r c9 font_13 l_h20" hover-class="none"> ></span>
       </navigator>
     </view>
 
   <view class="qbdd mt110">
-    <contact-button></contact-button>
-    <span class="font_14 c33">联系客服</span>
+    <!-- <contact-button></contact-button> -->
+    <span class="font_17 c3">联系客服</span>
     <span class="fl_r c9 font_13 l_h20" hover-class="none"> ></span>
   </view>
 </view>

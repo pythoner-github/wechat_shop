@@ -35,8 +35,8 @@
 
 	<view class="zhifu mt10 tc">总金额：<span class="font_20 red">¥ {{orderData.price}}</span></view>
 
-  <view class="tishi bg_white mt10 c6 l_h10  font_10 color_blue">
-    提示: 客户您好，您的订单金额仅为预估金额，实际支付金额以称重后为准。
+  <view class="tishi bg_white mt10 c6 l_h10  font_10 color_blue" wx:if="{{orderData.order_status == '待付款' || orderData.order_status == '待发货'  || orderData.order_status == '待收货'}}" >
+    温馨提示: 客户您好，您的订单金额仅为预估金额，实际支付金额以称重后为准。
   </view>
 
 

@@ -80,6 +80,10 @@ page {
   color : #dd2727;
 }
 
+.blue {
+  color : #1e43e6;
+}
+
 .c3 {
   color : #333;
 }
@@ -98,6 +102,11 @@ page {
 
 .font_16 {
   font-size : 16px;
+}
+
+.font_17 {
+  font-size : 15px;
+  color:  #173ad6;
 }
 
 .font_14 {
