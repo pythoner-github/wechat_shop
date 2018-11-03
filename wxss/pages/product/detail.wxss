@@ -81,6 +81,13 @@
   margin-top    : 5px;
 }
 
+.icon_sh {
+  width         : 20px;
+  height        : 20px;
+  display       : inline-block;
+  margin-top    : 5px;
+}
+
 .ke {
   text-align    : center
 }
@@ -439,3 +446,10 @@ swiper {
   left            : 23px;
   opacity         : 0;
 }
+
+.btnShare { 
+  width: 30%; 
+  border-radius: 98rpx; 
+
+}
+
