@@ -11,10 +11,27 @@
     </block>
   </swiper>
 
+<!-- <view>
   <view class="title">{{itemData.name}}</view>
+  <view> <button class="share"  open-type='share'>
+        <image class="icon_sh" src="/images/share.png" style="margin-top:15px;"></image>
+      </button >
+    </view>
+</view> -->
 
-  <view class="gmxx">
+<view><span class="title">{{itemData.name}}</span>
+ <span class="c6 fl_r font_12" >
+    <button class="share"  open-type='share'>
+      <image class="icon_sh" src="/images/share.png" style="margin-top:0px;"></image>
+    </button >
+  </span>
+</view>
+<view class="gmxx">
     <view class="font_14 c6" style='color:#000'>规格: {{itemData.company}}</view>
+    <!-- <view>分享</view> -->
+
+
+
     <view><span class="jiage">¥：{{itemData.price_yh}}</span> <span class="c6 fl_r font_14" style='color:#ccc'>库存：{{itemData.num}}</span> </view>
     <view class="font_14 c6">类型：{{itemData.brand}}</view>
     <view class="font_14 c6">支付：微信支付</view>

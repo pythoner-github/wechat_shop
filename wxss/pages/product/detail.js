@@ -446,37 +446,52 @@ Page ({
       }
     });
   },
-
-  // 分享到好友朋友圈
-  shareFun: function (e) {
-    var that = this;
-
-    return {
+  onShareAppMessage: function(res)
+  {
+    return{
       title: '送菜娃商城', // 转发后 所显示的title
       path: '/pages/index/index', // 相对的路径
-      success: (res) => {    // 成功后要做的事情
-        console.log(res.shareTickets[0])
-        // console.log
 
-        wx.getShareInfo({
-          shareTicket: res.shareTickets[0],
-          success: (res) => {
-            that.setData({
-              isShow: true
-            })
-            console.log(that.setData.isShow)
-          },
-          fail: function (res) { console.log(res) },
-          complete: function (res) { console.log(res) }
-        })
+      success: function (res) {
+        // 转发成功
+        console.log("转发成功:" + JSON.stringify(res));
       },
       fail: function (res) {
-        // 分享失败
-        console.log(res)
+        // 转发失败
+        console.log("转发失败:" + JSON.stringify(res));
       }
     }
-   
   },
+  // // 分享到好友朋友圈
+  // shareFun: function (e) {
+  //   var that = this;
+  //   onShareAppMessage(that)
+  //   return {
+  //     title: '送菜娃商城', // 转发后 所显示的title
+  //     path: '/pages/index/index', // 相对的路径
+  //     success: (res) => {    // 成功后要做的事情
+  //       console.log(res.shareTickets[0])
+  //       // console.log
+
+  //       wx.getShareInfo({
+  //         shareTicket: res.shareTickets[0],
+  //         success: (res) => {
+  //           that.setData({
+  //             isShow: true
+  //           })
+  //           console.log(that.setData.isShow)
+  //         },
+  //         fail: function (res) { console.log(res) },
+  //         complete: function (res) { console.log(res) }
+  //       })
+  //     },
+  //     fail: function (res) {
+  //       // 分享失败
+  //       console.log(res)
+  //     }
+  //   }
+   
+  // },
 
 
   // 添加到购物车
