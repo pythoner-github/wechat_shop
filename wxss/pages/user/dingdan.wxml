@@ -56,7 +56,9 @@
       <view class="df_1">
         <view class="sp_text">
           <navigator url="../index/detail?productId={{item.pid}}" hover-class="changestyle">
-            <view class="sp_tit ovh1">{{item.name}}</view>
+            <!-- <view class="sp_tit ovh1">{{item.name}}</view> -->
+            <view class="sp_tit ovh1"  wx:if="{{item.type=='weixin'}}">{{item.name}} 【微信支付】</view>
+            <view class="sp_tit ovh1"  wx:else>{{item.name}} 【线下支付】</view>
           </navigator>
 
           <view class="sp_neb">单价：¥ {{item.price_yh}} 数量：×{{item.product_num}} 产品：×{{item.pro_count}}</view>
@@ -81,7 +83,9 @@
       <view class="df_1">
         <view class="sp_text">
           <navigator url="../index/detail?productId={{item.pid}}" hover-class="changestyle">
-            <view class="sp_tit ovh1">{{item.name}}</view>
+            <!-- <view class="sp_tit ovh1">{{item.name}}</view> -->
+            <view class="sp_tit ovh1"  wx:if="{{item.type=='weixin'}}">{{item.name}} 【微信支付】</view>
+            <view class="sp_tit ovh1"  wx:else>{{item.name}} 【线下支付】</view>
           </navigator>
 
           <view class="sp_neb">单价：¥ {{item.price_yh}} 数量：×{{item.product_num}} 产品：×{{item.pro_count}}</view>
@@ -107,7 +111,9 @@
       <view class="df_1">
         <view class="sp_text">
           <navigator url="../index/detail?productId={{item.pid}}" hover-class="changestyle">
-            <view class="sp_tit ovh1">{{item.name}}</view>
+            <!-- <view class="sp_tit ovh1">{{item.name}}</view> -->
+            <view class="sp_tit ovh1"  wx:if="{{item.type=='weixin'}}">{{item.name}} 【微信支付】</view>
+            <view class="sp_tit ovh1"  wx:else>{{item.name}} 【线下支付】</view>
           </navigator>
 
           <view class="sp_neb">单价：¥ {{item.price_yh}} 数量：×{{item.product_num}} 产品：×{{item.pro_count}}</view>
@@ -131,7 +137,9 @@
       <view class="df_1">
         <view class="sp_text">
           <navigator url="../index/detail?productId={{item.pid}}" hover-class="changestyle">
-            <view class="sp_tit ovh1">{{item.name}}</view>
+            <!-- <view class="sp_tit ovh1">{{item.name}}</view> -->
+            <view class="sp_tit ovh1"  wx:if="{{item.type=='weixin'}}">{{item.name}} 【微信支付】</view>
+            <view class="sp_tit ovh1"  wx:else>{{item.name}} 【线下支付】</view>
           </navigator>
 
           <view class="sp_neb">单价：¥ {{item.price_yh}} 数量：×{{item.product_num}} 产品：×{{item.pro_count}}</view>
