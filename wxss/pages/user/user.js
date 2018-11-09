@@ -24,6 +24,11 @@ Page ({
         isunread  : true,
         unreadNum : 1
       }, {
+          icon: '../../images/yaojiang.png',
+          text: '摇奖',
+          isunread: true,
+          unreadNum: 2
+      }, {
         icon      : '../../images/iconfont-shouhuodizhi.png',
         text      : '收货地址管理'
       }, {
@@ -32,7 +37,8 @@ Page ({
       }, {
         icon      : '../../images/iconfont-help.png',
         text      : '常见问题'
-      }],
+      }
+      ],
 
      loadingText  : '加载中...',
      loadingHidden: false,
