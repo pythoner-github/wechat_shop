@@ -150,8 +150,8 @@ Page ({
           // 创建订单成功
           if (data.arr.pay_type == 'cash') {
               wx.showToast({
-                 title    : "请等待商家发货!",
-                 duration : 2000
+                 title    : "恭喜下单成功!",
+                 duration : 5000,
               });
 
               setTimeout(function() {

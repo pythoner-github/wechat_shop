@@ -63,7 +63,7 @@
 
           <view class="sp_neb">单价：¥ {{item.price_yh}} 数量：×{{item.product_num}} 产品：×{{item.pro_count}}</view>
           <view class="sp_jg">¥：{{item.price}}</view>
-          <navigator class="font_12 red fl_r" url="tuihuo?orderId={{item.id}}">申请退款</navigator>
+          <!-- <navigator class="font_12 red fl_r" url="tuihuo?orderId={{item.id}}">申请退款</navigator> -->
           <navigator url="../order/detail?orderId={{item.id}}" class="font_12 red fl_r mr_5">订单详情</navigator>
         </view>
       </view>
@@ -84,13 +84,15 @@
         <view class="sp_text">
           <navigator url="../index/detail?productId={{item.pid}}" hover-class="changestyle">
             <!-- <view class="sp_tit ovh1">{{item.name}}</view> -->
-            <view class="sp_tit ovh1"  wx:if="{{item.type=='weixin'}}">{{item.name}} 【微信支付】</view>
-            <view class="sp_tit ovh1"  wx:else>{{item.name}} 【线下支付】</view>
+            <!-- <view class="sp_tit ovh1"  wx:if="{{item.type=='weixin'}}">{{item.name}} 【微信支付】</view>
+            <view class="sp_tit ovh1"  wx:else>{{item.name}} 【线下支付】</view> -->
+            <view class="sp_tit ovh1">{{item.name}} 【线下支付】</view>
           </navigator>
 
           <view class="sp_neb">单价：¥ {{item.price_yh}} 数量：×{{item.product_num}} 产品：×{{item.pro_count}}</view>
           <view class="sp_jg">¥：{{item.price}}</view>
-          <navigator class="font_12 red fl_r" url="tuihuo?orderId={{item.id}}">申请退款</navigator>
+          <!-- <navigator class="font_12 red fl_r" url="tuihuo?orderId={{item.id}}">申请退款</navigator> -->
+          <view class="font_12 red fl_r" bindtap="payOrderByWechat" data-orderId="{{item.id}}" data-ordersn="{{item.order_sn}}" >微信支付</view>
           <view class="font_12 red fl_r mr_5" bindtap="recOrder" data-order-id="{{item.id}}">确认收货</view>
           <navigator url="../order/detail?orderId={{item.id}}" class="font_12 red fl_r mr_5">订单详情</navigator>
         </view>
