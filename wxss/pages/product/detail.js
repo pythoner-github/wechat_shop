@@ -449,7 +449,7 @@ Page ({
   onShareAppMessage: function(res)
   {
     return{
-      title: '送菜娃商城', // 转发后 所显示的title
+      title: '送菜娃商城，好货来袭，抓紧抢购啦', // 转发后 所显示的title
       path: '/pages/index/index', // 相对的路径
 
       success: function (res) {
