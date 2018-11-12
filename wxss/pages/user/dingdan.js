@@ -341,6 +341,8 @@ Page ({
       },              // 设置请求的 header
 
       success: function(res) {
+        console.log(res)
+
         if (res.data.status == 1) {
           var order = res.data.arr;
 

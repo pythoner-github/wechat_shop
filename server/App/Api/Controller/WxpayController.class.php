@@ -27,7 +27,7 @@ class WxpayController extends Controller{
       exit();
     }
 
-    if (intval($order_info['status'])!=10) {
+    if (intval($order_info['status'])!=10 && intval($order_info['status'])!=30) {
       echo json_encode(array('status'=>0,'err'=>'订单状态异常！'));
       exit();
     }

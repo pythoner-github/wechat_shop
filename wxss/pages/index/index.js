@@ -88,7 +88,7 @@ Page ({
       },
     })
 
-    that.getOrdermsg();
+    //that.getOrdermsg();
   },
 
   onShareAppMessage: function() {
