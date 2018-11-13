@@ -30,7 +30,7 @@
 
           <view class="sp_neb">单价：¥ {{item.price_yh}} 数量：×{{item.product_num}} 产品：×{{item.pro_count}}</view>
           <view class="sp_jg">¥：{{item.price}}</view>
-          <view class="font_12 red fl_r" bindtap="payOrderByWechat" data-orderId="{{item.id}}" data-ordersn="{{item.order_sn}}" wx:if="{{item.type=='weixin'}}">微信支付</view>
+          <!--view class="font_12 red fl_r" bindtap="payOrderByWechat" data-orderId="{{item.id}}" data-ordersn="{{item.order_sn}}" wx:if="{{item.type=='weixin'}}">微信支付</view-->
 
           <!--
           <navigator class="font_12 red fl_r" url="../order/downline?orderId={{item.id}}" wx:if="{{item.PayType=='cash'}}">线下支付</navigator>
@@ -92,8 +92,8 @@
           <view class="sp_neb">单价：¥ {{item.price_yh}} 数量：×{{item.product_num}} 产品：×{{item.pro_count}}</view>
           <view class="sp_jg">¥：{{item.price}}</view>
           <!-- <navigator class="font_12 red fl_r" url="tuihuo?orderId={{item.id}}">申请退款</navigator> -->
-          <view class="font_12 red fl_r" bindtap="payOrderByWechat" data-orderId="{{item.id}}" data-ordersn="{{item.order_sn}}" >微信支付</view>
-          <view class="font_12 red fl_r mr_5" bindtap="recOrder" data-order-id="{{item.id}}">确认收货</view>
+          <!--view class="font_12 red fl_r" bindtap="payOrderByWechat" data-orderId="{{item.id}}" data-ordersn="{{item.order_sn}}" >微信支付</view-->
+          <view class="font_12 red fl_r mr_5" bindtap="recOrderAndPayOrderByWechat" data-orderId="{{item.id}}" data-ordersn="{{item.order_sn}}">确认收货</view>
           <navigator url="../order/detail?orderId={{item.id}}" class="font_12 red fl_r mr_5">订单详情</navigator>
         </view>
       </view>
