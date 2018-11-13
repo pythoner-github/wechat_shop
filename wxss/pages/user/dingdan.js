@@ -484,11 +484,8 @@ Page ({
                   });
                 },
 
-                fail: function(res) {
-                  wx.showToast({
-                    title   : res,
-                    duration: 3000
-                  })
+                fail: function (e) {
+                  console.log(e)
                 }
               })
             } else {
