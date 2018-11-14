@@ -31,14 +31,14 @@ class OrderController extends PublicController{
 		}else{
 			$shop_id = intval($_REQUEST['shop_id']);
 		}
-		
+
 		$pay_type = trim($_REQUEST['pay_type']);//支付类型
 		$pay_status = intval($_REQUEST['pay_status']); //订单状态
 		$start_time = intval(strtotime($_REQUEST['start_time'])); //订单状态
 		$end_time = intval(strtotime($_REQUEST['end_time'])); //订单状态
 		//构建搜索条件
 		$condition = array();
-		$condition['del'] = 0; 
+		$condition['del'] = 0;
 		$where = '1=1 AND del=0';
 		//根据支付类型搜索
 		if ($pay_type) {
@@ -58,7 +58,7 @@ class OrderController extends PublicController{
 				$condition['status'] = $pay_status;
 				$where .=' AND status='.intval($pay_status);
 			}
-			
+
 			//搜索内容输出
 			$this->assign('pay_status',$pay_status);
 		}
@@ -104,9 +104,9 @@ class OrderController extends PublicController{
 	    //末页描述信息
 	    $Page->setConfig('last', '末页');
 	    /*
-	    * 分页主题描述信息 
-	    * %FIRST%  表示第一页的链接显示  
-	    * %UP_PAGE%  表示上一页的链接显示   
+	    * 分页主题描述信息
+	    * %FIRST%  表示第一页的链接显示
+	    * %UP_PAGE%  表示上一页的链接显示
 	    * %LINK_PAGE%  表示分页的链接显示
 	    * %DOWN_PAGE% 	表示下一页的链接显示
 	    * %END%   表示最后一页的链接显示
@@ -177,7 +177,15 @@ class OrderController extends PublicController{
 		if (intval($order_info['post'])) {
 			$post_info = M('post')->where('id='.intval($order_info['post']))->find();
 		}
-		
+
+    if ($order_info['kuaidi_name'] == "") {
+      $order_info['kuaidi_name'] = "送菜娃商城";
+    }
+
+    if ($order_info['kuaidi_num'] == "") {
+      $order_info['kuaidi_num'] = $order_info['order_sn'];
+    }
+
 		$this->assign('post_info',$post_info);
 		$this->assign('order_info',$order_info);
 		$this->assign('order_pro',$order_pro);
@@ -322,7 +330,7 @@ class OrderController extends PublicController{
 			 $day_String .= ',"'.date('Y/m',$day).'"';
 		  }else{
 			 $day = strtotime(date('Y-m-d')) - 86400*(11-$i);
-			 $dayend = $day+86400; 
+			 $dayend = $day+86400;
 			 $day_String .= ',"'.date('m/d',$day).'"';
 		  }
 

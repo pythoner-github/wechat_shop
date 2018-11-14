@@ -35,10 +35,17 @@
         <button type="button" class="btn btn-success" id="" name="" onclick="product_option(0);"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
     </div>
     <br>
+
+    <div style="border-bottom:1px solid #b9c9d6;">
+    订单编号：<?php echo $order_info['order_sn']; ?>
+    </div>
+    <br>
+
     <table class="table table-border table-bordered table-bg">
         <thead>
 
         <tr class="text-c">
+            <th width="150">产品订单ID</th>
             <th width="150">产品名称</th>
             <th width="40">产品价格</th>
             <th width="40">数量</th>
@@ -47,11 +54,11 @@
         </tr>
         </thead>
 
-
         <volist name='order_pro' id="pro">
             <tr id="concent_tr_{$pro.id}" class="text-c">
+                <td>{$pro.id}</td>
                 <td>{$pro.name}</td>
-                <td>￥ {$pro.price}</td>
+                <td><input id="pro_price_{$pro.id}" value="￥ {$pro.price}"></td>
                 <td>{$pro.num}</td>
                 <td><font style="color:#c00;">￥ <?php echo number_format($pro['price']*$pro['num'],2); ?></font></td>
                 <td>{$pro.pro_buff}</td>
@@ -185,10 +192,12 @@
                 throw ('请输入快递信息或选择订单状态！');
             };
 
+            //var order_pro_update = $('#pro_price_{$pro.id}').val();
+
             $.ajax({
                 type: "POST",
                 url: "{:U('sms_up')}",
-                data:{'order_status':order_status,'kuaidi_name':kuaidi_name,'kuaidi_num':kuaidi_num,'oid':<?php echo $order_info['id'];?>},
+                data:{'order_status':order_status,'kuaidi_name':kuaidi_name,'kuaidi_num':kuaidi_num,'order_pro_update':order_pro_update,'oid':<?php echo $order_info['id'];?>},
             dataType: "json",
                 success: function (data) {
                 if(data.returns){
