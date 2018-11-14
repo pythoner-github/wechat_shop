@@ -401,109 +401,111 @@ Page ({
       content : '您确定已收到菜品了吗？',
 
       success: function(res) {
-        var order_id = e.currentTarget.dataset.orderId;
-        var order_sn = e.currentTarget.dataset.ordersn;
+        if (res.confirm) {
+          var order_id = e.currentTarget.dataset.orderId;
+          var order_sn = e.currentTarget.dataset.ordersn;
 
-        if (!order_sn) {
-          wx.showToast({
-            title   : "订单异常!",
-            duration: 2000,
-          });
+          if (!order_sn) {
+            wx.showToast({
+              title   : "订单异常!",
+              duration: 2000,
+            });
 
-          return false;
-        }
+            return false;
+          }
 
-        wx.request({
-          url   : app.d.apiUrl + 'Wxpay/wxpay',
-          data  : {
-            order_id: order_id,
-            order_sn: order_sn,
-            uid     : app.d.userId,
-          },
-          method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-          header: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },              // 设置请求的 header
+          wx.request({
+            url   : app.d.apiUrl + 'Wxpay/wxpay',
+            data  : {
+              order_id: order_id,
+              order_sn: order_sn,
+              uid     : app.d.userId,
+            },
+            method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+            header: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },              // 设置请求的 header
 
-          success: function(res) {
-            console.log(res)
+            success: function(res) {
+              console.log(res)
 
-            if (res.data.status == 1) {
-              var order = res.data.arr;
+              if (res.data.status == 1) {
+                var order = res.data.arr;
 
-              wx.requestPayment({
-                timeStamp : order.timeStamp,
-                nonceStr  : order.nonceStr,
-                package   : order.package,
-                signType  : 'MD5',
-                paySign   : order.paySign,
+                wx.requestPayment({
+                  timeStamp : order.timeStamp,
+                  nonceStr  : order.nonceStr,
+                  package   : order.package,
+                  signType  : 'MD5',
+                  paySign   : order.paySign,
 
-                success: function(res) {
-                  wx.showToast({
-                    title   : "支付成功!",
-                    duration: 2000,
-                  });
+                  success: function(res) {
+                    wx.showToast({
+                      title   : "支付成功!",
+                      duration: 2000,
+                    });
 
-                  res.confirm && wx.request({
-                    url   : app.d.apiUrl + 'Order/orders_edit',
-                    method: 'post',
-                    data  : {
-                      id  : orderId,
-                      type: 'receive',
-                    },
-                    header: {
-                      'Content-Type': 'application/x-www-form-urlencoded'
-                    },
+                    wx.request({
+                      url   : app.d.apiUrl + 'Order/orders_edit',
+                      method: 'post',
+                      data  : {
+                        id  : orderId,
+                        type: 'receive',
+                      },
+                      header: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                      },
 
-                    success: function(res) {
-                      // init data
-                      var status = res.data.status;
+                      success: function(res) {
+                        // init data
+                        var status = res.data.status;
 
-                      if (status == 1) {
+                        if (status == 1) {
+                          wx.showToast({
+                            title   : '操作成功！',
+                            duration: 2000
+                          });
+
+                          that.loadOrderList();
+                        } else {
+                          wx.showToast({
+                            title   : res.data.err,
+                            duration: 2000
+                          });
+                        }
+                      },
+
+                      fail: function() {
+                        // fail
                         wx.showToast({
-                          title   : '操作成功！',
-                          duration: 2000
-                        });
-
-                        that.loadOrderList();
-                      } else {
-                        wx.showToast({
-                          title   : res.data.err,
+                          title   : '网络异常！',
                           duration: 2000
                         });
                       }
-                    },
+                    });
+                  },
 
-                    fail: function() {
-                      // fail
-                      wx.showToast({
-                        title   : '网络异常！',
-                        duration: 2000
-                      });
-                    }
-                  });
-                },
+                  fail: function (e) {
+                    console.log(e)
+                  }
+                })
+              } else {
+                wx.showToast({
+                  title   : res.data.err,
+                  duration: 2000
+                });
+              }
+            },
 
-                fail: function (e) {
-                  console.log(e)
-                }
-              })
-            } else {
+            fail: function (e) {
+              // fail
               wx.showToast({
-                title   : res.data.err,
+                title   : '网络异常！',
                 duration: 2000
               });
             }
-          },
-
-          fail: function (e) {
-            // fail
-            wx.showToast({
-              title   : '网络异常！',
-              duration: 2000
-            });
-          }
-        })
+          })
+        }
       }
     });
   }
