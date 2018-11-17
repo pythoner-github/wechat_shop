@@ -48,7 +48,7 @@
             <th width="150">产品订单ID</th>
             <th width="150">产品名称</th>
             <th width="40">产品价格</th>
-            <th width="40">单位</th>
+            <th width="40">产品规格</th>
             <th width="40">数量</th>
             <th width="40">总价</th>
             <th width="60">产品属性</th>
@@ -60,7 +60,7 @@
 				<td><input id="pro_id_{$key}" value="{$pro.id}" style="display:none"/>{$pro.id}</td>
                 <td>{$pro.name}</td>
                 <td>{$pro.price}</td>
-                <td><input id="pro_company_{$key}" value="{$pro.company}"/></td>
+                <td><input id="pro_guige_{$key}" value="{$pro.pro_guige}"/></td>
                 <td>{$pro.num}</td>
                 <td><font style="color:#c00;">￥ <?php echo number_format($pro['price']*$pro['num'],2); ?></font></td>
                 <td>{$pro.pro_buff}</td>
@@ -199,7 +199,7 @@
 
 			for (var i = 0; i < length; i++)
 			{
-				order_pro_update.push([$('#pro_id_' + i).val(), $('#pro_company_' + i).val()])
+				order_pro_update.push([$('#pro_id_' + i).val(), $('#pro_guige_' + i).val()])
 			}
 
             $.ajax({
