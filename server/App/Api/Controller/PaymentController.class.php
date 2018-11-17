@@ -170,8 +170,9 @@ class PaymentController extends PublicController {
         $date['photo_x']=$product->where('id='.intval($date['pid']))->getField('photo_x');
         $date['pro_buff']=$_POST['buff'];
         $date['addtime']=time();
-        $date['pro_guige']=$product->where('id='.intval($date['pid']))->getField('company');
         $date['num']=intval($_POST['num']);
+        $date['pro_guige']=$product->where('id='.intval($date['pid']))->getField('company');
+        $date['company'] = '';
 
         $res = $order_pro->add($date);
 
@@ -457,6 +458,7 @@ class PaymentController extends PublicController {
           $date['addtime']=time();
           $date['num']=$shops[$key]['num'];
           $date['pro_guige']=$product->where('id='.intval($date['pid']))->getField('company');
+          $date['company'] = '';
 
           $res = $order_pro->add($date);
 
