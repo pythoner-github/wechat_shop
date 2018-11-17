@@ -219,7 +219,7 @@ class OrderController extends PublicController{
 
                     $data = array();
                     $data['company'] = $order_pro_update[$i][1];
-                    $data['price'] = $tmp['price'] * round($data['company']/$tmp['company'], 2);
+                    $data['price'] = $tmp['price'] * round(floatval($data['company'])/floatval($tmp['company']), 2);
 
                     try {
                         $this->order_product->where('id='.intval($order_pro_update[$i][0]))->save($data);
