@@ -209,6 +209,7 @@ class OrderController extends PublicController{
 
         $update = false;
         $order_pro_update = $_POST['order_pro_update'];
+        $order_price = 0;
 
         for ($i=0; $i<=count($order_pro_update); $i++) {
             $tmp = $this->order_product->where('id='.intval($order_pro_update[$i][0]))->find();
@@ -228,6 +229,10 @@ class OrderController extends PublicController{
                         echo json_encode($json);
                         exit();
                     }
+
+                    $order_price += $data['price'];
+                } else {
+                    $order_price += $tmp['price'];
                 }
             }
         }
@@ -259,6 +264,9 @@ class OrderController extends PublicController{
             if ($kuaidi_num) {
                 $data['kuaidi_num'] = $kuaidi_num;
             }
+
+            $data['price'] = $order_price;
+
             $up = $this->order->where('id='.intval($oid))->save($data);
             $json = array();
             $json['message']="操作成功.";
