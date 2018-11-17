@@ -394,6 +394,7 @@ Page ({
   // 确认收货并付款
   recOrderAndPayOrderByWechat: function(e) {
     var that = this;
+    var orderId = e.currentTarget.dataset.orderId;
 
     wx.showModal({
       title   : '提示',
@@ -401,7 +402,7 @@ Page ({
 
       success: function(res) {
         if (res.confirm) {
-          var order_id = e.currentTarget.dataset.orderid;
+          var order_id = e.currentTarget.dataset.orderId;
           var order_sn = e.currentTarget.dataset.ordersn;
 
           if (!order_sn) {
@@ -448,7 +449,7 @@ Page ({
                       url   : app.d.apiUrl + 'Order/orders_edit',
                       method: 'post',
                       data  : {
-                        id  : order_id,
+                        id  : orderId,
                         type: 'receive',
                       },
                       header: {
@@ -456,8 +457,6 @@ Page ({
                       },
 
                       success: function(res) {
-                        console.log(res)
-
                         // init data
                         var status = res.data.status;
 

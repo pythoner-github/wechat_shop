@@ -170,7 +170,6 @@ class PaymentController extends PublicController {
         $date['photo_x']=$product->where('id='.intval($date['pid']))->getField('photo_x');
         $date['pro_buff']=$_POST['buff'];
         $date['addtime']=time();
-        $date['company']=$product->where('id='.intval($date['pid']))->getField('company');
         $date['num']=intval($_POST['num']);
         // $date['pro_guige']=$_REQUEST['guige'];
 
