@@ -458,6 +458,7 @@ class PaymentController extends PublicController {
           $date['addtime']=time();
           $date['num']=$shops[$key]['num'];
           $date['pro_guige']='';
+          $date['company']=$product->where('id='.intval($date['pid']))->getField('company');
 
           $res = $order_pro->add($date);
 
