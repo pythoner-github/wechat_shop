@@ -266,6 +266,7 @@ class OrderController extends PublicController{
             }
 
             $data['price'] = $order_price;
+            $data['amount'] = $order_price;
 
             $up = $this->order->where('id='.intval($oid))->save($data);
             $json = array();
