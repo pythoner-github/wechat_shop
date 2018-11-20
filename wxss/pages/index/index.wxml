@@ -1,17 +1,6 @@
 <!-- index.wxml -->
 
 <view class="page">
-  <view class="address df" style="font-size:24px">
-    <!-- <button bindtap="doAddressSearch"><image class="dwcion" src="/images/map.png"></image></button>
-    <button bindtap="doAddressSearch">{{address}}</button> -->
-    <button bindtap="doAddressSearch"><image class="dwcion" src="/images/map.png"></image>{{address}}</button>
-    <button bindtap="doSearch" class="searchcion"><image class="searchcion" src="/images/search.png"></image></button>
-    <button bindtap="doKf" class="kfcion"><image class="kfcion" src="/images/kefu.png"></image></button>
-  </view>
-
-  <view class="distance df" wx:if="{{distance > 5000}}"  style="font-size:840px">
-    <text class="distance">您当前选择的“{{address}}”，未在配送范围，我们将会为您尽快开通配送服务</text>
-  </view>
 
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
     <block wx:for="{{focus}}" wx:key="id">
@@ -20,6 +9,18 @@
       </swiper-item>
     </block>
   </swiper>
+  <view class="address df" style="font-size:15px;text-left:10px;titleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0);">
+    <!-- <button bindtap="doAddressSearch"><image class="dwcion" src="/images/map.png"></image></button>
+    <button bindtap="doAddressSearch">{{address}}</button> -->
+    <button style="border-radius:17px; border:2rpx;background:rgb(245, 244, 244);width:65%;font-size:15px;" bindtap="doAddressSearch" ><image class="dwcion" src="/images/map.png" style="border-radius:17px"></image>{{address}}</button>
+    <button style="width:16%;" bindtap="doSearch" class="searchcion"><image class="searchcion" src="/images/search.png"></image></button>
+    <button style="width:16%;" bindtap="doKf" class="kfcion"><image class="kfcion" src="/images/kefu.png"></image></button>
+  </view>
+
+  <view class="distance df" wx:if="{{distance > 5000}}"  style="font-size:840px">
+    <text class="distance">您当前选择的“{{address}}”，未在配送范围，我们将会为您尽快开通配送服务</text>
+  </view>
+
 
   <view class="cont">
     <navigator class="pr" url="../product/detail?productId={{item.id}}" hover-class="changestyle" wx:for="{{productData}}" wx:key="id">

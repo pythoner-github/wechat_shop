@@ -31,20 +31,20 @@
     </view>
 
     <view class="sc df tc bte ">
-      <navigator class="df_1" url="../user/dingdan?currentTab=0&otype=pay" hover-class="none" >
+      <!-- <navigator class="df_1" url="../user/dingdan?currentTab=0&otype=pay" hover-class="none" >
         <view>
           <image src="/images/dfk.png"></image>
         </view>
 
         <text class="font_14">待付款<text style="color:red">({{orderInfo.pay_num}})</text></text>
-      </navigator>
+      </navigator> -->
 
-      <!--
+      
       <navigator class="df_1" url="../user/dingdan" hover-class="none" >
         <view><image src="/images/dfh.png"></image>{{orderInfo.HasSum}}</view>
         <text class="font_13">待发货</text>
       </navigator>
-      -->
+     
 
       <navigator class="df_1" url="../user/dingdan?currentTab=2&otype=receive" hover-class="none" >
         <view><image src="/images/dpl.png"></image></view>
