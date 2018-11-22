@@ -6,10 +6,10 @@
     <text class="fl_l">{{userInfo.nickName}}</text>
   </view>
 
-  <!--
-  <view class="sc mt10 df">
+  
+  <!-- <view class="sc mt10 df">
     <view class="df_1 tc">
-      <navigator url="../user/shoucang" hover-class="none">
+      <navigator  url="../user/shoucang" hover-class="none">
         <view><image src="/images/use_sc.png"></image></view>
         <text>我的收藏</text>
       </navigator>
@@ -35,6 +35,8 @@
         <view>
           <image src="/images/dfk.png"></image>
         </view>
+
+
 
         <text class="font_14">待付款<text style="color:red">({{orderInfo.pay_num}})</text></text>
       </navigator> -->
@@ -65,6 +67,13 @@
     <view class="qbdd mt10">
       <navigator url="/pages/address/user-address/user-address">
         <span class="font_17 c3">地址管理</span>
+        <span class="fl_r c9 font_13 l_h20" hover-class="none"> ></span>
+      </navigator>
+    </view>
+
+    <view class="qbdd mt10">
+      <navigator url="/pages/user/shoucang">
+        <span class="font_17 c3">我的收藏</span>
         <span class="fl_r c9 font_13 l_h20" hover-class="none"> ></span>
       </navigator>
     </view>
