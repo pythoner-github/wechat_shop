@@ -44,7 +44,7 @@
   <view class="tishi bg_white mt10 c6 l_h10  font_10 color_blue" wx:if="{{orderData.order_status == '待付款' || orderData.order_status == '待发货'  || orderData.order_status == '待收货'}}">
     温馨提示: 客户您好，您的订单金额仅为预估金额，实际支付金额以称重后为准。
   </view>
-  <view class="mt10" wx:else="{{orderData.order_status == '已完成'}}">
+  <view class="mt10" wx:if="{{orderData.order_status == '已完成'}}">
     <navigator url="../prize/prize">
       <button bindtap="yaojiang" style="width:230px;height:106px;display:block;background:transparent;border-style:hidden;"  class="font_17 c3">
         <image  class="yaojiang" style="width:200px;height:95px;vertical-align:middle;margin-top:20;padding-top:8px;outline:none;" src="/images/choujiang.png"></image>
