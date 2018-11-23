@@ -1,6 +1,7 @@
 // pages/user/shoucang.js
 
 var app = getApp();
+var common = require("../../utils/common.js");
 
 Page ({
   data: {
@@ -71,6 +72,7 @@ Page ({
 
         // init data
         var data = res.data.data;
+        console.log(res);
         that.initProductData(data);
 
         that.setData({

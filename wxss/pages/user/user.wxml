@@ -5,7 +5,7 @@
     <image class="userinfo-avatar fl_l" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="fl_l">{{userInfo.nickName}}</text>
   </view>
-
+ 
   
   <!-- <view class="sc mt10 df">
     <view class="df_1 tc">
