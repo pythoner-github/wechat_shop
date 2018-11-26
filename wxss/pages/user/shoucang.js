@@ -27,7 +27,7 @@ Page ({
       content : '您确认移除吗',
       success : function(res) {
         res.confirm && wx.request({
-          url   : app.d.hostUrl + 'ztb/productZBT/RemoveCollectCategory',
+          url   : app.d.hostUrl + 'user/collection_qu',
           method: 'post',
           data  : {
             ccId: ccId,
@@ -56,7 +56,7 @@ Page ({
     console.log(this.data);
 
     wx.request({
-      url   : app.d.hostUrl + '/ztb/productZBT/GetCollectCategoryList',
+      url   : app.d.hostUrl + 'user/collection',
       method: 'post',
       data  : {
         userId    : app.d.userId,
