@@ -466,6 +466,8 @@ class PaymentController extends PublicController {
             throw new \Exception("下单失败！".__LINE__);
           }
 
+          $order_pro->where('id='.intval($res)->save($date);
+
           // 检查产品是否存在，并修改库存
           $check_pro = $product->where('id='.intval($date['pid']).' AND del=0 AND is_down=0')->field('num,shiyong')->find();
           $up = array();
