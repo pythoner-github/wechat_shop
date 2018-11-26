@@ -138,7 +138,7 @@
       <contact-button type="default-light" session-from="productId_{{itemData.id}}" class="ke">
         <contact-button class="pos"></contact-button>
         <image class="icon_kf" src="/images/kefu.png" style="margin-right:20px;"></image>
-        <view class="dbtext" style="line;margin-top:5px">客服</view>
+        <view bindtap="addFavorites"  class="dbtext" style="line;margin-top:5px">客服</view>
       </contact-button >
     </view>
 
