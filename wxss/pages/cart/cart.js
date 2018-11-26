@@ -21,7 +21,6 @@ Page ({
       num --;
     }
 
-    console.log(num);
     var cart_id = e.currentTarget.dataset.cartid;
 
     wx.request({
@@ -205,9 +204,6 @@ Page ({
   },
 
   sum: function() {
-    console.log('sum');
-
-
     var carts = this.data.carts;
     // 计算总金额
     var total = 0;
