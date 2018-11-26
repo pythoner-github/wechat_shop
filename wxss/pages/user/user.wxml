@@ -90,9 +90,9 @@
         <span class="fl_r c9 font_13 l_h20" hover-class="none"> ></span>
       </navigator>
   </view> -->
-  <view class="qbdd mt110">
+  <!-- <view class="qbdd mt110">
   <contact-button></contact-button>
     <span class="font_17 c3">联系客服</span>
     <span class="fl_r c9 font_13 l_h20" hover-class="none"> ></span>
-  </view>
+  </view> -->
 </view>
