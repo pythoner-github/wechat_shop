@@ -215,12 +215,12 @@ class OrderController extends PublicController{
             $tmp = $this->order_product->where('id='.intval($order_pro_update[$i][0]))->find();
 
             if ($tmp) {
-                if ($tmp['company'] != $order_pro_update[$i][1]) {
+                if ($tmp['pro_guige'] != $order_pro_update[$i][1]) {
                     $update = true;
 
                     $data = array();
-                    $data['company'] = $order_pro_update[$i][1];
-                    $data['price'] = $tmp['price'] * round(floatval($data['company'])/floatval($tmp['company']), 2);
+                    $data['pro_guige'] = $order_pro_update[$i][1];
+                    $data['price'] = $tmp['price'] * round(floatval($data['pro_guige'])/floatval($tmp['pro_guige']), 2);
 
                     try {
                         $this->order_product->where('id='.intval($order_pro_update[$i][0]))->save($data);
@@ -230,9 +230,9 @@ class OrderController extends PublicController{
                         exit();
                     }
 
-                    $order_price += $data['price'];
+                    $order_price += floatval($data['price']) * intval($tmp['num']);
                 } else {
-                    $order_price += $tmp['price'];
+                    $order_price += floatval($tmp['price']) * intval($tmp['num']);
                 }
             }
         }

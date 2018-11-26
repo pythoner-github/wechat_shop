@@ -8,6 +8,7 @@
 
     "pages/login/login",
     "pages/user/dingdan",
+    "pages/user/shoucang",
     "pages/user/tuihuo",
     "pages/order/pay",
     "pages/order/detail",

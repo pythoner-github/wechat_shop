@@ -82,7 +82,7 @@ function doWechatPay(prepayId, successCallback, failCallback, completeCallback) 
     complete : completeCallback
   }
 
-  console.log(dataMap);
+//  console.log(dataMap);
   wx.requestPayment(dataMap);
 }
 

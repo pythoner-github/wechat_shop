@@ -75,5 +75,9 @@
 			<!-- <button class="wx_pay_submit" type="primary" id="wxPay" disabled="{{btnDisabled}}" formType="submit" bindtap="createProductOrderByWX">微信支付</button> -->
 			<button class="xx_pay_submit" type="default" id="xxPay" disabled="{{btnDisabled}}" formType="submit" bindtap="createProductOrderByXX">线下支付</button>
 		</view>
+
 	</view>
+  <view class="tishi bg_white mt10 c6 l_h10  font_10 color_blue" style="text-indent:2em;">
+       温馨提示:  客户您好，您的订单金额仅为预估金额，实际支付金额以称重后为准。
+  </view>
 </view>

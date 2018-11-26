@@ -37,7 +37,7 @@ Page ({
         type: 'gcj02',
 
         success: function(res) {
-          console.log(res);
+//          console.log(res);
 
           latitude = res.latitude;
           longitude = res.longitude;
@@ -66,7 +66,7 @@ Page ({
       },
 
       success: function (res) {
-        console.log(res)
+      //  console.log(res)
         var focus = res.data.focus;
         var procat = res.data.procat;
         var prolist = res.data.prolist;
@@ -215,7 +215,7 @@ Page ({
       }],
 
       success: function(res) {
-        console.log(res);
+        //console.log(res);
 
         that.setData({
           distance  : res.result.elements[0].distance
@@ -227,7 +227,7 @@ Page ({
       },
 
       complete: function(res) {
-        console.log(res);
+       // console.log(res);
       }
     });
   },
@@ -242,7 +242,7 @@ Page ({
       },
 
       success: function(res) {
-        console.log(res);
+        //console.log(res);
 
         app.globalData.province = res.result.address_component.province;
         app.globalData.city = res.result.address_component.city;
@@ -259,7 +259,7 @@ Page ({
       },
 
       complete: function(res) {
-        console.log(res);
+        //console.log(res);
       }
     });
   },

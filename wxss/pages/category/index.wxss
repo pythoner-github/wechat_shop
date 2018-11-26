@@ -19,7 +19,7 @@
 .left::before {
   content     : "";
   position    : absolute;
-  background  : #dcdcdc;
+  background  : #6ec546;
   right       : 0;
   top         : 0;
   height      : 100%;
@@ -100,7 +100,7 @@
 
 .search {
   padding       : 1% 1%;
-  background    : #c5c5c5;
+  background    : #99cc33;
 }
 
 .search button {

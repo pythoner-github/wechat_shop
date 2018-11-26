@@ -6,4 +6,4 @@
     </view>
     <view class="start-btn" bindtap="startGame" style=" background-color:{{isRunning?'#e7930a':'#ffe400'}}">START</view>
   </view>
-</view>
+</view>///
