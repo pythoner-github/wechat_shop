@@ -11,7 +11,7 @@
   <text>没有找到您要的地址/(ㄒoㄒ)/~~</text>
 </view>
 
-<scroll-view wx:for="{{searchData}}">
+<scroll-view wx:for="{{searchData}}" wx:key="title">
   <navigator url="/pages/index/index?latitude={{item.location.lat}}&longitude={{item.location.lng}}&address={{item.title}}" open-type="reLaunch" hover-class="changestyle">
     <view class="text">{{item.title}}({{item.district}})</view>
   </navigator>
