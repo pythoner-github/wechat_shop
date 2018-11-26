@@ -30,7 +30,7 @@ Page ({
           url   : app.d.hostUrl + 'user/collection_qu',
           method: 'post',
           data  : {
-            ccId: ccId,
+            id: ccId,
           },
           header: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -40,7 +40,7 @@ Page ({
             var data = res.data;
             console.log(data);
             // todo
-            if (data.result == 'ok'){
+            if (data.status == 1){
               that.data.productData.length =0;
               that.loadProductData();
             }
@@ -59,7 +59,7 @@ Page ({
       url   : app.d.hostUrl + 'user/collection',
       method: 'post',
       data  : {
-        userId    : app.d.userId,
+        id        : app.d.userId,
         pageindex : that.data.page,
         pagesize  : 100,
       },
@@ -71,26 +71,14 @@ Page ({
         console.log(res);
 
         // init data
-        var data = res.data.data;
-        console.log(res);
-        that.initProductData(data);
+        var data = res.data.sc_list;
 
         that.setData({
-          productData : that.data.productData.concat(data),
+          productData : data
         });
 
         //endInitData
       },
     });
-  },
-
-  initProductData: function (data) {
-    for (var i=0; i<data.length; i++) {
-      // console.log(data[i]);
-      var item = data[i];
-
-      item.Price = item.Price/100;
-      item.ImgUrl = app.d.hostImg + item.ImgUrl;
-    }
-  },
+  }
 });
