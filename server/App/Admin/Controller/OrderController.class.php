@@ -230,9 +230,9 @@ class OrderController extends PublicController{
                         exit();
                     }
 
-                    $order_price += $data['price'];
+                    $order_price += floatval($data['price']) * intval($tmp['num']);
                 } else {
-                    $order_price += $tmp['price'];
+                    $order_price += floatval($tmp['price']) * intval($tmp['num']);
                 }
             }
         }
