@@ -41,7 +41,6 @@ Page ({
             console.log(data);
             // todo
             if (data.status == 1){
-              that.data.productData.length =0;
               that.loadProductData();
             }
           },
