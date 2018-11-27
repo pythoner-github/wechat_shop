@@ -9,7 +9,13 @@ class IndexController extends PublicController{
 	public function index(){
 	    $menu="";
 	    $index="";
-      $menu="<include File='Page/adminusermenu'/>";
+
+      if (intval($_SESSION['admininfo']['qx']) == 4) {
+        $menu="<include File='Page/adminusermenu'/>";
+      } else {
+        $menu="<include File='Page/usermenu'/>";
+      }
+
       $index="<iframe src='".U('Page/adminindex')."' id='iframe' name='iframe'></iframe>";
 
        //版权
@@ -18,5 +24,5 @@ class IndexController extends PublicController{
        $this->assign('menu',$menu);
        $this->assign('index',$index);
 	   $this->display();
-	}	
+	}
 }

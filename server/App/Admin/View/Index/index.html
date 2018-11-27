@@ -62,8 +62,11 @@
     </div>
 </header>
 
-<include File='Page/adminusermenu'/>
-
+<?php if (intval($_SESSION['admininfo']['qx']) == 4) { ?>
+  <include File='Page/adminusermenu'/>
+<?php } else { ?>
+  <include File='Page/usermenu'/>
+<?php } ?>
 
 <section class="Hui-article-box">
 
