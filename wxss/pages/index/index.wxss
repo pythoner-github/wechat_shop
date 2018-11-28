@@ -359,19 +359,17 @@
 
 .searchcion {
   width           : 24px;
-  height          : 26px;
+  height          : 24px;
   text-align      : right;
-  margin-right    : -5%; 
+  margin-right    : 2%; 
   vertical-align  : middle;
 }
 
 .kfcion {
   width           : 24px;
   height          : 24px;
-  margin-right    : 5%; 
-  vertical-align  : middle ;
-
-  
+  margin-right    : 2%; 
+  vertical-align  : middle ;  
 }
 
 .sousuo {
