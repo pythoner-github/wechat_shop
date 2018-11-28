@@ -346,30 +346,28 @@
   border          : none;
   padding         : 1px;
   /* border-radius   : 6px; */
-  vertical-align  : middle ;
-
-  
+  vertical-align  : middle ;  
 }
 
 
 .address button::after {
   content         : none;
-  text-align      :start;
+  text-align      : start;
 }
 
 .searchcion {
   width           : 24px;
   height          : 24px;
   text-align      : right;
-  margin-right    : 2%; 
+  margin-right    : 5px; 
   vertical-align  : middle;
 }
 
 .kfcion {
   width           : 24px;
   height          : 24px;
-  margin-right    : 2%; 
-  vertical-align  : middle ;  
+  vertical-align  : middle;
+  margin-right    : 5px;
 }
 
 .sousuo {
@@ -508,7 +506,7 @@ icon {
   width         : 24px;
   height        : 24px;
   text-align    : left;
-  margin-left   : -10% ;
+  margin-left   : 2% ;
   vertical-align: middle ;
 
 }

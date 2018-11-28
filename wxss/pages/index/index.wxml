@@ -12,10 +12,14 @@
   <view class="address df" style="font-size:15px;">
     <!-- <button bindtap="doAddressSearch"><image class="dwcion" src="/images/map.png"></image></button>
     <button bindtap="doAddressSearch">{{address}}</button> -->
-    <button  style="font-size:15px;" bindtap="doAddressSearch" ><image class="dwcion" src="/images/map.png" style="border-radius:17px"></image>{{address}}</button>
-    <button style="width:20%;border-radius:15px; border:2rpx;background:rgb(245, 244, 244); " bindtap="doSearch" class="searchcion"><image class="searchcion" style="background-size:20rpx;margin-right:40rpx" src="/images/search_gr.png"></image></button>
+    <button style="width:75%;font-size:15px;text-align:left" bindtap="doAddressSearch" ><image class="dwcion" src="/images/map.png" style="float:left;border-radius:17px"></image>{{address}}</button>
+    <button style="width:20%;border-radius:10px; border:2rpx;background:rgb(245, 244, 244); " bindtap="doSearch" class="searchcion"><image class="searchcion" style="background-size:20rpx;margin-right:40rpx" src="/images/search_gr.png"></image></button>
 
-    <contact-button class="kfcion" style="margin-right:5rpx;" type="default-light" size="30" session-from="weapp"/>
+    <!--contact-button class="kfcion" style="margin-right:5rpx;" type="default-light" size="30" session-from="weapp"/-->
+
+	<button open-type='contact'>
+		<image class='kfcion' src='/images/kefu.png'/>
+	</button>
   </view>
 
   <view class="distance df" wx:if="{{distance > 5000}}"  style="font-size:840px">
