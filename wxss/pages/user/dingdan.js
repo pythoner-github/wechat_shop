@@ -22,10 +22,12 @@ Page ({
   },
 
   onLoad: function(options) {
+    var that = this;
+
     this.initSystemInfo();
     this.setData({
       currentTab: parseInt(options.currentTab),
-      isStatus  : options.otype
+      isStatus  : options.otype || that.data.isStatus
     });
 
     if(this.data.currentTab == 4){
