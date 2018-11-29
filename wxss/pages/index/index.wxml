@@ -27,6 +27,13 @@
   </view>
 
 
+  <view class="address df" style="font-size:15px;">
+
+ 
+      <image class='kfcion' src='/images/xlb.png'></image>送菜娃商城上线了
+
+  </view>
+
   <view class="cont">
     <navigator class="pr" url="../product/detail?productId={{item.id}}" hover-class="changestyle" wx:for="{{productData}}" wx:key="id">
       <image class="photo" src="{{item.photo_x}}"></image>
