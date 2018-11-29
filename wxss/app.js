@@ -40,8 +40,20 @@ App ({
           var code = res.code;
           that.globalData.loginCode = code;
 
-          wx.navigateTo({
-            url: '/pages/login/login',
+          // 获取本地用户信息
+          wx.getStorage({
+            key: 'UserInfo',
+            success: function(res) {
+              console.log(res);
+
+              that.globalData.userInfo = res.data;
+              that.getUserSessionKey();
+            },
+            fail: function(e) {
+              wx.navigateTo({
+                url: '/pages/login/login'
+              });
+            }
           });
         }
       });
@@ -134,6 +146,8 @@ App ({
 
           return false;
         }
+
+        console.log(that.globalData);
 
         that.d.userId = userId;
         that.getOrderInfo();
