@@ -46,8 +46,9 @@ Page ({
       },
 
       success: function (res) {
-        // that.initProductData(res.data);
         var adds = res.data.adds;
+
+		console.log(res);
 
         if (adds) {
           var addrId = adds.id;
