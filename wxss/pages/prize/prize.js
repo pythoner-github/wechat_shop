@@ -110,6 +110,14 @@ Page({
     if (this.data.isRunning) return this.setData({
       isRunning: true
     })
+
+    wx.showToast({
+      title: "敬请期待，谢谢关注!",
+      icon: "none",
+      duration: 2000
+    });
+    return;
+    
     var _this = this;
     var indexSelect = 0
     var i = 0;

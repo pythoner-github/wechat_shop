@@ -195,7 +195,7 @@ App ({
           wx.showToast({
             title: "您的订单已发货，请注意查收!",
             icon: "none",
-            duration: 5000
+            duration: 3000
           });
         }
       }
