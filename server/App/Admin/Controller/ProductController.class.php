@@ -286,6 +286,38 @@ class ProductController extends PublicController{
 		$this->display();
 	}
 
+  public function pro_update(){
+    $pro_update = $_POST['pro_update'];
+
+    for ($i=0; $i<=count($pro_update); $i++) {
+          $tmp = M('product')->where('id='.intval($pro_update[$i][0]))->find();
+
+          if ($tmp) {
+            $data = array();
+            $data['price'] = $pro_update[$i][1];
+            $data['price_yh'] = $pro_update[$i][2];
+            $data['num'] = $pro_update[$i][3];
+            $data['company'] = $pro_update[$i][4];
+            $data['price_jf'] = $pro_update[$i][5];
+            $data['intro'] = $pro_update[$i][6];
+
+            try {
+                M('product')->where('id='.intval($pro_update[$i][0]))->save($data);
+            }catch(Exception $e){
+                $json = array('returns'=>0 , 'message'=>$e->getMessage());
+                echo json_encode($json);
+                exit();
+            }
+          }
+      }
+
+    $json = array();
+    $json['message']="操作成功.";
+    $json['returns']=1;
+    echo json_encode($json);
+    exit();
+  }
+
 	/*
 	* 商品获取二级分类
 	*/

@@ -56,11 +56,11 @@
                 <td>{$pro.pro_number}</td>
                 <td>{$pro.name}</td>
                 <td>{$pro.brand}</td>
-                <td><input id="pro_intro_{$key}" value="{$pro.price}"/></td>
-                <td><input id="pro_intro_{$key}" value="{$pro.price_yh}"/></td>
-                <td><input id="pro_intro_{$key}" value="{$pro.num}"/></td>
-                <td><input id="pro_intro_{$key}" value="{$pro.company}"/></td>
-                <td><input id="pro_intro_{$key}" value="{$pro.price_jf}"/></td>
+                <td><input id="pro_price_{$key}" value="{$pro.price}"/></td>
+                <td><input id="pro_price_yh_{$key}" value="{$pro.price_yh}"/></td>
+                <td><input id="pro_num_{$key}" value="{$pro.num}"/></td>
+                <td><input id="pro_company_{$key}" value="{$pro.company}"/></td>
+                <td><input id="pro_price_jf_{$key}" value="{$pro.price_jf}"/></td>
                 <td><input id="pro_intro_{$key}" value="{$pro.intro}"/></td>
             </tr>
         </volist>
@@ -99,8 +99,44 @@
         location=url;
     }
 
-    function pro_update(){
-        alert(123);
+    function pro_update() {
+      try{
+        var pro_update = [];
+        var length = eval(<?php echo count($productlist); ?>);
+
+        for (var i = 0; i < length; i++)
+        {
+          pro_update.push([
+            $('#pro_id_' + i).val(),
+            $('#pro_price_' + i).val(),
+            $('#pro_price_yh_' + i).val(),
+            $('#pro_num_' + i).val(),
+            $('#pro_company_' + i).val(),
+            $('#pro_price_jf_' + i).val(),
+            $('#pro_intro_' + i).val()
+          ]);
+        }
+
+        $.ajax({
+              type: "POST",
+              url: "{:U('pro_update')}",
+              data:{'pro_update':pro_update},
+              dataType: "json",
+              success: function (data) {
+                if (data.returns) {
+                    alert('提交成功！');
+                    window.location.reload(true);
+                } else {
+                    alert(data.message);
+                }
+              },
+              error: function (msg) {
+                  alert ('网络连接失败！');
+              }
+          });
+        } catch(e) {
+            alert(e);
+        }
     }
 </script>
 
