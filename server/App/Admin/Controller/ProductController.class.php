@@ -62,7 +62,6 @@ class ProductController extends PublicController{
 	//注意：cid 分类id  shop_id店铺id
 	//**********************************************
 	public function add(){
-
 		$id=(int)$_GET['id'];
 		$page=(int)$_GET['page'];
 		$name=$_GET['name'];
@@ -255,8 +254,69 @@ class ProductController extends PublicController{
 		$this->assign('pro_allinfo',$pro_allinfo);
 		$this->assign('shangchang',$shangchang);
 		$this->display();
-
 	}
+
+  public function update(){
+		$aaa_pts_qx=1;
+
+		//===============================
+		// 产品列表信息
+		//===============================
+		$where="1=1 AND pro_type=1 AND del<1";
+		define('rows',10);
+		$count=M('product')->where($where)->count();
+		$rows=ceil($count/rows);
+		$page=(int)$_GET['page'];
+		$page<0?$page=0:'';
+		$limit=$page*rows;
+		$page_index=$this->page_index($count,$rows,$page);
+		$productlist=M('product')->where($where)->order('addtime desc')->limit($limit,rows)->select();
+
+		foreach ($productlist as $k => $v) {
+			$productlist[$k]['cname'] = M('category')->where('id='.intval($v['cid']))->getField('name');
+			$productlist[$k]['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
+		}
+
+		//=============
+		// 将变量输出
+		//=============
+		$this->assign('page',$page);
+    $this->assign('productlist',$productlist);
+		$this->assign('page_index',$page_index);
+		$this->display();
+	}
+
+  public function pro_update(){
+    $pro_update = $_POST['pro_update'];
+
+    for ($i=0; $i<=count($pro_update); $i++) {
+          $tmp = M('product')->where('id='.intval($pro_update[$i][0]))->find();
+
+          if ($tmp) {
+            $data = array();
+            $data['price'] = $pro_update[$i][1];
+            $data['price_yh'] = $pro_update[$i][2];
+            $data['num'] = $pro_update[$i][3];
+            $data['company'] = $pro_update[$i][4];
+            $data['price_jf'] = $pro_update[$i][5];
+            $data['intro'] = $pro_update[$i][6];
+
+            try {
+                M('product')->where('id='.intval($pro_update[$i][0]))->save($data);
+            }catch(Exception $e){
+                $json = array('returns'=>0 , 'message'=>$e->getMessage());
+                echo json_encode($json);
+                exit();
+            }
+          }
+      }
+
+    $json = array();
+    $json['message']="操作成功.";
+    $json['returns']=1;
+    echo json_encode($json);
+    exit();
+  }
 
 	/*
 	* 商品获取二级分类
