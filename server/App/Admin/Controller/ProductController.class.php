@@ -62,7 +62,6 @@ class ProductController extends PublicController{
 	//注意：cid 分类id  shop_id店铺id
 	//**********************************************
 	public function add(){
-
 		$id=(int)$_GET['id'];
 		$page=(int)$_GET['page'];
 		$name=$_GET['name'];
@@ -255,7 +254,36 @@ class ProductController extends PublicController{
 		$this->assign('pro_allinfo',$pro_allinfo);
 		$this->assign('shangchang',$shangchang);
 		$this->display();
+	}
 
+  public function update(){
+		$aaa_pts_qx=1;
+
+		//===============================
+		// 产品列表信息
+		//===============================
+		$where="1=1 AND pro_type=1 AND del<1";
+		define('rows',10);
+		$count=M('product')->where($where)->count();
+		$rows=ceil($count/rows);
+		$page=(int)$_GET['page'];
+		$page<0?$page=0:'';
+		$limit=$page*rows;
+		$page_index=$this->page_index($count,$rows,$page);
+		$productlist=M('product')->where($where)->order('addtime desc')->limit($limit,rows)->select();
+
+		foreach ($productlist as $k => $v) {
+			$productlist[$k]['cname'] = M('category')->where('id='.intval($v['cid']))->getField('name');
+			$productlist[$k]['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
+		}
+
+		//=============
+		// 将变量输出
+		//=============
+		$this->assign('page',$page);
+    $this->assign('productlist',$productlist);
+		$this->assign('page_index',$page_index);
+		$this->display();
 	}
 
 	/*
