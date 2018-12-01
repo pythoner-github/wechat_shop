@@ -43,7 +43,7 @@ class OrderController extends PublicController{
         //根据支付类型搜索
         if ($pay_type) {
             $condition['type'] = $pay_type;
-            $where .=' AND type='.$pay_type;
+            $where .=' AND type="'.$pay_type.'"';
             //搜索内容输出
             $this->assign('pay_type',$pay_type);
         }
