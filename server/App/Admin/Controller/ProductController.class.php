@@ -263,7 +263,7 @@ class ProductController extends PublicController{
 		// 产品列表信息
 		//===============================
 		$where="1=1 AND pro_type=1 AND del<1";
-		define('rows',10);
+		define('rows',30);
 		$count=M('product')->where($where)->count();
 		$rows=ceil($count/rows);
 		$page=(int)$_GET['page'];
@@ -281,7 +281,7 @@ class ProductController extends PublicController{
 		// 将变量输出
 		//=============
 		$this->assign('page',$page);
-    $this->assign('productlist',$productlist);
+        $this->assign('productlist',$productlist);
 		$this->assign('page_index',$page_index);
 		$this->display();
 	}
