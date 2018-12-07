@@ -259,15 +259,49 @@ class ProductController extends PublicController{
   public function update(){
 		$aaa_pts_qx=1;
 
+    $page=(int)$_GET['page'];
+    $page<0?$page=0:'';
+
+    $cateid=$_GET['cateid'];
+    $cid=$_GET['cid'];
+
+    //=========================
+		// 查询一级产品分类
+		//=========================
+		$cate_list = M('category')->where('tid=1')->field('id,name')->select();
+    $cid_list = array();
+
+    if ($cateid != '') {
+      $cid_list = M('category')->where('tid='.intval($cateid))->field('id,name')->select();
+    }
+
 		//===============================
 		// 产品列表信息
 		//===============================
-		$where="1=1 AND pro_type=1 AND del<1";
+
+    if ($cid != '') {
+      $where="1=1 AND pro_type=1 AND del<1 AND cid=".intval($cid);
+    } elseif ($cateid != '') {
+      $cidlist = M('category')->where('tid='.intval($cateid))->field('id')->select();
+
+      $cid_where = '';
+
+      foreach ($cidlist as $k => $v) {
+        if ($cid_where == '') {
+            $cid_where = $cid_where."".$v['id'];
+        } else {
+            $cid_where = $cid_where.", ".$v['id'];
+        }
+      }
+
+      $where="1=1 AND pro_type=1 AND del<1 AND cid in (".$cid_where.")";
+    } else {
+      $where="1=1 AND pro_type=1 AND del<1";
+    }
+
 		define('rows',30);
 		$count=M('product')->where($where)->count();
 		$rows=ceil($count/rows);
-		$page=(int)$_GET['page'];
-		$page<0?$page=0:'';
 		$limit=$page*rows;
 		$page_index=$this->page_index($count,$rows,$page);
 		$productlist=M('product')->where($where)->order('addtime desc')->limit($limit,rows)->select();
@@ -277,13 +311,20 @@ class ProductController extends PublicController{
 			$productlist[$k]['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
 		}
 
+		$this->assign('cate_list',$cate_list);
+    $this->assign('cid_list',$cid_list);
+    $this->assign('cateid',$cateid);
+    $this->assign('cid',$cid);
+
 		//=============
 		// 将变量输出
 		//=============
 		$this->assign('page',$page);
-        $this->assign('productlist',$productlist);
+    $this->assign('productlist',$productlist);
 		$this->assign('page_index',$page_index);
-		$this->display();
+
+		$this->assign('where',$where);
+    $this->display();
 	}
 
   public function pro_update(){

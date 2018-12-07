@@ -30,7 +30,40 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 产品管理 <span class="c-gray en">&gt;</span> 全部产品 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
+    <div class="text-c">
+      <label>一级分类：</label>
+      <select class="inp_1" name="cateid" id="cateid" onchange="getcid();" style="width:150px;margin-right:5px;">
+          <!-- 遍历 -->
+          <option value=""></option>
+
+          <volist name="cate_list" id="v">
+            <if condition="$v.id == $cateid">
+              <option value="{$v.id}" selected = "selected">{$v.name}</option>
+            <else/>
+              <option value="{$v.id}">{$v.name}</option>
+            </if>
+          </volist>
+          <!-- 遍历 -->
+      </select>
+
+      <label>二级分类：</label>
+      <select class="inp_1" name="cid" id="cid" style="width:150px;">
+          <option value=""></option>
+
+          <volist name="cid_list" id="v">
+            <if condition="$v.id == $cid">
+              <option value="{$v.id}" selected = "selected">{$v.name}</option>
+            <else/>
+              <option value="{$v.id}">{$v.name}</option>
+            </if>
+          </volist>
+      </select>
+
+      <button type="button" class="btn btn-success" onclick="product_option(0);"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
+    </div>
+
     <br>
+
     <table class="table table-border table-bordered table-bg">
         <thead>
 
@@ -70,7 +103,7 @@
 
         <tr>
         <td colspan="10" class="td_2" style="text-align:right">
-        <input type="button" value="提交"  onclick="pro_update()" class="btn btn-success"/>
+        <input type="button" value="提交" onclick="pro_update()" class="btn btn-success"/>
         </td>
         </tr>
 
@@ -94,9 +127,11 @@
 
 
 <script>
-    function product_option(page){
-        var url='?page='+page;
-        location=url;
+    function product_option(page) {
+        var cateid = $("#cateid").val();
+        var cid = $("#cid").val();
+
+        location='?page='+page+'&cateid='+cateid+"&cid="+cid;
     }
 
     function pro_update() {
@@ -137,6 +172,23 @@
         } catch(e) {
             alert(e);
         }
+    }
+
+    function getcid(){
+        var cateid = $('#cateid').val();
+
+        $.post('{:U("getcid")}',{cateid:cateid},function(data){
+            if(data.catelist!=''){
+                var htmls = '<option value=""></option>';
+                var cate = data.catelist;
+                for (var i = 0; i<cate.length; i++) {
+                    htmls += '<option value="'+cate[i].id+'">'+cate[i].name+'</option>';
+                }
+                $('#cid').html(htmls);
+            }else{
+                $('#cid').html('<option value=""></option>');
+            }
+        },"json");
     }
 </script>
 
