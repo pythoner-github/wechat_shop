@@ -26,7 +26,14 @@
     <script type="text/javascript" src="__PUBLIC__/admin/js/action.js"></script>
 
     <title>订单详情</title>
+
+    <style media="print">
+      @page {
+        size: landscape;
+      }
+    </style>
 </head>
+
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单管理 <span class="c-gray en">&gt;</span> 订单详情 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
@@ -34,6 +41,9 @@
         <input type="text" class="input-text" style="width:250px" placeholder="品牌名称" id="name" value="<?php echo $name;?>">
         <button type="button" class="btn btn-success" id="" name="" onclick="product_option(0);"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
     </div>
+    <!--startprint-->
+
+    <br>
     <br>
 
     <div style="border-bottom:1px solid #b9c9d6;">
@@ -123,10 +133,15 @@
         <br>
             <font>订单价格:</font> ￥ <?php echo number_format($order_info['price'],2); ?>
 
+        <!--endprint-->
+
         <br><br>
         <input type="button" value="提交" style="" onclick="sms_message()" class="btn btn-success"/>
+        <input type="button" name="button_print" title="打印" onclick="preview()" value="打印" class="btn btn-success">
         <br>
         <input type="hidden" value="<?php echo $order_info['status']; ?>" name="o_status" id="o_status">
+        <br>
+
     </div>
     </div>
 
@@ -224,6 +239,18 @@
         }catch(e){
             alert(e);
         }
+    }
+
+    function preview()
+    {
+        bdhtml=window.document.body.innerHTML;                //获取当前页的html代码
+        sprnstr="<!--startprint-->";                          //设置打印开始区域
+        eprnstr="<!--endprint-->";                            //设置打印结束区域
+        prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html
+        prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html
+        window.document.body.innerHTML=prnhtml;
+        window.print();
+        window.document.body.innerHTML=bdhtml;
     }
 </script>
 
