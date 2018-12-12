@@ -43,7 +43,12 @@ class IndexController extends PublicController {
         $indeximg[$k]['photo'] = __DATAURL__.$v['photo'];
       }
 
-      $messages = M("message")->field('message')->select();
+      $messages = array()
+      $data = M("message")->field('message')->select();
+
+      foreach ($data as $k => $v) {
+        array_push($messages, $v['message']);
+      }
 
       echo json_encode(array('focus'=>$focus,'procat'=>$indeximg,'prolist'=>$pro_list,'brand'=>$brand, 'messages'=>$messages));
       exit();
