@@ -512,11 +512,7 @@ icon {
 }
 
 .th-text {
-  width: 100%;
-  justify-content: center;
-  color: #000;
-  display: block;
-  height: 70rpx;
-  align-items: center;
-  max-height: 70rpx;
+  width         : 90%;
+  color		      : #000;
+  white-space   : nowrap;
 }

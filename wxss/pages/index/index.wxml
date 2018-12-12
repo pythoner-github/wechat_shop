@@ -26,10 +26,9 @@
     <text class="distance">您当前选择的“{{address}}”，未在配送范围，我们将会为您尽快开通配送服务</text>
   </view>
 
-
   <view class="address df" style="font-size:13px;">
       <image class='kfcion' src='/images/xlb.png'></image>
-      <text class="th-text" disabled='true' style="overflow-y:auto;overflow-x:scroll;" selectable="true">{{message}}</text>
+      <view class='address df th-text' style='transform:translateX({{marquee}}px)'>{{message}}</view>
   </view>
 
   <view class="cont">
