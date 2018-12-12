@@ -28,9 +28,8 @@
 
 
   <view class="address df" style="font-size:13px;">
-
-      <image class='kfcion' src='/images/xlb.png'></image>送菜娃商城上线了
-
+      <image class='kfcion' src='/images/xlb.png'></image>
+      <text class="th-text" disabled='true' style="overflow-y:auto;overflow-x:scroll;" selectable="true">{{message}}</text>
   </view>
 
   <view class="cont">

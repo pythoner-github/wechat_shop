@@ -16,6 +16,7 @@ Page ({
     proCat        : [],
     page          : 2,
     brand         : [],
+    message       : '',
 
     time          : 0,
     order_msg     : ''
@@ -37,7 +38,7 @@ Page ({
         type: 'gcj02',
 
         success: function(res) {
-//          console.log(res);
+          // console.log(res);
 
           latitude = res.latitude;
           longitude = res.longitude;
@@ -71,12 +72,14 @@ Page ({
         var procat = res.data.procat;
         var prolist = res.data.prolist;
         var brand = res.data.brand;
+        var message = res.data.messages.join(' ');
 
         that.setData({
           focus       : focus,
           proCat      : procat,
           productData : prolist,
-          brand       : brand
+          brand       : brand,
+          message     : message
         });
       },
 

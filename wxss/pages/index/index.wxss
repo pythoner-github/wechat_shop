@@ -346,7 +346,7 @@
   border          : none;
   padding         : 1px;
   /* border-radius   : 6px; */
-  vertical-align  : middle ;  
+  vertical-align  : middle ;
 }
 
 
@@ -359,7 +359,7 @@
   width           : 24px;
   height          : 24px;
   text-align      : right;
-  margin-right    : 5px; 
+  margin-right    : 5px;
   vertical-align  : middle;
 }
 
@@ -509,4 +509,14 @@ icon {
   margin-left   : 2% ;
   vertical-align: middle ;
 
+}
+
+.th-text {
+  width: 100%;
+  justify-content: center;
+  color: #000;
+  display: block;
+  height: 70rpx;
+  align-items: center;
+  max-height: 70rpx;
 }
