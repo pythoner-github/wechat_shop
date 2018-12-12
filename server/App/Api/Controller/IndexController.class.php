@@ -43,7 +43,7 @@ class IndexController extends PublicController {
         $indeximg[$k]['photo'] = __DATAURL__.$v['photo'];
       }
 
-      $messages = array()
+      $messages = array();
       $data = M("message")->field('message')->select();
 
       foreach ($data as $k => $v) {
