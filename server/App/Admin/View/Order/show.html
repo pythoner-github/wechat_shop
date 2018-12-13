@@ -55,107 +55,80 @@
         <thead>
 
         <tr class="text-c">
-            <th width="150">产品订单ID</th>
-            <th width="150">产品名称</th>
-            <th width="40">产品价格</th>
-            <th width="40">产品规格</th>
-            <th width="40">数量</th>
-            <th width="40">总价</th>
-            <th width="60">产品属性</th>
+            <th width="15%">产品名称</th>
+            <th width="15%">所属品牌</th>
+            <th width="15%">产品价格</th>
+            <th width="15%">产品规格</th>
+            <th width="15%">数量</th>
+            <th width="15%">单品总价</th>
         </tr>
         </thead>
 
         <volist name='order_pro' id="pro">
             <tr id="concent_tr_{$key}" class="text-c">
-				        <td><input id="pro_id_{$key}" value="{$pro.id}" style="display:none"/>{$pro.id}</td>
-                <td>{$pro.name}</td>
-                <td>{$pro.price}</td>
-                <td><input id="pro_guige_{$key}" value="{$pro.pro_guige}"/></td>
-                <td>{$pro.num}</td>
-                <td><font style="color:#c00;">￥ <?php echo number_format($pro['price']*$pro['num'],2); ?></font></td>
-                <td>{$pro.pro_buff}</td>
+				        <td width="15%"><input id="pro_id_{$key}" value="{$pro.id}" style="display:none"/>{$pro.name}</td>
+                <td width="15%">{$pro.brand}</td>
+                <td width="15%">￥ {$pro.price}</td>
+                <td width="15%"><input id="pro_guige_{$key}" value="{$pro.pro_guige}"/></td>
+                <td width="15%">{$pro.num}</td>
+                <td width="15%"><font style="color:#c00;"><strong>￥ <?php echo number_format($pro['price']*$pro['num'],2); ?></strong></font></td>
             </tr>
         </volist>
     </table>
 
     <br>
 
-    <div style="border-bottom:1px solid #b9c9d6;">
-        <ul style="margin-top:15px;  padding-bottom:5px; width:500px; float:left;">
-            <li style="font-size:15px; color:#000;">收货地址信息：</li>
-            <li style="padding-top:5px;">
-                <div>收货人：<?php echo $order_info['receiver']; ?></div>
-                <div>联系电话：<?php echo $order_info['tel']; ?></div>
-                <div>邮政编码：<?php echo $order_info['code']; ?></div>
-                <div>收货地址：<?php echo $order_info['address_xq']; ?></div>
-            </li>
-        </ul>
-        <ul style="margin-top:15px; padding-bottom:5px; width:300px; float:left;">
-            <li style="font-size:15px; color:#000;">买家留言：</li>
-            <li style="padding:5px 0 0 0; padding-top:5px; color:#090; font-size:14px;">
-                <?php echo $order_info['remark']; ?>
-            </li>
-            <li style="font-size:15px; color:#000;">邮费信息：</li>
-            <li style="padding:5px 0 0 0; color:#090; font-size:14px;">
-                <?php if ($post_info) {
-             	echo $post_info['price']."（".$post_info['name']."）"."<br />".$order_info['post_remark'];
-                }else {
-                echo "卖家包邮";
-                } ?>
-            </li>
-        </ul>
-        <ul style="margin-top:15px; padding-bottom:5px; width:300px; float:left;">
-            <li style="font-size:15px; color:#000;">物流信息：</li>
-            <li>
-                暂无
-            </li>
-        </ul>
-    </div>
+    <table>
+      <div style="border-bottom:1px solid #b9c9d6;">
+          <ul style="margin-top:15px;  padding-bottom:5px; width:500px; float:left;">
+              <li style="font-size:15px; color:#000;"><strong>收货地址信息</strong></li>
+              <li style="padding-top:5px;">
+                  <div>收货人  ：<?php echo $order_info['receiver']; ?></div>
+                  <div>联系电话：<?php echo $order_info['tel']; ?></div>
+                  <div>邮政编码：<?php echo $order_info['code']; ?></div>
+                  <div>收货地址：<?php echo $order_info['address_xq']; ?></div>
+              </li>
+          </ul>
 
-    <div>
-    <div class="ord_show_5">
+          <ul style="margin-top:15px; padding-bottom:5px; width:300px; float:left;">
+              <li style="font-size:15px; color:#000;"><strong>物流信息</strong></li>
+              <li>发货快递：<input id="kuaidi_name" value="<?php echo $order_info['kuaidi_name'];?>" /></li>
+              <li>快递单号：<input id="kuaidi_num" value="<?php echo $order_info['kuaidi_num'];?>"/></li>
+              <li>&nbsp;</li>
+              <li><font>订单总价:</font> <strong>￥ <?php echo number_format($order_info['price'],2); ?></strong></li>
+          </ul>
+      </div>
+    </table>
 
-        <br>
-        <div style="color:#c00; line-height:20px;font-size: 14px">发送待收货短信通知，要求订单状态必须为“待收货”,表示卖家已经发货。</div>
-        发货快递：<input id="kuaidi_name" value="<?php echo $order_info['kuaidi_name'];?>" />
-        <br>
-        快递单号：<input id="kuaidi_num" value="<?php echo $order_info['kuaidi_num'];?>"/>
+    <!--endprint-->
 
-        <br>
+    <table>
+      <div class="ord_show_5">
+          <br>
+          状态修改：
+          <select id="zt_order_update">
+              <option value="">全部状态</option>
+              <?php foreach ($order_status as $key => $val) { ?>
+              <option value="<?php echo $key; ?>" <?php if($order_info['status']==$key) { ?>selected="selected"<?php } ?> >- <?php echo $val; ?></option>
+              <?php } ?>
+          </select>
 
-                状态修改：
-                <select id="zt_order_update">
-                    <option value="">全部状态</option>
-                    <?php foreach ($order_status as $key => $val) { ?>
-                    <option value="<?php echo $key; ?>" <?php if($order_info['status']==$key) { ?>selected="selected"<?php } ?> >- <?php echo $val; ?></option>
-                    <?php } ?>
-                </select>
-        <br>
-            <font>订单价格:</font> ￥ <?php echo number_format($order_info['price'],2); ?>
+          <br><br>
+          <input type="button" value="提交" style="" onclick="sms_message()" class="btn btn-success"/>&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="button" name="button_print" title="打印" onclick="preview()" value="打印" class="btn btn-success">
+          <br>
+          <input type="hidden" value="<?php echo $order_info['status']; ?>" name="o_status" id="o_status">
+          <br>
+      </div>
 
-        <!--endprint-->
-
-        <br><br>
-        <input type="button" value="提交" style="" onclick="sms_message()" class="btn btn-success"/>
-        <input type="button" name="button_print" title="打印" onclick="preview()" value="打印" class="btn btn-success">
-        <br>
-        <input type="hidden" value="<?php echo $order_info['status']; ?>" name="o_status" id="o_status">
-        <br>
-
-    </div>
-    </div>
-
-
-
-    <?php if($order_info['back']>0){ ?>
-    <div class="ord_show_1">
-        <div class="ord_show_6" style="float:left;margin-top:10px">
-            退款原因：<span style="color:#c00;"><?php echo $order_info['back_remark'];?></span>
-        </div>
-    </div>
-    <?php } ?>
-
-
+      <?php if($order_info['back']>0){ ?>
+      <div class="ord_show_1">
+          <div class="ord_show_6" style="float:left;margin-top:10px">
+              退款原因：<span style="color:#c00;"><?php echo $order_info['back_remark'];?></span>
+          </div>
+      </div>
+      <?php } ?>
+    </table>
 </div>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="__PUBLIC__/admin/lib/jquery/1.9.1/jquery.min.js"></script>

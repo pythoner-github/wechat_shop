@@ -157,12 +157,16 @@ class OrderController extends PublicController{
             $this->error('系统错误.');
         }
 
+        $qz=C('DB_PREFIX'); // 前缀
+
         //根据订单id获取订单数据还有商品信息
         $order_info = $this->order->where('id='.intval($order_id))->find();
         $order_pro = $this->order_product->where('order_id='.intval($order_id))->select();
         if (!$order_info || !$order_pro) {
             $this->error('订单信息错误.');
         }
+
+
         foreach ($order_pro as $k => $v) {
             $data=array();
             $data = unserialize($v['pro_guide']);
@@ -170,6 +174,12 @@ class OrderController extends PublicController{
                 $order_pro[$k]['g_name'] = $data['gname'];
             }else{
                 $order_pro[$k]['g_name'] = '无';
+            }
+
+            $brand_info = M('product')->where(''.$qz.'product.id='.intval($v['pid']))->join('LEFT JOIN __BRAND__ ON __PRODUCT__.brand_id=__BRAND__.id')   ->field(''.$qz.'product.id as id, '.$qz.'product.brand_id as brand_id, '.$qz.'brand.name as brand')->find();
+
+            if ($brand_info) {
+              $order_pro[$k]['brand'] = $brand_info['brand'];
             }
         }
 
