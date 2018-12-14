@@ -58,6 +58,7 @@
             <th width="15%">产品名称</th>
             <th width="15%">所属品牌</th>
             <th width="15%">产品价格</th>
+            <th width="15%">实际规格</th>
             <th width="15%">产品规格</th>
             <th width="15%">数量</th>
             <th width="15%">单品总价</th>
@@ -66,9 +67,10 @@
 
         <volist name='order_pro' id="pro">
             <tr id="concent_tr_{$key}" class="text-c">
-				        <td width="15%"><input id="pro_id_{$key}" value="{$pro.id}" style="display:none"/>{$pro.name}</td>
+				<td width="15%"><input id="pro_id_{$key}" value="{$pro.id}" style="display:none"/>{$pro.name}</td>
                 <td width="15%">{$pro.brand}</td>
-                <td width="15%">￥ {$pro.price}</td>
+                <td width="15%">￥ {$pro.ori_price}</td>
+                <td width="15%">￥ {$pro.ori_guige}</td>
                 <td width="15%"><input id="pro_guige_{$key}" value="{$pro.pro_guige}"/></td>
                 <td width="15%">{$pro.num}</td>
                 <td width="15%"><font style="color:#c00;"><strong>￥ <?php echo number_format($pro['price']*$pro['num'],2); ?></strong></font></td>

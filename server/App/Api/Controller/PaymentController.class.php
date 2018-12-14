@@ -173,6 +173,8 @@ class PaymentController extends PublicController {
         $date['num']=intval($_POST['num']);
         $date['pro_guige']=$product->where('id='.intval($date['pid']))->getField('company');
         //$date['company'] = '';
+        $date['ori_guige'] = $date['pro_guige'];
+        $date['ori_price'] = $date['price'];
 
         $res = $order_pro->add($date);
 
