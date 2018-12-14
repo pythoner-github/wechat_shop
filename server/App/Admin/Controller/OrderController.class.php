@@ -61,7 +61,10 @@ class OrderController extends PublicController{
 
             //搜索内容输出
             $this->assign('pay_status',$pay_status);
+        } else {
+            $where .=' AND status>0';
         }
+
         //根据下单时间搜索
         if ($start_time) {
             $condition['addtime'] = array('gt',$start_time);
