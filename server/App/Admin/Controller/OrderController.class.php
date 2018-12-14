@@ -181,6 +181,14 @@ class OrderController extends PublicController{
             if ($brand_info) {
               $order_pro[$k]['brand'] = $brand_info['brand'];
             }
+
+            if ($order_pro[$k]['ori_guige'] == '') {
+                $order_pro[$k]['ori_guige'] = $order_pro[$k]['pro_guige'];
+            }
+
+            if (floatval($order_pro[$k]['ori_price']) == 0.0) {
+                $order_pro[$k]['ori_price'] = $order_pro[$k]['price'];
+            }
         }
 
         $post_info = array();
@@ -249,6 +257,9 @@ class OrderController extends PublicController{
                     try {
                         $data['pro_guige'] = $order_pro_update[$i][1];
                         $data['price'] = $tmp['ori_price'] * round(floatval($data['pro_guige'])/floatval($tmp['ori_guige']), 2);
+                        $data['ori_guige'] = $tmp['pro_guige'];
+                        $data['ori_price'] = $tmp['ori_price'];
+
                         $this->order_product->where('id='.intval($order_pro_update[$i][0]))->save($data);
                     }catch(Exception $e){
                         $json = array('returns'=>0 , 'message'=>$e->getMessage());
