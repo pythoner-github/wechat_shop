@@ -228,11 +228,19 @@ class OrderController extends PublicController{
                 if ($tmp['pro_guige'] != $order_pro_update[$i][1]) {
                     $update = true;
 
+                    try {
+                        if (floatval($tmp['pro_guige']) <= 0) {
+                            $tmp['pro_guige'] = '1';
+                        }
+                    } catch(Exception $e) {
+                        $tmp['pro_guige'] = '1';
+                    }
+
                     $data = array();
-                    $data['pro_guige'] = $order_pro_update[$i][1];
-                    $data['price'] = $tmp['price'] * round(floatval($data['pro_guige'])/floatval($tmp['pro_guige']), 2);
 
                     try {
+                        $data['pro_guige'] = $order_pro_update[$i][1];
+                        $data['price'] = $tmp['price'] * round(floatval($data['pro_guige'])/floatval($tmp['pro_guige']), 2);
                         $this->order_product->where('id='.intval($order_pro_update[$i][0]))->save($data);
                     }catch(Exception $e){
                         $json = array('returns'=>0 , 'message'=>$e->getMessage());
