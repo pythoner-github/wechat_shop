@@ -260,7 +260,7 @@ class OrderController extends PublicController{
                     try {
                         $data['pro_guige'] = $order_pro_update[$i][1];
                         $data['price'] = $tmp['ori_price'] * round(floatval($data['pro_guige'])/floatval($tmp['ori_guige']), 2);
-                        $data['ori_guige'] = $tmp['pro_guige'];
+                        $data['ori_guige'] = $tmp['ori_guige'];
                         $data['ori_price'] = $tmp['ori_price'];
 
                         $this->order_product->where('id='.intval($order_pro_update[$i][0]))->save($data);
