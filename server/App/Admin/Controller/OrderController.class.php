@@ -224,23 +224,31 @@ class OrderController extends PublicController{
         for ($i=0; $i<=count($order_pro_update); $i++) {
             $tmp = $this->order_product->where('id='.intval($order_pro_update[$i][0]))->find();
 
+            if ($tmp['ori_guige'] == '') {
+                $tmp['ori_guige'] = $tmp['pro_guige'];
+            }
+
+            if (floatval($tmp['ori_price']) == 0.0) {
+                $tmp['ori_price'] = $tmp['price'];
+            }
+
+            try {
+                if (floatval($tmp['ori_guige']) <= 0) {
+                    $tmp['ori_guige'] = '1';
+                }
+            } catch(Exception $e) {
+                $tmp['ori_guige'] = '1';
+            }
+
             if ($tmp) {
                 if ($tmp['pro_guige'] != $order_pro_update[$i][1]) {
                     $update = true;
-
-                    try {
-                        if (floatval($tmp['pro_guige']) <= 0) {
-                            $tmp['pro_guige'] = '1';
-                        }
-                    } catch(Exception $e) {
-                        $tmp['pro_guige'] = '1';
-                    }
 
                     $data = array();
 
                     try {
                         $data['pro_guige'] = $order_pro_update[$i][1];
-                        $data['price'] = $tmp['price'] * round(floatval($data['pro_guige'])/floatval($tmp['pro_guige']), 2);
+                        $data['price'] = $tmp['ori_price'] * round(floatval($data['pro_guige'])/floatval($tmp['ori_guige']), 2);
                         $this->order_product->where('id='.intval($order_pro_update[$i][0]))->save($data);
                     }catch(Exception $e){
                         $json = array('returns'=>0 , 'message'=>$e->getMessage());
