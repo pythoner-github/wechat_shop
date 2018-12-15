@@ -46,7 +46,8 @@
     <br>
 
     <div style="border-bottom:1px solid #b9c9d6;">
-        <strong>送菜娃网购商城配送中心</strong> 订单编号：<?php echo $order_info['order_sn']; ?>
+        <h4><strong>送菜娃网购商城配送中心 (<?php echo date("Y-m-d"); ?>)</strong><br>
+        订单编号：<?php echo $order_info['order_sn']; ?></h4>
     </div>
 
     <br>
@@ -82,7 +83,7 @@
     <table>
       <div style="border-bottom:1px solid #b9c9d6;">
           <ul style="margin-top:15px;  padding-bottom:5px; width:500px; float:left;">
-              <li style="font-size:15px; color:#000;"><strong>收货地址信息</strong></li>
+              <!-- li style="font-size:15px; color:#000;"><strong>收货地址信息</strong></li -->
               <li style="padding-top:5px;">
                   <div>收货人  ：<?php echo $order_info['receiver']; ?></div>
                   <div>联系电话：<?php echo $order_info['tel']; ?></div>
