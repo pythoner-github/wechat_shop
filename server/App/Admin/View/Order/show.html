@@ -29,7 +29,7 @@
 
     <style media="print">
       @page {
-        size: landscape;
+        #size: landscape;
       }
     </style>
 </head>
@@ -44,21 +44,20 @@
     <!--startprint-->
 
     <br>
-    <br>
 
     <div style="border-bottom:1px solid #b9c9d6;">
-    订单编号：<?php echo $order_info['order_sn']; ?>
+        <strong>送菜娃网购商城配送中心</strong> 订单编号：<?php echo $order_info['order_sn']; ?>
     </div>
+
     <br>
 
     <table class="table table-border table-bordered table-bg">
         <thead>
-
         <tr class="text-c">
             <th width="10%">产品名称</th>
-            <th width="10%">所属品牌</th>
+            <!-- th width="10%">所属品牌</th -->
             <th width="10%">产品价格</th>
-            <th width="10%">产品重量(规格)</th>
+            <!-- th width="10%">产品重量(规格)</th -->
             <th width="10%">实际重量(规格)</th>
             <th width="10%">数量</th>
             <th width="10%">单品总价</th>
@@ -68,10 +67,10 @@
         <volist name='order_pro' id="pro">
             <tr id="concent_tr_{$key}" class="text-c">
 				<td width="10%"><input id="pro_id_{$key}" value="{$pro.id}" style="display:none"/>{$pro.name}</td>
-                <td width="10%">{$pro.brand}</td>
+                <!-- td width="10%">{$pro.brand}</td -->
                 <td width="10%">￥ {$pro.ori_price}</td>
-                <td width="10%">{$pro.ori_guige}</td>
-                <td width="10%"><input id="pro_guige_{$key}" value="{$pro.pro_guige}"/></td>
+                <!-- td width="10%">{$pro.ori_guige}</td -->
+                <td width="10%"><input id="pro_guige_{$key}" value="{$pro.pro_guige}" size = "10"/></td>
                 <td width="10%">{$pro.num}</td>
                 <td width="10%"><font style="color:#c00;"><strong>￥ <?php echo number_format($pro['price']*$pro['num'],2); ?></strong></font></td>
             </tr>
@@ -89,16 +88,17 @@
                   <div>联系电话：<?php echo $order_info['tel']; ?></div>
                   <div>邮政编码：<?php echo $order_info['code']; ?></div>
                   <div>收货地址：<?php echo $order_info['address_xq']; ?></div>
+                  <div><font>订单总价:</font> <strong>￥ <?php echo number_format($order_info['price'],2); ?></strong></div>
               </li>
           </ul>
 
-          <ul style="margin-top:15px; padding-bottom:5px; width:300px; float:left;">
+          <!--ul style="margin-top:15px; padding-bottom:5px; width:300px; float:left;">
               <li style="font-size:15px; color:#000;"><strong>物流信息</strong></li>
               <li>发货快递：<input id="kuaidi_name" value="<?php echo $order_info['kuaidi_name'];?>" /></li>
               <li>快递单号：<input id="kuaidi_num" value="<?php echo $order_info['kuaidi_num'];?>"/></li>
               <li>&nbsp;</li>
               <li><font>订单总价:</font> <strong>￥ <?php echo number_format($order_info['price'],2); ?></strong></li>
-          </ul>
+          </ul -->
       </div>
     </table>
 
@@ -145,24 +145,6 @@
 
 
 <script>
-    //删除订单
-    /*function order_show_updata(id,type){
-     if(id=='' || id==null)return;
-     var $val='';
-     if(type!='del'){
-     $val=document.getElementById('pro_beizhu_'+id).value;
-     }
-
-     $.post('include/order_beizhu.php',{"id":id,"beizhu":$val,"type":type},function(data){
-     if(data=='1'){
-     alert('操作成功！');
-     if(type=='del'){window.close(); window.opener.history.go(0);}
-     }else{
-     alert("操作失败");
-     }
-     });
-     }*/
-
     //保存快递名称，快递单号
     function sms_message(){
         try{
