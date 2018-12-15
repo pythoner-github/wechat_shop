@@ -54,7 +54,7 @@
 
     <table class="table table-border table-bordered table-bg">
         <thead>
-        <tr class="text-c">
+        <tr class="text-left">
             <th width="10%">产品名称</th>
             <!-- th width="10%">所属品牌</th -->
             <th width="10%">产品价格</th>
@@ -66,7 +66,7 @@
         </thead>
 
         <volist name='order_pro' id="pro">
-            <tr id="concent_tr_{$key}" class="text-c">
+            <tr id="concent_tr_{$key}" class="text-left">
 				<td width="10%"><input id="pro_id_{$key}" value="{$pro.id}" style="display:none"/>{$pro.name}</td>
                 <!-- td width="10%">{$pro.brand}</td -->
                 <td width="10%">￥ {$pro.ori_price}</td>
@@ -82,7 +82,7 @@
 
     <table>
       <div style="border-bottom:1px solid #b9c9d6;">
-          <ul style="margin-top:15px;  padding-bottom:5px; width:500px; float:left;">
+          <ul style="margin-top:15px; padding-bottom:5px; width:500px; float:left;">
               <!-- li style="font-size:15px; color:#000;"><strong>收货地址信息</strong></li -->
               <li style="padding-top:5px;">
                   <div>收货人  ：<?php echo $order_info['receiver']; ?></div>

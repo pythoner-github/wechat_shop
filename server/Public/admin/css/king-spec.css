@@ -76,6 +76,10 @@ a{text-decoration:none;}
 .table-sku-stock {width: 100%;background-color: #fff;text-align: left;border-collapse: collapse; border-spacing: 0;min-width: 565px;}
 table.table-sku-stock th {padding: 10px 8px; font-weight: normal;}
 .text-center {width: 74px; text-align: center;}
+.text-left {
+  text-align: left;
+}
+
 .th-price {width: 75px;}
 .th-stock {width: 75px;}
 .th-code {width: 80px;}
