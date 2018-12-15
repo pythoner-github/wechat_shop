@@ -156,15 +156,17 @@
             //选择状态不能比当前状态小，已付款的订单不能变成未付款
             //if (order_status && order_status!=40 && order_status<o_status) {return;};
             //获取快递名称
-            var kuaidi_name = $('#kuaidi_name').val();
-            if(kuaidi_name.length<1 && order_status==30) throw ('快递名称不能为空！');
+            var kuaidi_name = '';
+            //var kuaidi_name = $('#kuaidi_name').val();
+            //if(kuaidi_name.length<1 && order_status==30) throw ('快递名称不能为空！');
             //获取快递单号
-            var kuaidi_num = $('#kuaidi_num').val();
-            if(kuaidi_num.length<1 && order_status==30) throw ('运单号不能为空！');
+            var kuaidi_num = '';
+            //var kuaidi_num = $('#kuaidi_num').val();
+            //if(kuaidi_num.length<1 && order_status==30) throw ('运单号不能为空！');
 
-            if (!order_status && kuaidi_num.length<1 && kuaidi_name.length<1) {
-                throw ('请输入快递信息或选择订单状态！');
-            };
+            //if (!order_status && kuaidi_num.length<1 && kuaidi_name.length<1) {
+            //    throw ('请输入快递信息或选择订单状态！');
+            //};
 
 			var order_pro_update = [];
 			var length = eval(<?php echo count($order_pro); ?>);
