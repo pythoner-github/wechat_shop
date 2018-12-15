@@ -70,11 +70,11 @@
             <tr id="concent_tr_{$key}" class="text-left">
 				<td width="15%"><input id="pro_id_{$key}" value="{$pro.id}" style="display:none"/>{$pro.name}</td>
                 <!-- td width="10%">{$pro.brand}</td -->
-                <td width="10%">￥ {$pro.ori_price}</td>
+                <td width="10%">{$pro.ori_price}元</td>
                 <td width="10%">{$pro.ori_guige}</td>
                 <td width="10%"><input id="pro_guige_{$key}" value="{$pro.pro_guige}" size = "10"/></td>
                 <td width="5%">{$pro.num}</td>
-                <td width="40%"><font style="color:#c00;"><strong>￥ <?php echo number_format($pro['price']*$pro['num'],2); ?></strong></font></td>
+                <td width="40%"><font style="color:#c00;"><strong><?php echo number_format($pro['price']*$pro['num'],2); ?>元</strong></font></td>
             </tr>
         </volist>
     </table>
