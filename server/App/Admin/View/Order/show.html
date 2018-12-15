@@ -56,7 +56,7 @@
     <table class="table table-border table-bordered table-bg table-condensed">
         <thead>
         <tr class="text-left">
-            <th width="15%">产品名称</th>
+            <th width="12%">产品名称</th>
             <!-- th width="10%">所属品牌</th -->
             <th width="10%">价格(元)</th>
             <th width="10%">单位</th>
@@ -68,7 +68,7 @@
 
         <volist name='order_pro' id="pro">
             <tr id="concent_tr_{$key}" class="text-left">
-				<td width="15%"><input id="pro_id_{$key}" value="{$pro.id}" style="display:none"/>{$pro.name}</td>
+				<td width="12%"><input id="pro_id_{$key}" value="{$pro.id}" style="display:none"/>{$pro.name}</td>
                 <!-- td width="10%">{$pro.brand}</td -->
                 <td width="10%">{$pro.ori_price}</td>
                 <td width="10%">{$pro.ori_guige}</td>
