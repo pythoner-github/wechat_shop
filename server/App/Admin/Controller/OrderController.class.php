@@ -290,7 +290,7 @@ class OrderController extends PublicController{
         }
 
         try{
-            if(($kuaidi_name=='' || $kuaidi_num=='') && $order_status==30) throw new Exception('参数不正确');
+            // if(($kuaidi_name=='' || $kuaidi_num=='') && $order_status==30) throw new Exception('参数不正确');
             /*$msg = '您的订单（编号:%s）,已发货，送货快递:%s，运单号:%s 【%s】';
             $msg = sprintf($msg,$id,$kuaidi_name,$kuaidi_num,$partner_info['name']);*/
             //修改快递信息
