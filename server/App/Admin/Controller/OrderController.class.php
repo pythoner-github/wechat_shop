@@ -279,10 +279,11 @@ class OrderController extends PublicController{
 
         //接收ajax传过来的值
         $order_status = intval($_POST['order_status']);
-        $kuaidi_name = $_POST['kuaidi_name'];
-        $kuaidi_num = $_POST['kuaidi_num'];
+        //$kuaidi_name = $_POST['kuaidi_name'];
+        //$kuaidi_num = $_POST['kuaidi_num'];
 
-        if ($o_info['kuaidi_name']==$kuaidi_name && $o_info['kuaidi_num']==$kuaidi_num && intval($o_info['status'])==$order_status && !$update) {
+        // if ($o_info['kuaidi_name']==$kuaidi_name && $o_info['kuaidi_num']==$kuaidi_num && intval($o_info['status'])==$order_status && !$update) {
+        if (intval($o_info['status'])==$order_status && !$update) {
             $arr = array();
             $arr = array('returns'=>0 , 'message'=>'修改信息未发生变化.');
             echo json_encode($arr);
@@ -298,12 +299,12 @@ class OrderController extends PublicController{
             if ($order_status) {
                 $data['status'] = $order_status;
             }
-            if ($kuaidi_name) {
+            /*if ($kuaidi_name) {
                 $data['kuaidi_name'] = $kuaidi_name;
             }
             if ($kuaidi_num) {
                 $data['kuaidi_num'] = $kuaidi_num;
-            }
+            }*/
 
             $data['price'] = $order_price;
             $data['amount'] = $order_price;
