@@ -60,8 +60,8 @@
             <!-- th width="10%">所属品牌</th -->
             <th width="10%">价格(元)</th>
             <th width="10%">单位</th>
-            <th width="10%">实际重量</th>
             <th width="5%">数量</th>
+            <th width="10%">实际总重</th>
             <th width="40%">总价(元)</th>
         </tr>
         </thead>
@@ -72,8 +72,8 @@
                 <!-- td width="10%">{$pro.brand}</td -->
                 <td width="10%">{$pro.ori_price}</td>
                 <td width="10%">{$pro.ori_guige}</td>
-                <td width="10%"><input id="pro_guige_{$key}" value="{$pro.pro_guige}" size = "10"/></td>
                 <td width="5%">{$pro.num}</td>
+                <td width="10%"><input id="pro_full_guige_{$key}" value="{$pro.full_guige}" size = "10"/></td>
                 <td width="40%"><font style="color:#c00;"><strong><?php echo number_format($pro['price']*$pro['num'],2); ?></strong></font></td>
             </tr>
         </volist>
@@ -175,7 +175,7 @@
 
 			for (var i = 0; i < length; i++)
 			{
-				order_pro_update.push([$('#pro_id_' + i).val(), $('#pro_guige_' + i).val()])
+				order_pro_update.push([$('#pro_id_' + i).val(), $('#pro_full_guige_' + i).val()])
 			}
 
             $.ajax({

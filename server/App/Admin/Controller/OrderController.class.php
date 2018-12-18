@@ -192,6 +192,12 @@ class OrderController extends PublicController{
             if (floatval($order_pro[$k]['ori_price']) == 0.0) {
                 $order_pro[$k]['ori_price'] = $order_pro[$k]['price'];
             }
+
+             if ($order_pro[$k]['full_guige'] == '') {
+                $tmp_val = substr($order_pro[$k]['pro_guige'], strlen(preg_split('/[^0-9.]+/', $order_pro[$k]['pro_guige'], 2)[0]));
+
+                $order_pro[$k]['full_guige'] = (floatval($order_pro[$k]['pro_guige']) * floatval($order_pro[$k]['num'])).$tmp_val;
+            }
         }
 
         $post_info = array();
@@ -199,13 +205,13 @@ class OrderController extends PublicController{
             $post_info = M('post')->where('id='.intval($order_info['post']))->find();
         }
 
-    if ($order_info['kuaidi_name'] == "") {
-      $order_info['kuaidi_name'] = "送菜娃商城";
-    }
+        if ($order_info['kuaidi_name'] == "") {
+          $order_info['kuaidi_name'] = "送菜娃商城";
+        }
 
-    if ($order_info['kuaidi_num'] == "") {
-      $order_info['kuaidi_num'] = $order_info['order_sn'];
-    }
+        if ($order_info['kuaidi_num'] == "") {
+          $order_info['kuaidi_num'] = $order_info['order_sn'];
+        }
 
         $this->assign('post_info',$post_info);
         $this->assign('order_info',$order_info);
@@ -252,14 +258,14 @@ class OrderController extends PublicController{
             }
 
             if ($tmp) {
-                if ($tmp['pro_guige'] != $order_pro_update[$i][1]) {
+                if ($tmp['full_guige'] != $order_pro_update[$i][1] and floatval($order_pro_update[$i][1]) > 0) {
                     $update = true;
 
                     $data = array();
 
                     try {
-                        $data['pro_guige'] = $order_pro_update[$i][1];
-                        $data['price'] = $tmp['ori_price'] * round(floatval($data['pro_guige'])/floatval($tmp['ori_guige']), 2);
+                        $data['full_guige'] = $order_pro_update[$i][1];
+                        $data['price'] = $tmp['ori_price'] * round(floatval($data['full_guige'])/(floatval($tmp['ori_guige']) *  floatval($tmp['num'])), 2);
                         $data['ori_guige'] = $tmp['ori_guige'];
                         $data['ori_price'] = $tmp['ori_price'];
 
