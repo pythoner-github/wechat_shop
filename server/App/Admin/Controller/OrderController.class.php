@@ -265,7 +265,7 @@ class OrderController extends PublicController{
 
                     try {
                         $data['full_guige'] = $order_pro_update[$i][1];
-                        $data['price'] = $tmp['ori_price'] * round(floatval($data['full_guige'])/(floatval($tmp['ori_guige']) *  floatval($tmp['num'])), 2);
+                        $data['price'] = round((floatval($tmp['ori_price']) * floatval($data['full_guige']))/(floatval($tmp['ori_guige']) *  intval($tmp['num'])), 3);
                         $data['ori_guige'] = $tmp['ori_guige'];
                         $data['ori_price'] = $tmp['ori_price'];
 
