@@ -16,14 +16,9 @@ Page ({
     proCat        : [],
     page          : 2,
     brand         : [],
-    message       : '',
 
     time          : 0,
-    order_msg     : '',
-
-    marquee       : 0,    //每次移动X坐标
-    windowWidth   : 0,    //小程序宽度
-    maxScroll     : 0     //文本移动至最左侧宽度及文本宽度
+    order_msg     : ''
   },
 
   onLoad: function (options) {
@@ -42,7 +37,7 @@ Page ({
         type: 'gcj02',
 
         success: function(res) {
-          // console.log(res);
+//          console.log(res);
 
           latitude = res.latitude;
           longitude = res.longitude;
@@ -76,14 +71,12 @@ Page ({
         var procat = res.data.procat;
         var prolist = res.data.prolist;
         var brand = res.data.brand;
-        var message = res.data.messages.join(' ');
 
         that.setData({
           focus       : focus,
           proCat      : procat,
           productData : prolist,
-          brand       : brand,
-          message     : message
+          brand       : brand
         });
       },
 
@@ -95,15 +88,7 @@ Page ({
       },
     })
 
-    var w = wx.getSystemInfoSync().windowWidth;
-
-    that.setData({
-      marquee: w
-    });
-
-    that.data.maxScroll = that.data.message.length * 15 + 4;
-    that.data.windowWidth = w;
-    that.scrolltxt();
+    //that.getOrdermsg();
   },
 
   onShareAppMessage: function() {
@@ -113,7 +98,7 @@ Page ({
 
       success: function(res) {
       },
-
+      
       fail: function(res) {
       }
     }
@@ -130,6 +115,7 @@ Page ({
       url: '/pages/addr_search/addr_search',
     })
   },
+
 
   // 跳转商品列表页
   listdetail: function (e) {
@@ -279,20 +265,52 @@ Page ({
     });
   },
 
-  scrolltxt: function(){
-    var t = this;
-    var d = t.data;
+  doAddCart: function () {
+    wx.showToast({
+      title: '购物车+1',
+      duration: 2000
+    });
+  },
+  getOrdermsg: function() {
+    var that = this;
 
-    var interval = setInterval(function () {
-      var next = d.marquee-1; //每次移动距离
-      if( next<0 && Math.abs(next)>d.maxScroll ){
-        next = d.windowWidth;
-        clearInterval(interval);
-        t.scrolltxt();
-      }
-      t.setData({
-        marquee: next
-      });
-    }, 80);
+    setInterval(function() {
+      wx.request({
+        url   : app.d.apiUrl + 'Index/ordermsg',
+        method: 'post',
+        data  : {
+          time: this.data.time
+        },
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+
+        success: function (res) {
+          var time = res.data.time;
+          var orders = res.data.order;
+
+          //console.log(res.data);
+
+          var msg = "";
+
+          for (var i = 0; i < orders.length; i++) {
+            if (app.globalData.userInfo != null && orders[i].username != app.globalData.userInfo.nickName) {
+              if (msg != "") {
+                msg += "  ";
+              }
+
+              msg += "用户" + orders[i].username + "已下单" + orders[i].productname;
+            }
+          }
+
+          //console.log(msg);
+
+          that.setData({
+            time     : time,
+            order_msg: msg
+          });
+        }
+      })
+    }, 300000);
   }
 });

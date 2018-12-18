@@ -23,23 +23,35 @@
   </view>
 
   <view class="distance df" wx:if="{{distance > 5000}}"  style="font-size:840px">
-    <text class="distance">您当前选择的“{{address}}”，未在配送范围，我们将会为您尽快开通配送服务</text>
+    <text class="distance">您当前选择的“{{address}}”，未在配送范围，会为您尽快开通配送服务</text>
   </view>
 
-  <view class="address df" style="font-size:13px;">
-      <image class='kfcion' src='/images/xlb.png'></image>
-      <view class='address df th-text' style='transform:translateX({{marquee}}px)'>{{message}}</view>
+
+  <view class="address df" style="font-size:14px;">
+      <image class='kfcion' src='/images/xlb.png'></image>送菜娃商城上线了
   </view>
 
   <view class="cont">
     <navigator class="pr" url="../product/detail?productId={{item.id}}" hover-class="changestyle" wx:for="{{productData}}" wx:key="id">
       <image class="photo" src="{{item.photo_x}}"></image>
-      <view class="title">{{item.name}}</view>
+        <view class="title">{{item.name}}
+          <span class="c6 fl_r font_12" >
+            <button class="gwccion" style="outline:none;border-style:none;background-color:Transparent;border-radius:17px; "  bindtap="doAddCart">
+              <image class='icon_gwc' src='/images/car.png'></image>
+            </button >
+          </span> 
+        </view>
+
+     <!-- <span class="c6 fl_r font_12" >
+    <button class="share" style='margin-top:-20px;'  open-type='share'>
+      <image class="icon_sh"  src="/images/share.png" ></image>
+    </button >
+  </span> -->
 
       <view style="display:flex;line-height:50rpx;padding:10rpx 0;font-weight:bold;">
         <view class="tit">规格: {{item.company}}</view>
         <view class="tit " style="font-weight:bold;">{{item.brand}}</view>
-      </view>
+      </view>sarear
 
       <view style="display:flex;line-height:50rpx;padding:10rpx 0;">
         <view class="gmxx" style="color: red;">¥ {{item.price_yh}}</view>

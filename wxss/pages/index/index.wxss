@@ -332,6 +332,26 @@
 
 }
 
+.cart {
+  padding         : 1% 1%;
+  background: #99cc33;
+
+  color           :rgb(87, 60, 209);
+  text-align      :left;
+  /* text-justify:  auto;
+  flex-direction:  row; */
+
+}
+
+.horn {
+  padding         : 1% 1%;
+  background: #99cc33;
+
+  color           :rgb(32, 18, 221);
+  text-align      :left;
+
+}
+
 .distance {
   padding         : 1% 1%;
   background      : #9fcc75;
@@ -346,7 +366,7 @@
   border          : none;
   padding         : 1px;
   /* border-radius   : 6px; */
-  vertical-align  : middle ;
+  vertical-align  : middle ;  
 }
 
 
@@ -359,7 +379,7 @@
   width           : 24px;
   height          : 24px;
   text-align      : right;
-  margin-right    : 5px;
+  margin-right    : 5px; 
   vertical-align  : middle;
 }
 
@@ -368,6 +388,18 @@
   height          : 24px;
   vertical-align  : middle;
   margin-right    : 5px;
+}
+
+.gwccion {
+  width           : 34px;
+  height          : 34px;
+  vertical-align  : middle;
+}
+
+.icon_gwc {
+  width         : 20px;
+  height        : 20px;
+  display       : inline-block;
 }
 
 .sousuo {
@@ -509,10 +541,4 @@ icon {
   margin-left   : 2% ;
   vertical-align: middle ;
 
-}
-
-.th-text {
-  width         : 90%;
-  color		      : #000;
-  white-space   : nowrap;
 }
