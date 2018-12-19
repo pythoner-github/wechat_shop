@@ -17,9 +17,9 @@
 
     <!--contact-button class="kfcion" style="margin-right:5rpx;" type="default-light" size="30" session-from="weapp"/-->
 
-	<button open-type='contact'>
-		<image class='kfcion' src='/images/kefu.png'/>
-	</button>
+  <button open-type='contact'>
+    <image class='kfcion' src='/images/kefu.png'/>
+  </button>
   </view>
 
   <view class="distance df" wx:if="{{distance > 5000}}"  style="font-size:840px">
@@ -32,26 +32,29 @@
   </view>
 
   <view class="cont">
-    <navigator class="pr" url="../product/detail?productId={{item.id}}" hover-class="changestyle" wx:for="{{productData}}" wx:key="id">
-      <image class="photo" src="{{item.photo_x}}"></image>
-        <view class="title">{{item.name}}
-          <span class="c6 fl_r font_12" >
-            <button class="gwccion" style="outline:none;border-style:none;background-color:Transparent;border-radius:17px; "  bindtap="doAddCart">
-              <image class='icon_gwc' src='/images/car.png'></image>
-            </button >
-          </span> 
-        </view>
+    <view class="pr" hover-class="changestyle" wx:for="{{productData}}" wx:key="id">
+      <navigator url="../product/detail?productId={{item.id}}">
+        <image class="photo" src="{{item.photo_x}}"></image>
+      </navigator>
+
+      <view class="title">{{item.name}}
+        <span class="c6 fl_r font_12" >
+          <button class="gwccion" style="outline:none;border-style:none;background-color:transparent;border-radius:17px;" bindtap="doAddCart" data-id="{{item.id}}">
+            <image class='icon_gwc' src='/images/car.png'></image>
+          </button >
+        </span>
+      </view>
 
      <!-- <span class="c6 fl_r font_12" >
-    <button class="share" style='margin-top:-20px;'  open-type='share'>
-      <image class="icon_sh"  src="/images/share.png" ></image>
-    </button >
-  </span> -->
+      <button class="share" style='margin-top:-20px;' open-type='share'>
+        <image class="icon_sh"  src="/images/share.png" ></image>
+      </button >
+    </span> -->
 
       <view style="display:flex;line-height:50rpx;padding:10rpx 0;font-weight:bold;">
         <view class="tit">规格: {{item.company}}</view>
-        <view class="tit " style="font-weight:bold;">{{item.brand}}</view>
-      </view>sarear
+        <view class="tit" style="font-weight:bold;">{{item.brand}}</view>
+      </view>
 
       <view style="display:flex;line-height:50rpx;padding:10rpx 0;">
         <view class="gmxx" style="color: red;">¥ {{item.price_yh}}</view>
@@ -67,7 +70,7 @@
 
         <view class="ku" style="width:60%">销量：{{item.shiyong}}</view>
       </view>
-    </navigator>
+    </view>
   </view>
 
   <view class="clear mt10" bindtap="getMore">点击查看更多</view>

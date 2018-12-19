@@ -37,8 +37,6 @@ Page ({
         type: 'gcj02',
 
         success: function(res) {
-//          console.log(res);
-
           latitude = res.latitude;
           longitude = res.longitude;
 
@@ -98,7 +96,7 @@ Page ({
 
       success: function(res) {
       },
-      
+
       fail: function(res) {
       }
     }
@@ -265,22 +263,19 @@ Page ({
     });
   },
 
-  doAddCart: function () {
-    // wx.showToast({
-    //   title: '购物车+1',
-    //   duration: 2000
-    // });
+  doAddCart: function(event) {
     var that = this;
 
-    console.log(that);
+    var productid = event.currentTarget.dataset.id;
+    //console.log(productid);
 
     wx.request({
       url: app.d.apiUrl + 'Shopping/add',
       method: 'post',
       data: {
         uid: app.d.userId,
-        pid: that.data.productId,
-        num: that.data.buynum,
+        pid: productid,
+        num: 1,
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -291,20 +286,11 @@ Page ({
         var data = res.data;
 
         if (data.status == 1) {
-          var ptype = e.currentTarget.dataset.type;
-
-          if (ptype == 'buynow') {
-            wx.redirectTo({
-              url: '/pages/order/pay?cartId=' + data.cart_id
-            });
-            return;
-          } else {
             wx.showToast({
               title: '加入购物车成功',
               icon: 'success',
               duration: 2000
             });
-          }
         } else {
           wx.showToast({
             title: data.err,
@@ -322,6 +308,7 @@ Page ({
       }
     });
   },
+
   getOrdermsg: function() {
     var that = this;
 
