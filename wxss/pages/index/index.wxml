@@ -27,7 +27,7 @@
   </view>
 
 
-  <view class="address df" style="font-size:14px;">
+  <view class="address df" style="font-size:16px;">
       <image class='kfcion' src='/images/xlb.png'></image>送菜娃商城上线了
   </view>
 
