@@ -13,7 +13,8 @@
         </view>
 
         <view class="act-item ellipsis" >
-          <text style="color:red">¥ {{item.price_yh}}</text>
+          <text style="color:red">¥ {{item.price_yh}}  </text>
+          <text style="color:blue;font-size:30rpx">     规格: {{item.company}} </text>
         </view>
 
         <view class="act-item ellipsis" >
