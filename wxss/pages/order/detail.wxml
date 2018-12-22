@@ -33,7 +33,7 @@
   </view>
 
   <view class="p_all bg_white mt10 font_14">
-    <textarea class="min_60" auto-height name="remark" disabled="{{true}}" placeholder="订单备注" value="{{orderData.remark?orderData.remark:'未备注'}}" />
+    <textarea class="min_60" auto-height name="remark" disabled="{{true}}" placeholder="订单备注" style="background-color:BFCEDC;border:solid 1px #ccc;border-radius:10px;" value="{{orderData.remark?orderData.remark:'  未备注'}}" />
   </view>
 
 
@@ -41,7 +41,7 @@
     <span class="font_20 red">¥ {{orderData.price}}</span>
   </view>
   <view class="tishi">
-    <view  class="bg_white mt10 c6 l_h10  font_14 color_blue" style="text-indent:2em;color:blue" wx:if="{{orderData.order_status == '待付款' || orderData.order_status == '待发货'  || orderData.order_status == '待收货'}}">
+    <view  class="bg_white mt10 c6 l_h10  font_17 color_blue" style="text-indent:2em;color:blue" wx:if="{{orderData.order_status == '待付款' || orderData.order_status == '待发货'  || orderData.order_status == '待收货'}}">
       温馨提示: 客户您好，您的订单金额仅为预估金额，实际支付金额以称重后为准。
     </view>
     <view wx:else>

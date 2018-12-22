@@ -49,7 +49,7 @@
   </view>
 
   <view class="p_all bg_white mt10 font_14">
-    <textarea class="min_60" auto-height name="remark" placeholder="备注" bindinput="remarkInput" value="{{remark}}"/>
+    <textarea class="min_60" auto-height name="remark" style="background-color:BFCEDC;border:solid 1px #ccc;border-radius:10px;text-left:55px" placeholder="  备注" bindinput="remarkInput" value="{{remark}}"/>
   </view>
 
 	<view class="zhifu mt10 tc">应共支付：<span class="font_20 red">¥ {{total}}</span></view>
@@ -77,7 +77,7 @@
 		</view>
 
 	</view>
-  <view class="tishi bg_white mt10 c6 l_h10  font_14 color_blue" style="text-indent:2em;color:blue">
+  <view class="tishi bg_white mt10 c6 l_h10  font_17 color_blue" style="text-indent:2em;color:blue">
        温馨提示:  客户您好，您的订单金额仅为预估金额，实际支付金额以称重后为准。
   </view>
 </view>

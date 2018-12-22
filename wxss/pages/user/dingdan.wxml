@@ -37,7 +37,7 @@
           -->
 
           <view class="font_12 red fl_r mr_5" bindtap="removeOrder" data-order-id="{{item.id}}">取消订单</view>
-          <navigator url="../order/detail?orderId={{item.id}}" class="font_12 red fl_r mr_5">订单详情</navigator>
+          <navigator url="../order/detail?orderId={{item.id}}" class="font_12 red fl_r mr_5" style ="margin-right:50px;" >订单详情</navigator>
         </view>
       </view>
     </view>
@@ -93,7 +93,7 @@
           <view class="sp_jg">¥：{{item.price}}</view>
           <!-- <navigator class="font_12 red fl_r" url="tuihuo?orderId={{item.id}}">申请退款</navigator> -->
           <!--view class="font_12 red fl_r" bindtap="payOrderByWechat" data-orderId="{{item.id}}" data-ordersn="{{item.order_sn}}" >微信支付</view-->
-          <view class="font_12 red fl_r mr_5" bindtap="recOrderAndPayOrderByWechat" data-orderId="{{item.id}}" data-ordersn="{{item.order_sn}}">确认收货</view>
+          <view class="font_12 red fl_r mr_5" bindtap="recOrderAndPayOrderByWechat" data-orderId="{{item.id}}" style ="margin-left:50px;" data-ordersn="{{item.order_sn}}">确认收货</view>
           <navigator url="../order/detail?orderId={{item.id}}" class="font_12 red fl_r mr_5">订单详情</navigator>
         </view>
       </view>
