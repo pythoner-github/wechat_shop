@@ -389,7 +389,12 @@
   vertical-align  : middle;
   margin-right    : 5px;
 }
-
+.xlbcion {
+  width           : 25px;
+  height          : 25px;
+  vertical-align  : middle;
+  margin-right    : 1px;
+}
 .gwccion {
   width           : 34px;
   height          : 34px;
