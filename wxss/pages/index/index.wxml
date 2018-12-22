@@ -26,9 +26,9 @@
     <text class="distance">您当前选择的“{{address}}”，未在配送范围，会为您尽快开通配送服务</text>
   </view>
 
-
-  <view class="address df" style="font-size:16px;color:blue">
-      <image class='kfcion' src='/images/xlb.png'></image>送菜娃商城上线了
+  <view class="address df" style="font-size:13px;">
+      <image class='kfcion' src='/images/xlb.png'></image>
+      <view class='address df th-text' style='transform:translateX({{marquee}}px)'>{{message}}</view>
   </view>
 
   <view class="cont">

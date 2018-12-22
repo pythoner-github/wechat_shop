@@ -16,9 +16,14 @@ Page ({
     proCat        : [],
     page          : 2,
     brand         : [],
+    message       : '',
 
     time          : 0,
-    order_msg     : ''
+    order_msg     : '',
+
+    marquee       : 0,    //每次移动X坐标
+    windowWidth   : 0,    //小程序宽度
+    maxScroll     : 0     //文本移动至最左侧宽度及文本宽度
   },
 
   onLoad: function (options) {
@@ -69,12 +74,14 @@ Page ({
         var procat = res.data.procat;
         var prolist = res.data.prolist;
         var brand = res.data.brand;
+        var message = res.data.messages.join(' ');
 
         that.setData({
           focus       : focus,
           proCat      : procat,
           productData : prolist,
-          brand       : brand
+          brand       : brand,
+          message     : message
         });
       },
 
@@ -86,7 +93,15 @@ Page ({
       },
     })
 
-    //that.getOrdermsg();
+    var w = wx.getSystemInfoSync().windowWidth;
+
+    that.setData({
+      marquee: w
+    });
+
+    that.data.maxScroll = that.data.message.length * 15 + 4;
+    that.data.windowWidth = w;
+    that.scrolltxt();
   },
 
   onShareAppMessage: function() {
@@ -113,7 +128,6 @@ Page ({
       url: '/pages/addr_search/addr_search',
     })
   },
-
 
   // 跳转商品列表页
   listdetail: function (e) {
@@ -261,6 +275,23 @@ Page ({
         //console.log(res);
       }
     });
+  },
+
+  scrolltxt: function(){
+    var t = this;
+    var d = t.data;
+
+    var interval = setInterval(function () {
+      var next = d.marquee-1; //每次移动距离
+      if( next<0 && Math.abs(next)>d.maxScroll ){
+        next = d.windowWidth;
+        clearInterval(interval);
+        t.scrolltxt();
+      }
+      t.setData({
+        marquee: next
+      });
+    }, 80);
   },
 
   doAddCart: function(event) {

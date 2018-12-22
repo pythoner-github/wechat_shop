@@ -366,7 +366,7 @@
   border          : none;
   padding         : 1px;
   /* border-radius   : 6px; */
-  vertical-align  : middle ;  
+  vertical-align  : middle ;
 }
 
 
@@ -379,7 +379,7 @@
   width           : 24px;
   height          : 24px;
   text-align      : right;
-  margin-right    : 5px; 
+  margin-right    : 5px;
   vertical-align  : middle;
 }
 
@@ -541,4 +541,10 @@ icon {
   margin-left   : 2% ;
   vertical-align: middle ;
 
+}
+
+.th-text {
+  width         : 90%;
+  color		      : #FF3333;
+  white-space   : nowrap;
 }
