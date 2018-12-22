@@ -81,12 +81,13 @@
         <thead>
 
         <tr class="text-c">
-            <th width="40">订单ID</th>
+            <th width="50">订单ID</th>
             <th width="100">订单编号</th>
-            <th width="150">买家</th>
-            <th width="130">总金额</th>
+            <th width="100">买家</th>
+            <th width="80">总金额</th>
+            <th width="100">备注</th>
             <th width="80">支付类型</th>
-            <th width="100">订单状态</th>
+            <th width="80">订单状态</th>
             <th width="100">订单时间</th>
             <th width="100">操作</th>
         </tr>
@@ -100,6 +101,7 @@
                 <td>{$order.order_sn}</td>
                 <td>{$order.u_name}</td>
                 <td>{$order.price}</td>
+                <td>{$order.remark}</td>
                 <td><if condition="$order.type eq 'alipay'">支付宝<elseif condition="$order.type eq 'weixin'" />微信支付<else />现金支付</if></td>
                 <td class="status">
                     <if condition="$order.back eq 1"><font style="color:red">申请退款</font>
