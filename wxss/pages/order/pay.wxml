@@ -49,7 +49,7 @@
   </view>
 
   <view class="p_all bg_white mt10 font_14">
-    <textarea class="min_60" auto-height name="remark" style="background-color:BFCEDC;border:solid 1px #ccc;border-radius:10px;text-left:55px" placeholder="  备注" bindinput="remarkInput" value="{{remark}}"/>
+    <textarea class="min_60" auto-height name="remark" style="border:solid 1px #ccc;border-radius:10px" placeholder="  备注" bindinput="remarkInput" value="{{remark}}"/>
   </view>
 
 	<view class="zhifu mt10 tc">应共支付：<span class="font_20 red">¥ {{total}}</span></view>
