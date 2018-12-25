@@ -65,14 +65,15 @@
             </div>
 
             <div class="pro_5">
+                收货人员：
+                <input class="inp_1 inp_6" id="receiver" name="receiver" value="<?php echo $receiver?>"></input>
+            </div>
+
+            <div class="pro_5">
                 购买时间：
                 <input class="inp_1 inp_6" id="start_time" name="start_time" value="<?php echo $start_time ?>" onfocus="MyCalendar.SetDate(this)">
                 <input class="inp_1 inp_6" id="end_time" name="end_time" value="<?php echo $end_time ?>" onfocus="MyCalendar.SetDate(this)">
                 <input class="btn btn-success" type="button"  value="搜 索" style="margin-left: 20px;" onclick="product_option();">
-            </div>
-            <div class="pro_6">
-
-
             </div>
         </div>
     </form>
@@ -84,22 +85,26 @@
             <th width="50">订单ID</th>
             <th width="100">订单编号</th>
             <th width="100">买家</th>
-            <th width="80">总金额</th>
+            <th width="100">姓名</th>
+            <th width="100">电话</th>
+            <th width="100">地址</th>
+            <th width="100">总金额</th>
             <th width="100">备注</th>
-            <th width="80">支付类型</th>
-            <th width="80">订单状态</th>
+            <th width="100">支付类型</th>
+            <th width="100">订单状态</th>
             <th width="100">订单时间</th>
             <th width="100">操作</th>
         </tr>
         </thead>
-
-
 
         <volist name='order_list' id='order'>
             <tr data-id="{$order.id}" data-name="{$order.name}" class="text-c">
                 <td>{$order.id}</td>
                 <td>{$order.order_sn}</td>
                 <td>{$order.u_name}</td>
+                <td>{$order.receiver}</td>
+                <td>{$order.tel}</td>
+                <td>{$order.address_xq}</td>
                 <td>{$order.price}</td>
                 <td>{$order.remark}</td>
                 <td><if condition="$order.type eq 'alipay'">支付宝<elseif condition="$order.type eq 'weixin'" />微信支付<else />现金支付</if></td>

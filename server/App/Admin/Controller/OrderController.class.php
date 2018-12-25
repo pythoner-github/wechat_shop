@@ -34,6 +34,7 @@ class OrderController extends PublicController{
 
         $pay_type = trim($_REQUEST['pay_type']);//支付类型
         $pay_status = intval($_REQUEST['pay_status']); //订单状态
+        $receiver = trim($_REQUEST['receiver']); //收货人员
         $start_time = intval(strtotime($_REQUEST['start_time'])); //订单状态
         $end_time = intval(strtotime($_REQUEST['end_time'])); //订单状态
         //构建搜索条件
@@ -63,6 +64,14 @@ class OrderController extends PublicController{
             $this->assign('pay_status',$pay_status);
         } else {
             $where .=' AND status>0';
+        }
+
+        // 根据收货人员搜索
+        if ($receiver) {
+            $where .=' AND receiver="'.$receiver.'"';
+
+            //搜索内容输出
+            $this->assign('receiver',$receiver);
         }
 
         //根据下单时间搜索
@@ -123,6 +132,7 @@ class OrderController extends PublicController{
             $order_list[$k]['u_name'] = M('user')->where('id='.intval($v['uid']))->getField('name');
         }
         //echo $where;
+
         $this->assign('order_list',$order_list);// 赋值数据集
         $this->assign('page',$show);// 赋值分页输出
         $this->assign('admin_qx',$_SESSION['admininfo']['qx']);//后台用户权限，目前设置为超级管理员权限
