@@ -23,7 +23,7 @@
   </view>
 
   <view class="distance df" wx:if="{{distance > 5000}}"  style="font-size:840px">
-    <text class="distance">您当前选择的“{{address}}”，未在配送范围，会为您尽快开通配送服务</text>
+    <text class="distance">您当前选择的“{{address}}”，未在配送范围，我们会为您尽快开通配送服务</text>
   </view>
 
   <view class="address df" >

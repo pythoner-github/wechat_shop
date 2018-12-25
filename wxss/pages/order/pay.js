@@ -1,6 +1,8 @@
 // pages/order/downline.js
 
 var app = getApp();
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
+var qqmapwx;
 
 Page ({
   data: {
@@ -28,6 +30,10 @@ Page ({
       userId: uid
     });
 
+    qqmapwx = new QQMapWX({
+      key: 'KSSBZ-LL66X-7LV4Z-77M4Z-USSIS-H6FXT'
+    });
+
     this.loadProductDetail();
   },
 
@@ -48,7 +54,7 @@ Page ({
       success: function (res) {
         var adds = res.data.adds;
 
-		console.log(res);
+    console.log(res);
 
         if (adds) {
           var addrId = adds.id;
@@ -127,51 +133,115 @@ Page ({
       return;
     }
 
+    // 判断是否在配送范围内
     wx.request({
-      url   : app.d.apiUrl + 'Payment/payment',
-      method: 'post',
-      data  : {
-        uid     : that.data.userId,
-        cart_id : that.data.cartId,
-        type    : that.data.paytype,
-        aid     : that.data.addrId,   // 地址的id
-        remark  : that.data.remark,   // 用户备注
-        price   : that.data.total,    // 总价
-        vid     : that.data.vid,      // 优惠券ID
-      },
+      url   : app.d.apiUrl + 'Address/details?addr_id=' + that.data.addrId,
+      method: 'get',
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
 
       success: function (res) {
-        // init data
-        var data = res.data;
+        var address = res.data.addr_xq;
 
-        if (data.status == 1) {
-          // 创建订单成功
-          if (data.arr.pay_type == 'cash') {
-              wx.showToast({
-                 title    : "恭喜下单成功!",
-                 duration : 5000,
-              });
+        qqmapwx.geocoder({
+          address: address,
 
-              setTimeout(function() {
-                wx.navigateTo({
-                  url : '/pages/user/dingdan?currentTab=0&otype=pay',
-                });
-              }, 2500);
-          } else {
-            if (data.arr.pay_type == 'weixin') {
-              // 微信支付
-              that.wxpay(data.arr);
-            }
+          success: function(res) {
+            console.log(res.result.location);
+
+            // 杨陵区政府 {lat: 34.27221, lng: 108.08455}
+
+            qqmapwx.calculateDistance({
+              from  : {
+                latitude  : res.result.location.lat,
+                longitude : res.result.location.lng
+              },
+              to    : [{
+                latitude  : 34.27221,
+                longitude : 108.08455
+              }],
+
+              success: function(res) {
+                console.log(res);
+
+                var distance = res.result.elements[0].distance;
+
+                if (distance > 5000) {
+                  wx.showToast({
+                    title   : '您当前选择的"' + address + '"未在配送范围',
+                    duration: 3000,
+                    icon    : 'none'
+                  });
+                } else {
+                  // 线下支付
+                  wx.request({
+                    url   : app.d.apiUrl + 'Payment/payment',
+                    method: 'post',
+                    data  : {
+                      uid     : that.data.userId,
+                      cart_id : that.data.cartId,
+                      type    : that.data.paytype,
+                      aid     : that.data.addrId,   // 地址的id
+                      remark  : that.data.remark,   // 用户备注
+                      price   : that.data.total,    // 总价
+                      vid     : that.data.vid,      // 优惠券ID
+                    },
+                    header: {
+                      'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+
+                    success: function (res) {
+                      // init data
+                      var data = res.data;
+
+                      if (data.status == 1) {
+                        // 创建订单成功
+                        if (data.arr.pay_type == 'cash') {
+                            wx.showToast({
+                               title    : "恭喜下单成功!",
+                               duration : 5000,
+                            });
+
+                            setTimeout(function() {
+                              wx.navigateTo({
+                                url : '/pages/user/dingdan?currentTab=0&otype=pay',
+                              });
+                            }, 2500);
+                        } else {
+                          if (data.arr.pay_type == 'weixin') {
+                            // 微信支付
+                            that.wxpay(data.arr);
+                          }
+                        }
+                      } else {
+                        wx.showToast({
+                          title   : "下单失败!",
+                          duration: 2500
+                        });
+                      }
+                    },
+
+                    fail: function (e) {
+                      wx.showToast({
+                        title   : '网络异常！err:createProductOrder',
+                        duration: 2000
+                      });
+                    }
+                  });
+                }
+              },
+
+              fail: function(res) {
+                console.log(res);
+              }
+            });
+          },
+
+          fail: function(res) {
+            console.log(res);
           }
-        } else {
-          wx.showToast({
-            title   : "下单失败!",
-            duration: 2500
-          });
-        }
+        });
       },
 
       fail: function (e) {
