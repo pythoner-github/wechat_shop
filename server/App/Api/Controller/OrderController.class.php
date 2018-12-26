@@ -59,12 +59,13 @@ class OrderController extends PublicController {
 		}
 
 		// 获取总页数
-    $count = $orders->where($condition)->count();
-    $eachpage=7;
+        $count = $orders->where($condition)->count();
+        $eachpage=7;
 
-		$order_status = array('0'=>'已取消','10'=>'待付款','20'=>'待发货','30'=>'待收货','40'=>'待评价','50'=>'交易完成','51'=>'交易关闭');
+        //$order_status = array('0'=>'已取消','10'=>'待付款','20'=>'待发货','30'=>'待收货','40'=>'待评价','50'=>'交易完成','51'=>'交易关闭');
+        $order_status = array('0'=>'已取消','10'=>'待付款','30'=>'待收货','40'=>'待评价','50'=>'交易完成','51'=>'交易关闭');
 
-    $order = $orders->where($condition)->order('id desc')->field('id,order_sn,pay_sn,status,price,type,product_num')->limit($pages.',7')->select();
+        $order = $orders->where($condition)->order('id desc')->field('id,order_sn,pay_sn,status,price,type,product_num')->limit($pages.',7')->select();
 
 		foreach ($order as $n=>$v) {
 			$order[$n]['desc'] = $order_status[$v['status']];
@@ -135,12 +136,13 @@ class OrderController extends PublicController {
 		}
 
 		// 获取总页数
-    $count = $orders->where($condition)->count();
-    $eachpage=7;
+        $count = $orders->where($condition)->count();
+        $eachpage=7;
 
-		$order_status = array('0'=>'已取消','10'=>'待付款','20'=>'待发货','30'=>'待收货','40'=>'待评价','50'=>'交易完成','51'=>'交易关闭');
+        // $order_status = array('0'=>'已取消','10'=>'待付款','20'=>'待发货','30'=>'待收货','40'=>'待评价','50'=>'交易完成','51'=>'交易关闭');
+        $order_status = array('0'=>'已取消','10'=>'待付款','30'=>'待收货','40'=>'待评价','50'=>'交易完成','51'=>'交易关闭');
 
-    $order = $orders->where($condition)->order('id desc')->field('id,order_sn,pay_sn,status,price,type,product_num')->limit($limit.',7')->select();
+        $order = $orders->where($condition)->order('id desc')->field('id,order_sn,pay_sn,status,price,type,product_num')->limit($limit.',7')->select();
 
 		foreach ($order as $n=>$v) {
 			$order[$n]['desc'] = $order_status[$v['status']];
@@ -314,7 +316,9 @@ class OrderController extends PublicController {
 		}
 
 		// 订单状态
-		$order_status=array('0'=>'已取消','10'=>'待付款','20'=>'待发货','30'=>'待收货','40'=>'已收货','50'=>'交易完成');
+		// $order_status=array('0'=>'已取消','10'=>'待付款','20'=>'待发货','30'=>'待收货','40'=>'已收货','50'=>'交易完成');
+        $order_status=array('0'=>'已取消','10'=>'待付款','30'=>'待收货','40'=>'已收货','50'=>'交易完成');
+
 		// 支付类型
 		$pay_type = array('cash'=>'现金支付','alipay'=>'支付宝','weixin'=>'微信支付');
 

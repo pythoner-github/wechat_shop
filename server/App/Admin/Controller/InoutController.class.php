@@ -4,7 +4,8 @@ use Think\Controller;
 class InoutController extends Controller {
      public function _initialize(){
         //订单状态获取
-        $this->order_status = array('10'=>'待付款','20'=>'待发货','30'=>'待收货','40'=>'交易关闭','50'=>'交易完成');
+        //$this->order_status = array('10'=>'待付款','20'=>'待发货','30'=>'待收货','40'=>'交易关闭','50'=>'交易完成');
+        $this->order_status = array('10'=>'待付款','30'=>'待收货','40'=>'交易关闭','50'=>'交易完成');
         //支付类型获取
         $this->pay_type = array('alipay'=>'支付宝','weixin'=>'微信支付','cash'=>'现金支付');
         //退款状态获取
@@ -23,7 +24,7 @@ class InoutController extends Controller {
         $dataNum = count($expTableData);
 
         vendor("PHPExcel.PHPExcel");
-            
+
         $objPHPExcel = new \PHPExcel();
         $cellName = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ');
 
@@ -92,7 +93,7 @@ class InoutController extends Controller {
         }else{
             $shop_id = intval($_REQUEST['shop_id']);
         }
-        
+
         $pay_type = trim($_GET['pay_type']);//支付类型
         $pay_status = intval($_GET['pay_status']); //订单状态
         $start_time = intval(strtotime($_GET['start_time'])); //订单状态
@@ -138,7 +139,7 @@ class InoutController extends Controller {
         }
         //print_r($where);die();
         $this->exportExcel($xlsName,$xlsCell,$xlsData);
-            
+
     }
     /**
      *
@@ -186,7 +187,7 @@ class InoutController extends Controller {
         }
         //print_r($where);die();
         $this->exportExcel($xlsName,$xlsCell,$xlsData);
-            
+
     }
     /**
      *
@@ -222,7 +223,7 @@ class InoutController extends Controller {
         if ($name) {
             $where .=' AND name='.$name;
         }
-      
+
         //查询要导出的信息
         $xlsModel = M('user');
         $xlsData  = $xlsModel->where($where)->Field('id,name,uname,qx,addtime,tel,qq_id,email,sex')->order('id desc')->select();
@@ -234,7 +235,7 @@ class InoutController extends Controller {
         }
         //print_r($where);die();
         $this->exportExcel($xlsName,$xlsCell,$xlsData);
-            
+
     }
 
     public function expTest() {
@@ -325,7 +326,7 @@ class InoutController extends Controller {
     function impUser(){
         if (!empty($_FILES)) {
             $upload = new \Think\Upload();// 实例化上传类
-            $filepath='./Public/Excle/'; 
+            $filepath='./Public/Excle/';
             $upload->exts = array('xlsx','xls');// 设置附件上传类型
             $upload->rootPath  =  $filepath; // 设置附件上传根目录
             $upload->saveName  =     'time';
@@ -369,7 +370,7 @@ class InoutController extends Controller {
             $this->error("请选择上传的文件");
         }
     }
-    
+
 }
 
 ?>

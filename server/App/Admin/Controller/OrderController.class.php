@@ -11,7 +11,8 @@ class OrderController extends PublicController{
         $this->order = M('Order');
         $this->order_product = M('Order_product');
 
-        $order_status = array('10'=>'待付款','20'=>'待发货','30'=>'待收货','40'=>'已收货','50'=>'交易完成');
+        // $order_status = array('10'=>'待付款','20'=>'待发货','30'=>'待收货','40'=>'已收货','50'=>'交易完成');
+        $order_status = array('10'=>'待付款','30'=>'待收货','40'=>'已收货','50'=>'交易完成');
         $this->assign('order_status',$order_status);
     }
 
