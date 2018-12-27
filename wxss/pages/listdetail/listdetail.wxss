@@ -116,6 +116,15 @@ page {
   margin-left     : 10rpx;
 }
 
+.gmx {
+  text-align      : left;
+  width           : 50%;
+  font-size       : 26rpx;
+  margin-right    : 10rpx;
+  text-decoration : line-through;
+  color           : #999
+}
+
 .kkk {
   font-size       : 26rpx;
   /* font-weight  : 700; */

@@ -139,6 +139,13 @@
   color           : #999
 }
 
+.remark {
+  font-size       : 20rpx;
+  /* font-weight  : 700; */
+  margin-left     : 10rpx;
+  color           : gray;
+}
+
 .ku {
   text-align      : right;
   width           : 50%;
