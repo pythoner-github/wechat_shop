@@ -16,6 +16,12 @@ page {
   border-radius   : 12rpx;
 }
 
+.icon_gwc {
+  width         : 20px;
+  height        : 20px;
+  display       : inline-block;
+}
+
 .list-tab li {
   flex            : 1;
   display         : flex;

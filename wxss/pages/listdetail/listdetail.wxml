@@ -3,9 +3,12 @@
     <view class="ban">
       <navigator url="../product/detail?productId={{item.id}}" class="cover flex-wrp">
         <image class="banner" src="{{item.photo_x}}" mode="widthFix"></image>
-
+       </navigator>
         <view class="act-item ellipsis">
-          <text class="type">{{item.name}} | {{item.brand}} </text>
+         <text class="type">{{item.name}} | {{item.brand}} </text> 
+         <span class="c6 fl_r font_12" > 
+            <image class='icon_gwc' bindtap="doAddCart" data-id="{{item.id}}" src='/images/car.png'></image>
+        </span>
         </view>
 
         <view class="act-item ellipsis" >
@@ -21,7 +24,7 @@
         <view class="act-item ellipsis" >
           <text style="color:#999999;font-size:25rpx">已有{{item.shiyong}}人购买</text>
         </view>
-      </navigator>
+     
     </view>
 
     <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}">fsaffffff</view>
