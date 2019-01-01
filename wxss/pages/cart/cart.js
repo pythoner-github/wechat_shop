@@ -52,6 +52,8 @@ Page ({
 
           that.sum();
         }else{
+          console.log(res);
+
           wx.showToast({
             title   : msg,
             duration: 2000
@@ -81,9 +83,6 @@ Page ({
       num = 1;
     }
 
-    // 自增
-    // num++;
-    console.log(num);
     var cart_id = e.currentTarget.dataset.cartid;
 
     wx.request({
@@ -112,6 +111,8 @@ Page ({
 
           that.sum();
         } else {
+          console.log(res);
+
           wx.showToast({
             title: msg,
             duration: 2000
@@ -141,7 +142,6 @@ Page ({
 
     // 自增
     num ++;
-    console.log(num);
     var cart_id = e.currentTarget.dataset.cartid;
 
     wx.request({
@@ -170,6 +170,8 @@ Page ({
 
           that.sum();
         }else{
+          console.log(res);
+
           wx.showToast({
             title   : msg,
             duration: 2000
