@@ -40,6 +40,7 @@ Page ({
 
       success: function(res) {
         var status = res.data.status;
+        var msg = res.data.msg;
 
         if (status==1) {
           // 只有大于一件的时候，才能normal状态，否则disable状态
@@ -52,7 +53,7 @@ Page ({
           that.sum();
         }else{
           wx.showToast({
-            title   : '操作失败！',
+            title   : msg,
             duration: 2000
           });
         }
@@ -99,6 +100,7 @@ Page ({
 
       success: function (res) {
         var status = res.data.status;
+        var msg = res.data.msg;
 
         if (status == 1) {
           // 只有大于一件的时候，才能normal状态，否则disable状态
@@ -111,7 +113,7 @@ Page ({
           that.sum();
         } else {
           wx.showToast({
-            title: '操作失败！',
+            title: msg,
             duration: 2000
           });
         }
@@ -156,6 +158,7 @@ Page ({
 
       success: function (res) {
         var status = res.data.status;
+        var msg = res.data.msg;
 
         if (status==1) {
           // 只有大于一件的时候，才能normal状态，否则disable状态
@@ -168,7 +171,7 @@ Page ({
           that.sum();
         }else{
           wx.showToast({
-            title   : '操作失败！',
+            title   : msg,
             duration: 2000
           });
         }

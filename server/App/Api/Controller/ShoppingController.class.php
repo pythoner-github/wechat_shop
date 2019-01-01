@@ -75,20 +75,20 @@ class ShoppingController extends PublicController {
 		$num=intval($_REQUEST['num']);
 
 		if (!$uid || !$cart_id || !$num) {
-			echo json_encode(array('status'=>0,'err'=>'网络异常.'.__LINE__));
+			echo json_encode(array('status'=>0,'msg'=>'网络异常.'.__LINE__));
 			exit();
 		}
 
 		$check = $shopping->where('id='.intval($cart_id))->find();
 		if (!$check) {
-			echo json_encode(array('status'=>0,'err'=>'购物车信息错误！'));
+			echo json_encode(array('status'=>0,'msg'=>'购物车信息错误！'));
 			exit();
 		}
 
 		//检测库存
 		$pro_num = M('product')->where('id='.intval($check['pid']))->getField('num');
 		if($num>intval($pro_num)){
-			echo json_encode(array('status'=>0,'err'=>'库存不足！'));
+			echo json_encode(array('status'=>0,'msg'=>'库存不足！'));
 			exit();
 		}
 
@@ -97,10 +97,10 @@ class ShoppingController extends PublicController {
 
 		$res = $shopping->where('id ='.intval($cart_id).' AND uid='.intval($uid))->save($data);
 		if ($res) {
-			echo json_encode(array('status'=>1,'succ'=>'操作成功!'));
+			echo json_encode(array('status'=>1,'msg'=>'操作成功!'));
 			exit();
 		}else{
-			echo json_encode(array('status'=>0,'err'=>'操作失败.'));
+			echo json_encode(array('status'=>0,'msg'=>'操作失败.'));
 			exit();
 		}
 
