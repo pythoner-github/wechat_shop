@@ -26,6 +26,10 @@ class ProductController extends PublicController {
 		$pro['brand'] = M('brand')->where('id='.intval($pro['brand_id']))->getField('name');
 		$pro['cat_name'] = M('category')->where('id='.intval($pro['cid']))->getField('name');
 
+        if (is_null($pro['brand'])) {
+            $pro['brand'] = '';
+        }
+
 		//图片轮播数组
 		$img=explode(',',trim($pro['photo_string'],','));
 		$b=array();
@@ -40,8 +44,8 @@ class ProductController extends PublicController {
 
 		//处理产品属性
 		$catlist=array();
-    $commodityAttr=array();//产品库还剩下的产品规格
-	  $attrValueList=array();//产品所有的产品规格
+        $commodityAttr=array();//产品库还剩下的产品规格
+	    $attrValueList=array();//产品所有的产品规格
 
 		if($pro['pro_buff']){//如果产品属性有值才进行数据组装
 			$pro_buff = explode(',',$pro['pro_buff']);
@@ -126,7 +130,11 @@ class ProductController extends PublicController {
 			}
 		}
 
-    $pro['brand'] = M('brand')->where('id='.intval($pro['brand_id']))->getField('name');
+        $pro['brand'] = M('brand')->where('id='.intval($pro['brand_id']))->getField('name');
+
+        if (is_null($pro['brand'])) {
+            $pro['brand'] = '';
+        }
 
 		echo json_encode(array('status'=>1,'pro'=>$pro,'address'=>$address));
 		exit();
@@ -224,8 +232,13 @@ class ProductController extends PublicController {
 			$json['company']=$v['company'];
  			$json['shiyong']=$v['shiyong'];
  			$json['intro']=$v['intro'];
-      $json['brand_id']=$v['brand_id'];
-      $json['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
+            $json['brand_id']=$v['brand_id'];
+            $json['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
+
+            if (is_null($json['brand'])) {
+                $json['brand'] = '';
+            }
+
  			$json_arr[] = $json;
  		}
  		$cat_name=M('category')->where("id=".intval($id))->getField('name');
@@ -291,7 +304,12 @@ class ProductController extends PublicController {
 			$json['company']=$v['company'];
  			$json['shiyong']=$v['shiyong'];
  			$json['intro']=$v['intro'];
-      $json['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
+            $json['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
+
+            if (is_null($json['brand'])) {
+                $json['brand'] = '';
+            }
+
  			$json_arr[] = $json;
  		}
  		$cat_name=M('category')->where("id=".intval($id))->getField('name');
@@ -389,7 +407,12 @@ class ProductController extends PublicController {
  			$json['price_yh']=$v['price_yh'];
  			$json['company']=$v['company'];
 			$json['shiyong']=$v['shiyong'];
-      $json['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
+            $json['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
+
+            if (is_null($json['brand'])) {
+                $json['brand'] = '';
+            }
+
  			//$json['intro']=$v['intro'];
  			if ($v['start_time']>time()) {
  				$json['state'] = 1;
@@ -454,7 +477,12 @@ class ProductController extends PublicController {
  			$json['price_yh']=$v['price_yh'];
 			$json['company']=$v['company'];
  			$json['shiyong']=$v['shiyong'];
-      $json['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
+            $json['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
+
+            if (is_null($json['brand'])) {
+                $json['brand'] = '';
+            }
+
  			//$json['intro']=$v['intro'];
  			if ($v['start_time']>time()) {
  				$json['state'] = 1;
