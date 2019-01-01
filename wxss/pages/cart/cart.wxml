@@ -51,7 +51,7 @@
         <text bindtap="removeShopCard" data-cartid="{{item.id}}" class="modal-close">x</text>
         <view class="stepper">
           <!-- 减号 -->
-          <text class="{{minusStatuses[index]}}" data-index="{{index}}" bindtap="bindMinus" data-cartid="{{item.id}}">-</text>
+          <text class="{{item.minus}}" data-index="{{index}}" bindtap="bindMinus" data-cartid="{{item.id}}">-</text>
 
           <!-- 数值 -->
           <input type="number" data-index="{{index}}" bindchange="bindManual" value="{{item.num}}" data-cartid="{{item.id}}" />
