@@ -64,7 +64,7 @@ class IndexController extends PublicController {
 
       $qz=C('DB_PREFIX'); // 前缀
 
-      $pro_list = M('product')->where('del=0 AND pro_type=1 AND is_down=0 AND '.$qz.'product.type=1')->join('LEFT JOIN __BRAND__ ON __PRODUCT__.brand_id=__BRAND__.id')->order('sort desc,id desc')->field(''.$qz.'product.id,'.$qz.'product.name,photo_x,price_yh,company,shiyong,'.$qz.'brand.name as brand')->limit($limit.',8')->select();
+      $pro_list = M('product')->where('del=0 AND pro_type=1 AND is_down=0 AND '.$qz.'product.type=1')->join('LEFT JOIN __BRAND__ ON __PRODUCT__.brand_id=__BRAND__.id')->order('sort desc,id desc')->field(''.$qz.'product.id,'.$qz.'product.name,photo_x,price_yh,price,company,shiyong,'.$qz.'brand.name as brand')->limit($limit.',8')->select();
       foreach ($pro_list as $k => $v) {
         $pro_list[$k]['photo_x'] = __DATAURL__.$v['photo_x'];
       }
