@@ -100,7 +100,7 @@ class ShoppingController extends PublicController {
 			echo json_encode(array('status'=>1,'msg'=>'操作成功!'));
 			exit();
 		}else{
-			echo json_encode(array('status'=>0,'msg'=>'操作失败!','res'=>$res));
+			echo json_encode(array('status'=>0,'msg'=>'操作失败!'));
 			exit();
 		}
 
