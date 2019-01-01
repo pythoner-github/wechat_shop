@@ -54,7 +54,7 @@
           <text class="{{minusStatuses[index]}}" data-index="{{index}}" bindtap="bindMinus" data-cartid="{{item.id}}">-</text>
 
           <!-- 数值 -->
-          <input type="number" bindchange="bindManual" value="{{item.num}}" />
+          <input type="number" data-index="{{index}}" bindchange="bindManual" value="{{item.num}}" data-cartid="{{item.id}}" />
 
           <!-- 加号 -->
           <text class="normal" data-index="{{index}}" bindtap="bindPlus" data-cartid="{{item.id}}">+</text>
