@@ -5,10 +5,10 @@ var app = getApp();
 Page ({
   data: {
     page          : 1,
-    minusStatuses : ['disabled', 'disabled', 'normal', 'normal', 'disabled'],
     total         : 0,
-    carts         : []
-    
+    carts         : [],
+    selectedAllStatus: false
+
   },
 
   bindMinus: function(e) {
@@ -20,6 +20,8 @@ Page ({
     // 如果只有1件了，就不允许再减了
     if (num > 1) {
       num --;
+    } else {
+      return;
     }
 
     var cart_id = e.currentTarget.dataset.cartid;
@@ -38,6 +40,7 @@ Page ({
 
       success: function(res) {
         var status = res.data.status;
+        var msg = res.data.msg;
 
         if (status==1) {
           // 只有大于一件的时候，才能normal状态，否则disable状态
@@ -45,18 +48,14 @@ Page ({
           // 购物车数据
           var carts = that.data.carts;
           carts[index].num = num;
-          // 按钮可用状态
-          var minusStatuses = that.data.minusStatuses;
-          minusStatuses[index] = minusStatus;
-          // 将数值与状态写回
-          that.setData({
-            minusStatuses: minusStatuses
-          });
+          carts[index].minus = minusStatus;
 
           that.sum();
         }else{
+          console.log(res);
+
           wx.showToast({
-            title   : '操作失败！',
+            title   : msg,
             duration: 2000
           });
         }
@@ -79,9 +78,11 @@ Page ({
    // var num = that.data.carts[index].num;
     var num = e.detail.value;
 
-    // 自增
-    // num++;
-    console.log(num);
+    if (num < 1)
+    {
+      num = 1;
+    }
+
     var cart_id = e.currentTarget.dataset.cartid;
 
     wx.request({
@@ -98,6 +99,7 @@ Page ({
 
       success: function (res) {
         var status = res.data.status;
+        var msg = res.data.msg;
 
         if (status == 1) {
           // 只有大于一件的时候，才能normal状态，否则disable状态
@@ -105,19 +107,14 @@ Page ({
           // 购物车数据
           var carts = that.data.carts;
           carts[index].num = num;
-          // 按钮可用状态
-          var minusStatuses = that.data.minusStatuses;
-          minusStatuses[index] = minusStatus;
-
-          // 将数值与状态写回
-          that.setData({
-            minusStatuses: minusStatuses
-          });
+          carts[index].minus = minusStatus;
 
           that.sum();
         } else {
+          console.log(res);
+
           wx.showToast({
-            title: '操作失败！',
+            title: msg,
             duration: 2000
           });
         }
@@ -133,16 +130,18 @@ Page ({
     });
   },
 
-
   bindPlus: function(e) {
     var that = this;
 
     var index = parseInt(e.currentTarget.dataset.index);
     var num = that.data.carts[index].num;
 
+    if (num < 1) {
+      num = 1;
+    }
+
     // 自增
     num ++;
-    console.log(num);
     var cart_id = e.currentTarget.dataset.cartid;
 
     wx.request({
@@ -159,6 +158,7 @@ Page ({
 
       success: function (res) {
         var status = res.data.status;
+        var msg = res.data.msg;
 
         if (status==1) {
           // 只有大于一件的时候，才能normal状态，否则disable状态
@@ -166,19 +166,14 @@ Page ({
           // 购物车数据
           var carts = that.data.carts;
           carts[index].num = num;
-          // 按钮可用状态
-          var minusStatuses = that.data.minusStatuses;
-          minusStatuses[index] = minusStatus;
-
-          // 将数值与状态写回
-          that.setData({
-            minusStatuses: minusStatuses
-          });
+          carts[index].minus = minusStatus;
 
           that.sum();
         }else{
+          console.log(res);
+
           wx.showToast({
-            title   : '操作失败！',
+            title   : msg,
             duration: 2000
           });
         }
@@ -357,14 +352,21 @@ Page ({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        // init data
-        var cart = res.data.cart;
+        var carts = res.data.cart;
+
+        for (var i=0;i<carts.length;i++) {
+          if (carts[i].num > 1) {
+            carts[i].minus = 'normal';
+          } else {
+            carts[i].minus = 'disabled';
+          }
+        }
+
+        console.log(carts);
 
         that.setData({
-          carts:cart,
+          carts:carts,
         });
-
-        // endInitData
       },
     });
   },
