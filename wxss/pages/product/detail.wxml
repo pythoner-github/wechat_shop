@@ -4,31 +4,38 @@
 <view class="cont">
   <!-- <image class="tp_image" src="{{itemData.photo_d}}"></image> -->
   <swiper style="height:375px" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-    <block wx:for="{{bannerItem}}"  wx:key="id">
+    <block wx:for="{{bannerItem}}" wx:key="id">
       <swiper-item>
         <image src="{{item}}" class="slide-image" />
       </swiper-item>
     </block>
   </swiper>
 
-<!-- <view>
-  <view class="title">{{itemData.name}}</view>
-  <view> <button class="share"  open-type='share'>
-        <image class="icon_sh" src="/images/share.png" style="margin-top:15px;"></image>
-      </button >
-    </view>
-</view> -->
+  <view>
+    <view class="title">{{itemData.name}}</view>
+    <view> <button class="share"  open-type='share'>
+          <image class="icon_sh" src="/images/share.png" style="margin-top:15px;"></image>
+        </button >
+      </view>
+  </view>
 
-<view><span class="title">{{itemData.name}}</span>
- <span class="c6 fl_r font_12" >
-    <button class="share" style='margin-top:-20px;'  open-type='share'>
-      <image class="icon_sh"  src="/images/share.png" ></image>
-    </button >
-  </span>
-</view>
-<view class="gmxx">
+  <!-- <view>
+    <span class="title">{{itemData.name}}</span>
+    <span class="c6 fl_r font_12">
+      <view class="white w50 fl_l" data-status="1">
+        <button class="share"  bindtap="setModalShare"  style='margin-top:-20px;' >
+          <image class="icon_sh" src="/images/share.png"></image>
+        </button>
+      </view>
+    </span>
+  </view> -->
+
+  <view class="gmxx">
     <view class="font_14 c6" style='color:#000'>规格: {{itemData.company}}</view>
-    <view><span class="jiage">¥：{{itemData.price_yh}}</span> <span class="c6 fl_r font_14" style='color:#ccc'>库存：{{itemData.num}}</span> </view>
+    <view>
+      <span class="jiage">¥：{{itemData.price_yh}}</span>
+      <span class="c6 fl_r font_14" style='color:#ccc'>库存：{{itemData.num}}</span>
+    </view>
     <view class="font_14 c6">类型：{{itemData.brand}}</view>
     <view class="font_14 c6">支付：微信支付</view>
   </view>
@@ -36,41 +43,25 @@
 
 <!--弹窗-->
 <view class="drawer_screen" data-status="0" wx:if="{{showModalStatus}}"></view>
-  <view animation="{{animationData}}" class="drawer_attr_box" wx:if="{{showModalStatus}}">
-    <view class="close_icon" bindtap="setModalStatus" data-status="0">×</view>
+<view animation="{{animationData}}" class="drawer_attr_box" wx:if="{{showModalStatus}}">
+  <view class="close_icon" bindtap="setModalStatus" data-status="0">×</view>
 
-    <view class="drawer_attr_content">
-      <view class="text_center">
-        <image class="drawer_image" src="{{itemData.photo_x}}"></image>
+  <view class="drawer_attr_content">
+    <view class="text_center">
+      <image class="drawer_image" src="{{itemData.photo_x}}"></image>
 
-        <view class="mingcheng">
-          <view>{{itemData.name}}</view>
-          <view>规格: {{itemData.company}}</view>
-          <view style="font-size:29rpx;color:red">¥ {{itemData.price_yh}}</view>
-          <view style="font-size:26rpx;color:#ccc">库存：{{itemData.num}}</view>
-        </view>
+      <view class="mingcheng">
+        <view>{{itemData.name}}</view>
+        <view>规格: {{itemData.company}}</view>
+        <view style="font-size:29rpx;color:red">¥ {{itemData.price_yh}}</view>
+        <view style="font-size:26rpx;color:#ccc">库存：{{itemData.num}}</view>
       </view>
+    </view>
 
-      <!--
-      <view>
-        <text class="cun">尺寸</text>
-      </view>
-
-      <view class="commodity_attr_list">
-        <view class="attr_box" wx:for="{{attrValueList}}" wx:for-item="attrValueObj" wx:for-index="attrValueList">
-          <view class="attr_name">{{attrValueObj.attrKey}}</view>
-
-          <view class="attr_value_box">
-            <view class="attr_value {{attrIndex==firstIndex || attrValueObj.attrValueStatus[valueIndex]?(value==attrValueObj.selectedValue?'attr_value_active':''):'attr_value_disabled'}}" bindtap="selectAttrValue" data-status="{{attrValueObj.attrValueStatus[valueIndex]}}" data-value="{{value}}" data-key="{{attrValueObj.attrKey}}" data-index="{{attrIndex}}" data-selectedvalue="{{attrValueObj.selectedValue}}" wx:for="{{attrValueObj.attrValues}}" wx:for-item="value" wx:for-index="valueIndex">{{value}}</view>
-          </view>
-        </view>
-      </view>
-      -->
-
-      <view class="shu">
-        <text class="cun">购买数量</text>
-        <view class="dian">
-          <view class="stepper">
+    <view class="shu">
+      <text class="cun">购买数量</text>
+      <view class="dian">
+        <view class="stepper">
 
           <!-- 减号 -->
           <text class="{{minusStatuses[index]}}" data-alpha-beta="0" bindtap="changeNum">-</text>
@@ -81,10 +72,24 @@
         </view>
       </view>
     </view>
-
     <view class="footc" bindtap="addShopCart" data-type="buynow" data-status="1">立即购买</view>
   </view>
 </view>
+
+
+<!--弹窗-->
+<view class="drawer_screen" data-status="0" wx:if="{{showModalStatus}}" ></view>
+<view animation="{{animationData}}" class="drawer_attr_box" wx:if="{{showModalStatus}}">
+  <view class="close_icon" bindtap="setModalShare" data-status="0" >×</view>
+  <view class="footc">分享给朋友
+    <button class="share" style='margin-top:-20px;' open-type='share'>
+      <image class="icon_sh" src="/images/share.png"></image>
+    </button>
+  </view>
+  <view class="footc" bindtap="addShopCart" data-type="buynow" data-status="1">生成商品海报</view>
+
+</view>
+
 
 <!--图文详情头部-->
 <view>
@@ -96,10 +101,10 @@
   <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
     <!-- 图文详情 -->
     <swiper-item>
-      <import src="../../wxParse/wxParse.wxml"/>
+      <import src="../../wxParse/wxParse.wxml" />
       <view class="wxParse">
         <scroll-view style="height:2000rpx;" scroll-y='true'>
-          <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+          <template is="wxParse" data="{{wxParseData:content.nodes}}" />
         </scroll-view>
       </view>
     </swiper-item>
@@ -138,15 +143,15 @@
       <contact-button type="default-light" session-from="productId_{{itemData.id}}" class="ke">
         <contact-button class="pos"></contact-button>
         <image class="icon_kf" src="/images/kefu.png" style="margin-right:20px;"></image>
-        <view bindtap="addFavorites"  class="dbtext" style="line;margin-top:5px">客服</view>
-      </contact-button >
+        <view bindtap="addFavorites" class="dbtext" style="line;margin-top:5px">客服</view>
+      </contact-button>
     </view>
 
     <view class="df_1 l_h15 pt5">
       <view>
-         <image  class="icon_kf"  wx:if="{{isCollect == 1}}"  src="/images/shced.png" ></image>
-         <image  wx:else class="icon_kf"  wx:else src="/images/shc.png"></image>
-         <view bindtap="addFavorites" class="dbtext">收藏</view>
+        <image class="icon_kf" wx:if="{{isCollect == 1}}" src="/images/shced.png"></image>
+        <image wx:else class="icon_kf" wx:else src="/images/shc.png"></image>
+        <view bindtap="addFavorites" class="dbtext">收藏</view>
       </view>
     </view>
 
