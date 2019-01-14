@@ -158,8 +158,10 @@
         switch(obj.html()){
             case '待发货':
             case '交易完成':
-            case '待收货':
                 obj.css('color','#090');
+                break;
+			case '待收货':
+				obj.css('color','##db1425');
                 break;
             case '交易关闭':
             case '已退款':
