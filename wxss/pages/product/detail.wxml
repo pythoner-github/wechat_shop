@@ -20,6 +20,13 @@
   </view>
 
   <!-- <view>
+    <view class="title">{{itemData.name}}</view>
+    <view>
+      <image class="icon_sh" bindtap="showModal" bindload="imageLoad" style="width:{{imageWidth}}px;;height:{{imageHeight}}px;" src="/images/share.png" style="margin-top:15px;"></image>
+    </view>
+  </view> -->
+
+  <!-- <view>
     <span class="title">{{itemData.name}}</span>
     <span class="c6 fl_r font_12">
       <view class="white w50 fl_l" data-status="1">
@@ -29,6 +36,10 @@
       </view>
     </span>
   </view> -->
+
+
+  <!-- <image bindtap="showModal" bindload="imageLoad" style="width:{{imageWidth}}px;;height:{{imageHeight}}px;" src="../pro1.jpg" />
+ -->
 
   <view class="gmxx">
     <view class="font_14 c6" style='color:#000'>规格: {{itemData.company}}</view>
@@ -78,9 +89,9 @@
 
 
 <!--弹窗-->
-<view class="drawer_screen" data-status="0" wx:if="{{showModalStatus}}" ></view>
+<!-- <view class="drawer_screen" data-status="0" wx:if="{{showModalStatus}}"></view>
 <view animation="{{animationData}}" class="drawer_attr_box" wx:if="{{showModalStatus}}">
-  <view class="close_icon" bindtap="setModalShare" data-status="0" >×</view>
+  <view class="close_icon" bindtap="setModalShare" data-status="0">×</view>
   <view class="footc">分享给朋友
     <button class="share" style='margin-top:-20px;' open-type='share'>
       <image class="icon_sh" src="/images/share.png"></image>
@@ -88,6 +99,20 @@
   </view>
   <view class="footc" bindtap="addShopCart" data-type="buynow" data-status="1">生成商品海报</view>
 
+</view> -->
+
+
+<view animation="{{animationDataSh}}" class="container-column buydes-dialog-container" wx:if="{{showModalStatusSh}}">
+  <view class="buydes-dialog-container-top" bindtap="hideModal"></view>
+  <view class="container-column buydes-dialog-container-bottom">
+    <view class="close_icon" bindtap="setModalShare" data-status="0">×</view>
+    <view class="footsh">分享给朋友
+      <button class="share" style='margin-top:100px;' open-type='share'>
+        <image class="icon_sh" src="/images/share.png"></image>
+      </button>
+    </view>
+    <view class="footsh" bindtap="addShopCart" style='margin-top:-20px;'  data-type="buynow" data-status="1">生成商品海报</view>
+  </view>
 </view>
 
 

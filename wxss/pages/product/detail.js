@@ -5,7 +5,7 @@ var app = getApp();
 
 // 引入这个插件，使html内容自动转换成wxml内容
 var WxParse = require('../../wxParse/wxParse.js');
-
+let animationShowHeight = 300;
 Page ({
   firstIndex: -1,
   data      : {
@@ -28,7 +28,66 @@ Page ({
     // 数据结构：以一组一组来进行设定
     commodityAttr : [],
     attrValueList : [],
-    isCollect     : 0
+    isCollect     : 0,
+
+    animationDataSh: "",
+    showModalStatusSh: true,
+    imageHeight: 0,
+    imageWidth: 0
+  },
+
+  imageLoad: function (e) {
+    this.setData({ imageHeight: e.detail.height, imageWidth: e.detail.width });
+  },
+
+  showModal: function () {
+    // 显示遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationDataSh: animation.export(),
+      showModalStatusSh: true
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationDataSh: animation.export()
+      })
+    }.bind(this), 200)
+  },
+  hideModal: function () {
+    // 隐藏遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation;
+    animation.translateY(animationShowHeight).step()
+    this.setData({
+      animationDataSh: animation.export(),
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationDataSh: animation.export(),
+        showModalStatusSh: false
+      })
+    }.bind(this), 200)
+  },
+
+  onShow: function () {
+    let that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        animationShowHeight = res.windowHeight;
+      }
+    })
   },
 
   // 弹窗
