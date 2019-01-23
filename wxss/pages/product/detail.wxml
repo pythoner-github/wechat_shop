@@ -11,35 +11,47 @@
     </block>
   </swiper>
 
-  <view>
+  <!-- <view>
     <view class="title">{{itemData.name}}</view>
     <view> <button class="share"  open-type='share'>
           <image class="icon_sh" src="/images/share.png" style="margin-top:15px;"></image>
         </button >
       </view>
-  </view>
+  </view> -->
 
-  <!-- <view>
+
+  <view>
     <view class="title">{{itemData.name}}</view>
     <view>
-      <image class="icon_sh" bindtap="showModal" bindload="imageLoad" style="width:{{imageWidth}}px;;height:{{imageHeight}}px;" src="/images/share.png" style="margin-top:15px;"></image>
+      <button class="share" bindtap="powerDrawer" data-statu="open">
+        <image class="icon_sh" src="/images/share.png" style="margin-top:15px;"></image>
+      </button>
     </view>
-  </view> -->
+  </view>
 
-  <!-- <view>
-    <span class="title">{{itemData.name}}</span>
-    <span class="c6 fl_r font_12">
-      <view class="white w50 fl_l" data-status="1">
-        <button class="share"  bindtap="setModalShare"  style='margin-top:-20px;' >
-          <image class="icon_sh" src="/images/share.png"></image>
+  <view class="btn" bindtap="powerDrawer" data-statu="open">button</view>
+  <!--mask-->
+  <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+  <!--content-->
+  <!--使用animation属性指定需要执行的动画-->
+  <view animation="{{animationDataSh}}" class="drawer_attr_box" wx:if="{{showModalStatusSh}}">
+  <view class="close_icon" bindtap="powerDrawer" data-statu="close">×</view>
+    <!--drawer content-->
+    <view class="drawer_content">
+      <view class="drawer_title line">
+        <button class="share" open-type='share'>分享给朋友
         </button>
       </view>
-    </span>
-  </view> -->
+      <view class="drawer_title line">
+        <button class="shareBtns" bindtap='saveImageToPhotosAlbum'>生成商品海报</button>
+      </view>
+    </view>
+  </view>
 
+<view class='more' bindtap='saveImageToPhotosAlbum'>保存图片</view>   //保存图片按钮
+<canvas canvas-id='share' style='width:100vw;height:90vh;' hidden='{{canvasHidden}}'></canvas> 
 
-  <!-- <image bindtap="showModal" bindload="imageLoad" style="width:{{imageWidth}}px;;height:{{imageHeight}}px;" src="../pro1.jpg" />
- -->
+<canvas canvas-id="myCanvas" style="position:fixed;visibily:hidden;width: 646px; height: 966px;" />
 
   <view class="gmxx">
     <view class="font_14 c6" style='color:#000'>规格: {{itemData.company}}</view>
@@ -111,7 +123,7 @@
         <image class="icon_sh" src="/images/share.png"></image>
       </button>
     </view>
-    <view class="footsh" bindtap="addShopCart" style='margin-top:-20px;'  data-type="buynow" data-status="1">生成商品海报</view>
+    <view class="footsh" bindtap="addShopCart" style='margin-top:-20px;' data-type="buynow" data-status="1">生成商品海报</view>
   </view>
 </view>
 

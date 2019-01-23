@@ -202,7 +202,6 @@
   position      : fixed;
   bottom        : 0;
   left          : 0;
-  //background    : rgb(76, 0, 255);
   z-index       : 100;
   width         : 100%;
   font-size     : 16px;
@@ -495,3 +494,47 @@ swiper {
     border-bottom: 1rpx solid #eeeeee;
 }
 
+.btn {
+  width: 80%;
+  padding: 20rpx 0;
+  border-radius: 10rpx;
+  text-align: center;
+  margin: 40rpx 10%;
+  background: #0C1939;
+  color: #fff;
+}
+/*mask*/
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  /* background: #000; */
+  opacity: 0.2;
+  overflow: hidden;
+}
+/*content*/
+.drawer_attr_box {
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1001;
+  background: #fff;
+}
+.drawer_content {
+  padding: 20rpx 40rpx;
+  height: 470rpx;
+  overflow-y: scroll;
+}
+.drawer_title{
+  padding:20rpx;
+  font:42rpx "microsoft yahei";
+  text-align: center;
+}
+.line{
+  border-bottom: 1px solid #f8f8f8;
+}
