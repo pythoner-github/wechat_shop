@@ -538,3 +538,17 @@ swiper {
 .line{
   border-bottom: 1px solid #f8f8f8;
 }
+
+.canvas-box{
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 999999rpx;
+}
+
+.canvas-box{
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 999999rpx;
+  }

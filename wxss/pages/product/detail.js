@@ -44,6 +44,8 @@ Page({
     screenWidth: '', //设备屏幕宽度
     description: app.globalData.description, //奖品描述
     FilePath: '', //头像路径
+    hidden: true,
+    prurl:'/images/code.jpg'
   },
 
   imageLoad: function(e) {
@@ -741,309 +743,197 @@ Page({
       });
     }
   },
+  
+  drawImage:function() {
+    //绘制canvas图片
+    var that = this
+    const ctx = wx.createCanvasContext('myCanvas')
+    var bgPath = '/images/share.png'
+    var portraitPath = that.data.portrait_temp
+    var hostNickname = app.globalData.userInfo.nickName
 
-  // //先制作一个canvas标签，再保存成图片
-  // onSaveImg: function() {
-  //   const ctx = wx.createCanvasContext('myCanvas'); //看回wxml里的canvas标签，这个的myCanvas要和标签里的canvas-id一致
-
-  //   ctx.clearRect(0, 0, 644, 966);
-  //   ctx.drawImage("/images/share.png", 0, 0, 646, 966);
-  //   ctx.drawImage("/images/kefu.png", 0, -60, 646, 966);
-  //   ctx.drawImage("/images/search.png" + this.data.tipsImgId + ".png", 79, 291 - 60, 492, 244);
-  //   ctx.drawImage("/images/map.png", 90, 780 - 60, 135, 135);
-  //   ctx.setFillStyle("#02446e");
-  //   ctx.setFontSize(26);
-  //   ctx.fillText("送菜娃商城" + this.data.testName + this.data.testId, 100, 610 - 60);
-  //   ctx.setTextAlign("center");
-  //   ctx.fillText("杨凌好帮手网络科技有限公司", 435, 790 - 60);
-
-  //   ctx.setTextAlign("left");
-  //   ctx.setFillStyle("black");
-  //   ctx.setFontSize(18);
-  //   ctx.fillText("我等你", 330, 825 - 60);
-  //   ctx.setFontSize(22);
-
-  //   ctx.drawImage("../../img/test4.png", 0, 936 - 60, 646, 30);
-  //   var self = this;
-
-  //   ctx.draw(true, setTimeout(function() { //为什么要延迟100毫秒？大家测试一下
-  //     wx.canvasToTempFilePath({
-  //       x: 0,
-  //       y: 0,
-  //       width: 646,
-  //       height: 966,
-  //       destWidth: 646,
-  //       destHeight: 966,
-  //       canvasId: 'myCanvas',
-  //       success: function(res) {
-  //         self.data.savedImgUrl = res.tempFilePath;
-  //         self.saveImageToPhoto();
-  //       }
-  //     })
-  //   }, 100))
-  // },
-  // saveImageToPhoto: function() {
-  //   if (this.data.savedImgUrl != "") {
-  //     wx.saveImageToPhotosAlbum({
-  //       filePath: this.data.savedImgUrl,
-  //       success: function() {
-  //         wx.showModal({
-  //           title: '保存图片成功',
-  //           content: '寻人启事已经保存到相册，您可以手动分享到朋友圈！',
-  //           showCancel: false
-  //         });
-  //       },
-  //       fail: function(res) {
-  //         console.log(res);
-  //         if (res.errMsg == "saveImageToPhotosAlbum:fail cancel") {
-  //           wx.showModal({
-  //             title: '保存图片失败',
-  //             content: '您已取消保存图片到相册！',
-  //             showCancel: false
-  //           });
-  //         } else {
-  //           wx.showModal({
-  //             title: '提示',
-  //             content: '保存图片失败，您可以点击确定设置获取相册权限后再尝试保存！',
-  //             complete: function(res) {
-  //               console.log(res);
-  //               if (res.confirm) {
-  //                 wx.openSetting({}) //打开小程序设置页面，可以设置权限
-  //               } else {
-  //                 wx.showModal({
-  //                   title: '保存图片失败',
-  //                   content: '您已取消保存图片到相册！',
-  //                   showCancel: false
-  //                 });
-  //               }
-  //             }
-  //           });
-  //         }
-  //       }
-  //     })
-  //   }
-  // },
-
-  /**
-   * 绘制分享的图片
-   * @param goodsPicPath 商品图片的本地链接
-   * @param qrCodePath 二维码的本地链接
-   */
-  drawSharePic: function(goodsPicPath, qrCodePath) {
-    wx.showLoading({
-      title: '正在生成图片...',
-      mask: true,
-    });
-    //y方向的偏移量，因为是从上往下绘制的，所以y一直向下偏移，不断增大。
-    let yOffset = 20;
-    const goodsTitle = this.data.orderDetail.paltProduct.name1;
-    let goodsTitleArray = [];
-    //为了防止标题过长，分割字符串,每行18个
-    for (let i = 0; i < goodsTitle.length / 18; i++) {
-      if (i > 2) {
-        break;
-      }
-      goodsTitleArray.push(goodsTitle.substr(i * 18, 18));
-    }
-    const price = this.data.orderDetail.price;
-    const marketPrice = this.data.orderDetail.marketPrice;
-    const title1 = '您的好友邀请您一起分享精品好货';
-    const title2 = '立即打开看看吧';
-    const codeText = '长按识别小程序码查看详情';
-    const imgWidth = 780;
-    const imgHeight = 1600;
-
-    const canvasCtx = wx.createCanvasContext('shareCanvas');
-    //绘制背景
-    canvasCtx.setFillStyle('white');
-    canvasCtx.fillRect(0, 0, 390, 800);
-    //绘制分享的标题文字
-    canvasCtx.setFontSize(24);
-    canvasCtx.setFillStyle('#333333');
-    canvasCtx.setTextAlign('center');
-    canvasCtx.fillText(title1, 195, 40);
-    //绘制分享的第二行标题文字
-    canvasCtx.fillText(title2, 195, 70);
-    //绘制商品图片
-    canvasCtx.drawImage(goodPicPath, 0, 90, 390, 390);
-    //绘制商品标题
-    yOffset = 490;
-    goodsTitleArray.forEach(function(value) {
-      canvasCtx.setFontSize(20);
-      canvasCtx.setFillStyle('#333333');
-      canvasCtx.setTextAlign('left');
-      canvasCtx.fillText(value, 20, yOffset);
-      yOffset += 25;
-    });
-    //绘制价格
-    yOffset += 8;
-    canvasCtx.setFontSize(20);
-    canvasCtx.setFillStyle('#f9555c');
-    canvasCtx.setTextAlign('left');
-    canvasCtx.fillText('￥', 20, yOffset);
-    canvasCtx.setFontSize(30);
-    canvasCtx.setFillStyle('#f9555c');
-    canvasCtx.setTextAlign('left');
-    canvasCtx.fillText(price, 40, yOffset);
-    //绘制原价
-    const xOffset = (price.length / 2 + 1) * 24 + 50;
-    canvasCtx.setFontSize(20);
-    canvasCtx.setFillStyle('#999999');
-    canvasCtx.setTextAlign('left');
-    canvasCtx.fillText('原价:￥' + marketPrice, xOffset, yOffset);
-    //绘制原价的删除线
-    canvasCtx.setLineWidth(1);
-    canvasCtx.moveTo(xOffset, yOffset - 6);
-    canvasCtx.lineTo(xOffset + (3 + marketPrice.toString().length / 2) * 20, yOffset - 6);
-    canvasCtx.setStrokeStyle('#999999');
-    canvasCtx.stroke();
-    //绘制最底部文字
-    canvasCtx.setFontSize(18);
-    canvasCtx.setFillStyle('#333333');
-    canvasCtx.setTextAlign('center');
-    canvasCtx.fillText(codeText, 195, 780);
-    //绘制二维码
-    canvasCtx.drawImage(qrCodePath, 95, 550, 200, 200);
-    canvasCtx.draw();
-    //绘制之后加一个延时去生成图片，如果直接生成可能没有绘制完成，导出图片会有问题。
-    setTimeout(function() {
-      wx.canvasToTempFilePath({
-        x: 0,
-        y: 0,
-        width: 390,
-        height: 800,
-        destWidth: 390,
-        destHeight: 800,
-        canvasId: 'shareCanvas',
-        success: function(res) {
-          that.setData({
-            shareImage: res.tempFilePath,
-            showSharePic: true
-          })
-          wx.hideLoading();
-        },
-        fail: function(res) {
-          console.log(res)
-          wx.hideLoading();
-        }
-      })
-    }, 2000);
-  },
-
-  onLoad: function(options) {
-    var that = this;
-    var userInfo, nickName, avatarUrl;
-    //获取用户信息，头像，昵称之类的数据
-    wx.getUserInfo({
-        success: function(res) {
-          console.log(res);
-          userInfo = res.userInfo;
-          nickName = userInfo.nickName;
-          avatarUrl = userInfo.avatarUrl;
-          that.setData({
-            avatarUrl: res.userInfo.avatarUrl,
-            nickName: res.userInfo.nickName,
-          })
-          wx.downloadFile({
-            url: res.userInfo.avatarUrl
-          })
-        }
-      }),
-      //获取用户设备信息，屏幕宽度
-      wx.getSystemInfo({
-        success: res => {
-          that.setData({
-              screenWidth: res.screenWidth
-            }),
-            console.log(that.data.screenWidth)
-        }
-      })
-    saveImageToPhotosAlbum();
-  },
-
-  //定义的保存图片方法
-  saveImageToPhotosAlbum: function () {
-    wx.showLoading({
-      title: '保存中...',
-    })
-    var that = this;
-    //设置画板显示，才能开始绘图
+    var qrPath = that.data.qrcode_temp
+    var windowWidth = that.data.windowWidth
     that.setData({
-      canvasHidden: false
+      scale: 1.6
     })
-    var unit = that.data.screenWidth / 375;
-    var path1 = "../images/bg3.png";
-    var avatarUrl = that.data.avatarUrl;
-    console.log(avatarUrl + "头像");
-    var path2 = "../images/award.png";
-    var path3 = "../images/qrcode.png";
-    var path4 = "../images/headborder.png";
-    var path5 = "../images/border.png";
-    var unlight = "../images/unlight.png";
-    var nickName = that.data.nickName;
-    console.log(nickName + "昵称")
-    var context = wx.createCanvasContext('share');
-    var description = that.data.description;
-    var wxappName = "来「 " + that.data.wxappName + " 」试试运气";
-    context.drawImage(path1, 0, 0, unit * 375, unit * 462.5)
-    //   context.drawImage(path4, unit * 164, unit * 40, unit * 50, unit * 50)
-    context.drawImage(path2, unit * 48, unit * 120, unit * 280, unit * 178)
-    context.drawImage(path5, unit * 48, unit * 120, unit * 280, unit * 178)
-    context.drawImage(unlight, unit * 82, unit * 145, unit * 22, unit * 32)
-    context.drawImage(unlight, unit * 178, unit * 145, unit * 22, unit * 32)
-    context.drawImage(unlight, unit * 274, unit * 145, unit * 22, unit * 32)
-    context.drawImage(unlight, unit * 82, unit * 240, unit * 22, unit * 32)
-    context.drawImage(unlight, unit * 178, unit * 240, unit * 22, unit * 32)
-    context.drawImage(unlight, unit * 274, unit * 240, unit * 22, unit * 32)
-    context.drawImage(path3, unit * 20, unit * 385, unit * 55, unit * 55)
-    //   context.drawImage(path4, 48, 200, 280, 128)
-    context.setFontSize(14)
-    context.setFillStyle("#999")
-    context.fillText("长按识别小程序", unit * 90, unit * 408)
-    context.fillText(wxappName, unit * 90, unit * 428)
-    //把画板内容绘制成图片，并回调 画板图片路径
-    context.draw(false, function () {
+    //绘制背景图片
+    ctx.drawImage(bgPath, 0, 0, windowWidth, that.data.scale * windowWidth)
+
+    //绘制头像
+    ctx.save()
+    ctx.beginPath()
+    ctx.arc(windowWidth / 2, 0.32 * windowWidth, 0.15 * windowWidth, 0, 2 * Math.PI)
+    ctx.clip()
+    ctx.drawImage(portraitPath, 0.7 * windowWidth / 2, 0.17 * windowWidth, 0.3 * windowWidth, 0.3 * windowWidth)
+    ctx.restore()
+    //绘制第一段文本
+    ctx.setFillStyle('#ffffff')
+    ctx.setFontSize(0.037 * windowWidth)
+    ctx.setTextAlign('center')
+    ctx.fillText(hostNickname + ' 正在参加疯狂红包活动', windowWidth / 2, 0.52 * windowWidth)
+    //绘制第二段文本
+    ctx.setFillStyle('#ffffff')
+    ctx.setFontSize(0.037 * windowWidth)
+    ctx.setTextAlign('center')
+    ctx.fillText('邀请你一起来领券抢红包啦~', windowWidth / 2, 0.57 * windowWidth)
+    //绘制二维码
+    ctx.drawImage(qrPath, 0.64 * windowWidth / 2, 0.75 * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
+    //绘制第三段文本
+    ctx.setFillStyle('#ffffff')
+    ctx.setFontSize(0.037 * windowWidth)
+    ctx.setTextAlign('center')
+    ctx.fillText('长按二维码领红包', windowWidth / 2, 1.36 * windowWidth)
+    ctx.draw();
+    canvasToImage();
+  },
+
+  canvasToImage:function() {
+    var that = this
+    wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: that.data.windowWidth,
+      height: that.data.windowWidth * that.data.scale,
+      destWidth: that.data.windowWidth * 4,
+      destHeight: that.data.windowWidth * 4 * that.data.scale,
+      canvasId: 'myCanvas',
+      success: function (res) {
+        console.log('朋友圈分享图生成成功:' + res.tempFilePath)
+        wx.previewImage({
+          current: res.tempFilePath, // 当前显示图片的http链接
+          urls: [res.tempFilePath] // 需要预览的图片http链接列表
+        })
+      },
+      fail: function (err) {
+        console.log('失败')
+        console.log(err)
+      }
+    })
+  },
+
+  startDraw: function () {
+    const ctx = wx.createCanvasContext('myCanvas');
+
+    let windowWidth = wx.getSystemInfoSync().windowWidth;
+    let windowHeight = wx.getSystemInfoSync().windowHeight;
+    let _this = this;
+    this.setData({
+      scale: 1.6
+    });
+
+    ctx.setFillStyle('#333');
+    ctx.fillRect(0, 0, windowWidth, 100);
+    ctx.setFontSize(20);
+    ctx.setFillStyle('#fff');
+    ctx.fillText('开始绘制图片', 30, 50);
+    ctx.setFillStyle('#FFF');
+    ctx.fillRect(0, 70, windowWidth, 600);
+
+    ctx.setFillStyle('#666');
+    ctx.setFontSize(19);
+    ctx.fillText('我是标题', 100, 140);
+
+    ctx.setFontSize(20);
+    ctx.fillText('微信小程序文本部分', 20, 170);
+
+    ctx.draw()
+
+    wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: windowWidth,
+      height: windowHeight,
+      destWidth: windowWidth,
+      destHeight: windowHeight,
+      canvasId: 'myCanvas',
+      success: function (res1) {
+        console.log('朋友圈分享图生成成功:' + res1.tempFilePath);
+      }
+    });
+  },
+
+  onSaveImg: function () {
+    const ctx = wx.createCanvasContext('myCanvas');         //看回wxml里的canvas标签，这个的myCanvas要和标签里的canvas-id一致  
+
+    ctx.clearRect(0, 0, 644, 966);
+   // ctx.drawImage("/images/xlb.png", 0, 0, 646, 966);
+  // ctx.drawImage("/images/code.jpg", 0, -60, 646, 966);
+    //ctx.drawImage("/imgages/" + this.data.tipsImgId + ".png", 79, 291 - 60, 492, 244);
+    ctx.drawImage("/images/code.jpg", 90, 780 - 60, 135, 135);
+    ctx.setFillStyle("#02446e");
+    ctx.setFontSize(26);
+    ctx.fillText("送菜娃" + this.data.testName + this.data.testId, 100, 610 - 60);
+    ctx.setTextAlign("center");
+    ctx.fillText("文字", 435, 790 - 60);
+
+    ctx.setTextAlign("left");
+    ctx.setFillStyle("green");
+    ctx.setFontSize(18);
+    ctx.fillText("文字", 330, 825 - 60);
+    ctx.setFontSize(22);
+
+    ctx.drawImage("/images/cart.jpg", 0, 936 - 60, 646, 30);
+    var self = this;
+
+    ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下  
       wx.canvasToTempFilePath({
         x: 0,
         y: 0,
-        width: unit * 375,
-        height: unit * 462.5,
-        destWidth: unit * 375,
-        destHeight: unit * 462.5,
-        canvasId: 'share',
+        width: 646,
+        height: 966,
+        destWidth: 646,
+        destHeight: 966,
+        canvasId: 'myCanvas',
         success: function (res) {
-          that.setData({
-            shareImgPath: res.tempFilePath
-          })
-          if (!res.tempFilePath) {
+          self.data.savedImgUrl = res.tempFilePath;
+          self.saveImageToPhoto();
+        }
+      })
+    }, 100))
+  },  
+
+  //保存图片到相册  
+  saveImageToPhoto: function () {
+    if (this.data.savedImgUrl != "") {
+      wx.saveImageToPhotosAlbum({
+        filePath: this.data.savedImgUrl,
+        success: function () {
+          wx.showModal({
+            title: '保存图片成功',
+            content: '',
+            showCancel: false
+          });
+        },
+        fail: function (res) {
+          console.log(res);
+          if (res.errMsg == "saveImageToPhotosAlbum:fail cancel") {
+            wx.showModal({
+              title: '保存图片失败',
+              content: '您已取消保存图片到相册！',
+              showCancel: false
+            });
+          } else {
             wx.showModal({
               title: '提示',
-              content: '图片绘制中，请稍后重试',
-              showCancel: false
-            })
+              content: '保存图片失败，您可以点击确定设置获取相册权限后再尝试保存！',
+              complete: function (res) {
+                console.log(res);
+                if (res.confirm) {
+                  wx.openSetting({})      //打开小程序设置页面，可以设置权限  
+                } else {
+                  wx.showModal({
+                    title: '保存图片失败',
+                    content: '您已取消保存图片到相册！',
+                    showCancel: false
+                  });
+                }
+              }
+            });
           }
-          console.log(that.data.shareImgPath)
-          //画板路径保存成功后，调用方法吧图片保存到用户相册
-          wx.saveImageToPhotosAlbum({
-            filePath: res.tempFilePath,
-            //保存成功失败之后，都要隐藏画板，否则影响界面显示。
-            success: (res) => {
-              console.log(res)
-              wx.hideLoading()
-              that.setData({
-                canvasHidden: true
-              })
-            },
-            fail: (err) => {
-              console.log(err)
-              wx.hideLoading()
-              that.setData({
-                canvasHidden: true
-              })
-            }
-          })
         }
       })
-    });
-  }
+    }
+  },  
+
 });

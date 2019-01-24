@@ -19,17 +19,23 @@
       </view>
   </view> -->
 
+<view><span class="title">{{itemData.name}}</span>
+ <span class="c6 fl_r font_12" >
+      <button class="share" bindtap="powerDrawer" data-statu="open">
+        <image class="icon_sh" src="/images/share.png" style="margin-top:15px;"></image>
+      </button>
+  </span>
+</view>
 
-  <view>
+  <!-- <view>
     <view class="title">{{itemData.name}}</view>
     <view>
       <button class="share" bindtap="powerDrawer" data-statu="open">
         <image class="icon_sh" src="/images/share.png" style="margin-top:15px;"></image>
       </button>
     </view>
-  </view>
+  </view> -->
 
-  <view class="btn" bindtap="powerDrawer" data-statu="open">button</view>
   <!--mask-->
   <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
   <!--content-->
@@ -43,13 +49,12 @@
         </button>
       </view>
       <view class="drawer_title line">
-        <button class="shareBtns" bindtap='saveImageToPhotosAlbum'>生成商品海报</button>
+        <button class="shareBtns" bindtap='onSaveImg'>生成商品海报</button>
       </view>
     </view>
   </view>
-
-<view class='more' bindtap='saveImageToPhotosAlbum'>保存图片</view>   //保存图片按钮
-<canvas canvas-id='share' style='width:100vw;height:90vh;' hidden='{{canvasHidden}}'></canvas> 
+<!-- 
+<canvas canvas-id='share' style='width:100vw;height:90vh;' hidden='{{canvasHidden}}'></canvas>  -->
 
 <canvas canvas-id="myCanvas" style="position:fixed;visibily:hidden;width: 646px; height: 966px;" />
 
