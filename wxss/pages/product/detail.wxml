@@ -45,15 +45,14 @@
     <!--drawer content-->
     <view class="drawer_content">
       <view class="drawer_title line">
-        <button class="share" open-type='share'>分享给朋友
-        </button>
+        <button class="share" open-type='share'>分享给朋友</button>
       </view>
       <view class="drawer_title line">
         <button class="shareBtns" bindtap='onSaveImg'>生成商品海报</button>
       </view>
     </view>
   </view>
-<!-- 
+<!--
 <canvas canvas-id='share' style='width:100vw;height:90vh;' hidden='{{canvasHidden}}'></canvas>  -->
 
 <canvas canvas-id="myCanvas" style="position:fixed;visibily:hidden;width: 646px; height: 966px;" />

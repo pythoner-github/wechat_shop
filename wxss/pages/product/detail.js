@@ -703,7 +703,7 @@ Page({
   },
   util: function(currentStatu) {
     /* 动画部分 */
-    // 第1步：创建动画实例 
+    // 第1步：创建动画实例
     var animation = wx.createAnimation({
       duration: 100, //动画时长
       timingFunction: "linear", //线性
@@ -745,7 +745,7 @@ Page({
       });
     }
   },
-  
+
   drawImage:function() {
     //绘制canvas图片
     var that = this
@@ -856,11 +856,11 @@ Page({
   },
 
   onSaveImg: function () {
-    const ctx = wx.createCanvasContext('myCanvas');         //看回wxml里的canvas标签，这个的myCanvas要和标签里的canvas-id一致  
+    const ctx = wx.createCanvasContext('myCanvas');         //看回wxml里的canvas标签，这个的myCanvas要和标签里的canvas-id一致
 
     var that = this;
     var simageAttr = '';
-    console.log(that)
+
     wx.request({
       url: app.d.apiUrl + 'Product/index',
       method: 'post',
@@ -871,18 +871,40 @@ Page({
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-  
+
       success: function (res) {
         // init data
         var status = res.data.status;
 
         if (status == 1) {
           var pro = res.data.pro;
-          console.log('朋友圈分享图:' + pro);
-          //simageAttr = pro.img_arr[0];
-          console.log('success share:' + pro);
-         
+          console.log('朋友圈分享图');
+          console.log(pro);
 
+          ctx.clearRect(0, 0, 644, 966);
+          ctx.drawImage(pro.img_arr[0], 0, 0, 644, 644);
+          ctx.drawImage("/images/code.jpg", 50, 700, 250, 250);
+
+          ctx.setFillStyle("#02446e");
+          ctx.setFontSize(26);
+          ctx.fillText("送菜娃 " + pro.name, 50, 660);
+          ctx.setTextAlign("center");
+
+          ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下
+            wx.canvasToTempFilePath({
+              x: 0,
+              y: 0,
+              width: 646,
+              height: 966,
+              destWidth: 646,
+              destHeight: 966,
+              canvasId: 'myCanvas',
+              success: function (res1) {
+                that.data.savedImgUrl = res1.tempFilePath;
+                that.saveImageToPhoto();
+              }
+            })
+          }, 100))
         } else {
           wx.showToast({
             title: res.data.err,
@@ -890,56 +912,10 @@ Page({
           });
         }
       },
-     
- 
     });
+  },
 
-
- //   console.log('朋友圈分享图:' + res);
-    ctx.clearRect(0, 0, 644, 966);
-    // if (simageAttr.length == 0) {
-    //   console.log('朋友圈分享cannot get ' );
-    //   return;
-    // }
-    // else {
- //     ctx.drawImage(pro.img_arr[0], 0, 0, 646, 966);
-    // ctx.drawImage("/images/code.jpg", 0, -60, 646, 966);
-      //ctx.drawImage("/imgages/" + this.data.tipsImgId + ".png", 79, 291 - 60, 492, 244);
-      ctx.drawImage("/images/code.jpg", 90, 780 - 60, 135, 135);
-      ctx.setFillStyle("#02446e");
-      ctx.setFontSize(26);
-      ctx.fillText("送菜娃"  + this.data.testId, 100, 610 - 60);
-      ctx.setTextAlign("center");
-      ctx.fillText("文字", 435, 790 - 60);
-
-      ctx.setTextAlign("left");
-      ctx.setFillStyle("green");
-      ctx.setFontSize(18);
-      ctx.fillText("文字", 330, 825 - 60);
-      ctx.setFontSize(22);
-
-      ctx.drawImage("/images/cart.jpg", 0, 936 - 60, 646, 30);
-      var self = this;
-
-      ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下  
-        wx.canvasToTempFilePath({
-          x: 0,
-          y: 0,
-          width: 646,
-          height: 966,
-          destWidth: 646,
-          destHeight: 966,
-          canvasId: 'myCanvas',
-          success: function (res) {
-            self.data.savedImgUrl = res.tempFilePath;
-            self.saveImageToPhoto();
-          }
-        })
-      }, 100))
-    // }
-  },  
-
-  //保存图片到相册  
+  //保存图片到相册
   saveImageToPhoto: function () {
     if (this.data.savedImgUrl != "") {
       wx.saveImageToPhotosAlbum({
@@ -966,7 +942,7 @@ Page({
               complete: function (res) {
                 console.log(res);
                 if (res.confirm) {
-                  wx.openSetting({})      //打开小程序设置页面，可以设置权限  
+                  wx.openSetting({})      //打开小程序设置页面，可以设置权限
                 } else {
                   wx.showModal({
                     title: '保存图片失败',
@@ -980,6 +956,5 @@ Page({
         }
       })
     }
-  },  
-
+  },
 });
