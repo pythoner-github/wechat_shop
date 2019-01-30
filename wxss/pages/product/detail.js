@@ -45,7 +45,9 @@ Page({
     description: app.globalData.description, //奖品描述
     FilePath: '', //头像路径
     hidden: true,
-    prurl:'/images/code.jpg'
+    prurl:'/images/code.jpg',
+    firstPicPath:'0',
+    imageAttr: [],
   },
 
   imageLoad: function(e) {
@@ -212,7 +214,7 @@ Page({
   // 商品详情数据获取
   loadProductDetail: function() {
     var that = this;
-
+    console.log(that)
     wx.request({
       url: app.d.apiUrl + 'Product/index',
       method: 'post',
@@ -856,41 +858,85 @@ Page({
   onSaveImg: function () {
     const ctx = wx.createCanvasContext('myCanvas');         //看回wxml里的canvas标签，这个的myCanvas要和标签里的canvas-id一致  
 
-    ctx.clearRect(0, 0, 644, 966);
-   // ctx.drawImage("/images/xlb.png", 0, 0, 646, 966);
-  // ctx.drawImage("/images/code.jpg", 0, -60, 646, 966);
-    //ctx.drawImage("/imgages/" + this.data.tipsImgId + ".png", 79, 291 - 60, 492, 244);
-    ctx.drawImage("/images/code.jpg", 90, 780 - 60, 135, 135);
-    ctx.setFillStyle("#02446e");
-    ctx.setFontSize(26);
-    ctx.fillText("送菜娃" + this.data.testName + this.data.testId, 100, 610 - 60);
-    ctx.setTextAlign("center");
-    ctx.fillText("文字", 435, 790 - 60);
+    var that = this;
+    var simageAttr = '';
+    console.log(that)
+    wx.request({
+      url: app.d.apiUrl + 'Product/index',
+      method: 'post',
+      data: {
+        uid: app.d.userId,
+        pro_id: that.data.productId,
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+  
+      success: function (res) {
+        // init data
+        var status = res.data.status;
 
-    ctx.setTextAlign("left");
-    ctx.setFillStyle("green");
-    ctx.setFontSize(18);
-    ctx.fillText("文字", 330, 825 - 60);
-    ctx.setFontSize(22);
+        if (status == 1) {
+          var pro = res.data.pro;
+          console.log('朋友圈分享图:' + pro);
+          //simageAttr = pro.img_arr[0];
+          console.log('success share:' + pro);
+         
 
-    ctx.drawImage("/images/cart.jpg", 0, 936 - 60, 646, 30);
-    var self = this;
-
-    ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下  
-      wx.canvasToTempFilePath({
-        x: 0,
-        y: 0,
-        width: 646,
-        height: 966,
-        destWidth: 646,
-        destHeight: 966,
-        canvasId: 'myCanvas',
-        success: function (res) {
-          self.data.savedImgUrl = res.tempFilePath;
-          self.saveImageToPhoto();
+        } else {
+          wx.showToast({
+            title: res.data.err,
+            duration: 2000,
+          });
         }
-      })
-    }, 100))
+      },
+     
+ 
+    });
+
+
+ //   console.log('朋友圈分享图:' + res);
+    ctx.clearRect(0, 0, 644, 966);
+    // if (simageAttr.length == 0) {
+    //   console.log('朋友圈分享cannot get ' );
+    //   return;
+    // }
+    // else {
+ //     ctx.drawImage(pro.img_arr[0], 0, 0, 646, 966);
+    // ctx.drawImage("/images/code.jpg", 0, -60, 646, 966);
+      //ctx.drawImage("/imgages/" + this.data.tipsImgId + ".png", 79, 291 - 60, 492, 244);
+      ctx.drawImage("/images/code.jpg", 90, 780 - 60, 135, 135);
+      ctx.setFillStyle("#02446e");
+      ctx.setFontSize(26);
+      ctx.fillText("送菜娃"  + this.data.testId, 100, 610 - 60);
+      ctx.setTextAlign("center");
+      ctx.fillText("文字", 435, 790 - 60);
+
+      ctx.setTextAlign("left");
+      ctx.setFillStyle("green");
+      ctx.setFontSize(18);
+      ctx.fillText("文字", 330, 825 - 60);
+      ctx.setFontSize(22);
+
+      ctx.drawImage("/images/cart.jpg", 0, 936 - 60, 646, 30);
+      var self = this;
+
+      ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下  
+        wx.canvasToTempFilePath({
+          x: 0,
+          y: 0,
+          width: 646,
+          height: 966,
+          destWidth: 646,
+          destHeight: 966,
+          canvasId: 'myCanvas',
+          success: function (res) {
+            self.data.savedImgUrl = res.tempFilePath;
+            self.saveImageToPhoto();
+          }
+        })
+      }, 100))
+    // }
   },  
 
   //保存图片到相册  
