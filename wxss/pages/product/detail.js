@@ -877,34 +877,39 @@ Page({
         var status = res.data.status;
 
         if (status == 1) {
-          var pro = res.data.pro;
-          console.log('朋友圈分享图');
-          console.log(pro);
+            var pro = res.data.pro;
+            console.log('朋友圈分享图');
+            console.log(pro);
 
-          ctx.clearRect(0, 0, 644, 966);
-          ctx.drawImage(pro.img_arr[0], 0, 0, 644, 644);
-          ctx.drawImage("/images/code.jpg", 50, 700, 250, 250);
+            wx.downloadFile({
+                url: pro.img_arr[0],
+                success: function (res_img) {
+                    ctx.clearRect(0, 0, 644, 966);
+                    ctx.drawImage(res_img.tempFilePath, 0, 0, 644, 644);
+                    ctx.drawImage("/images/code.jpg", 50, 700, 250, 250);
 
-          ctx.setFillStyle("#02446e");
-          ctx.setFontSize(26);
-          ctx.fillText("送菜娃 " + pro.name, 50, 660);
-          ctx.setTextAlign("center");
+                    ctx.setFillStyle("#02446e");
+                    ctx.setFontSize(26);
+                    ctx.fillText("送菜娃 " + pro.name, 50, 660);
+                    ctx.setTextAlign("center");
 
-          ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下
-            wx.canvasToTempFilePath({
-              x: 0,
-              y: 0,
-              width: 646,
-              height: 966,
-              destWidth: 646,
-              destHeight: 966,
-              canvasId: 'myCanvas',
-              success: function (res1) {
-                that.data.savedImgUrl = res1.tempFilePath;
-                that.saveImageToPhoto();
-              }
-            })
-          }, 100))
+                    ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下
+                        wx.canvasToTempFilePath({
+                            x: 0,
+                            y: 0,
+                            width: 646,
+                            height: 966,
+                            destWidth: 646,
+                            destHeight: 966,
+                            canvasId: 'myCanvas',
+                            success: function (res_cvs) {
+                                that.data.savedImgUrl = res_cvs.tempFilePath;
+                                that.saveImageToPhoto();
+                            }
+                        })
+                    }, 100))
+                }
+            });
         } else {
           wx.showToast({
             title: res.data.err,
