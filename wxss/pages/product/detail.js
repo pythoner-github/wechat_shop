@@ -746,114 +746,114 @@ Page({
     }
   },
 
-  drawImage:function() {
-    //绘制canvas图片
-    var that = this
-    const ctx = wx.createCanvasContext('myCanvas')
-    var bgPath = '/images/share.png'
-    var portraitPath = that.data.portrait_temp
-    var hostNickname = app.globalData.userInfo.nickName
+  // drawImage:function() {
+  //   //绘制canvas图片
+  //   var that = this
+  //   const ctx = wx.createCanvasContext('myCanvas')
+  //   var bgPath = '/images/share.png'
+  //   var portraitPath = that.data.portrait_temp
+  //   var hostNickname = app.globalData.userInfo.nickName
 
-    var qrPath = that.data.qrcode_temp
-    var windowWidth = that.data.windowWidth
-    that.setData({
-      scale: 1.6
-    })
-    //绘制背景图片
-    ctx.drawImage(bgPath, 0, 0, windowWidth, that.data.scale * windowWidth)
+  //   var qrPath = that.data.qrcode_temp
+  //   var windowWidth = that.data.windowWidth
+  //   that.setData({
+  //     scale: 1.6
+  //   })
+  //   //绘制背景图片
+  //   ctx.drawImage(bgPath, 0, 0, windowWidth, that.data.scale * windowWidth)
 
-    //绘制头像
-    ctx.save()
-    ctx.beginPath()
-    ctx.arc(windowWidth / 2, 0.32 * windowWidth, 0.15 * windowWidth, 0, 2 * Math.PI)
-    ctx.clip()
-    ctx.drawImage(portraitPath, 0.7 * windowWidth / 2, 0.17 * windowWidth, 0.3 * windowWidth, 0.3 * windowWidth)
-    ctx.restore()
-    //绘制第一段文本
-    ctx.setFillStyle('#ffffff')
-    ctx.setFontSize(0.037 * windowWidth)
-    ctx.setTextAlign('center')
-    ctx.fillText(hostNickname + ' 正在参加疯狂红包活动', windowWidth / 2, 0.52 * windowWidth)
-    //绘制第二段文本
-    ctx.setFillStyle('#ffffff')
-    ctx.setFontSize(0.037 * windowWidth)
-    ctx.setTextAlign('center')
-    ctx.fillText('邀请你一起来领券抢红包啦~', windowWidth / 2, 0.57 * windowWidth)
-    //绘制二维码
-    ctx.drawImage(qrPath, 0.64 * windowWidth / 2, 0.75 * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
-    //绘制第三段文本
-    ctx.setFillStyle('#ffffff')
-    ctx.setFontSize(0.037 * windowWidth)
-    ctx.setTextAlign('center')
-    ctx.fillText('长按二维码领红包', windowWidth / 2, 1.36 * windowWidth)
-    ctx.draw();
-    canvasToImage();
-  },
+  //   //绘制头像
+  //   ctx.save()
+  //   ctx.beginPath()
+  //   ctx.arc(windowWidth / 2, 0.32 * windowWidth, 0.15 * windowWidth, 0, 2 * Math.PI)
+  //   ctx.clip()
+  //   ctx.drawImage(portraitPath, 0.7 * windowWidth / 2, 0.17 * windowWidth, 0.3 * windowWidth, 0.3 * windowWidth)
+  //   ctx.restore()
+  //   //绘制第一段文本
+  //   ctx.setFillStyle('#ffffff')
+  //   ctx.setFontSize(0.037 * windowWidth)
+  //   ctx.setTextAlign('center')
+  //   ctx.fillText(hostNickname + ' 正在参加疯狂红包活动', windowWidth / 2, 0.52 * windowWidth)
+  //   //绘制第二段文本
+  //   ctx.setFillStyle('#ffffff')
+  //   ctx.setFontSize(0.037 * windowWidth)
+  //   ctx.setTextAlign('center')
+  //   ctx.fillText('邀请你一起来领券抢红包啦~', windowWidth / 2, 0.57 * windowWidth)
+  //   //绘制二维码
+  //   ctx.drawImage(qrPath, 0.64 * windowWidth / 2, 0.75 * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
+  //   //绘制第三段文本
+  //   ctx.setFillStyle('#ffffff')
+  //   ctx.setFontSize(0.037 * windowWidth)
+  //   ctx.setTextAlign('center')
+  //   ctx.fillText('长按二维码领红包', windowWidth / 2, 1.36 * windowWidth)
+  //   ctx.draw();
+  //   canvasToImage();
+  // },
 
-  canvasToImage:function() {
-    var that = this
-    wx.canvasToTempFilePath({
-      x: 0,
-      y: 0,
-      width: that.data.windowWidth,
-      height: that.data.windowWidth * that.data.scale,
-      destWidth: that.data.windowWidth * 4,
-      destHeight: that.data.windowWidth * 4 * that.data.scale,
-      canvasId: 'myCanvas',
-      success: function (res) {
-        console.log('朋友圈分享图生成成功:' + res.tempFilePath)
-        wx.previewImage({
-          current: res.tempFilePath, // 当前显示图片的http链接
-          urls: [res.tempFilePath] // 需要预览的图片http链接列表
-        })
-      },
-      fail: function (err) {
-        console.log('失败')
-        console.log(err)
-      }
-    })
-  },
+  // canvasToImage:function() {
+  //   var that = this
+  //   wx.canvasToTempFilePath({
+  //     x: 0,
+  //     y: 0,
+  //     width: that.data.windowWidth,
+  //     height: that.data.windowWidth * that.data.scale,
+  //     destWidth: that.data.windowWidth * 4,
+  //     destHeight: that.data.windowWidth * 4 * that.data.scale,
+  //     canvasId: 'myCanvas',
+  //     success: function (res) {
+  //       console.log('朋友圈分享图生成成功:' + res.tempFilePath)
+  //       wx.previewImage({
+  //         current: res.tempFilePath, // 当前显示图片的http链接
+  //         urls: [res.tempFilePath] // 需要预览的图片http链接列表
+  //       })
+  //     },
+  //     fail: function (err) {
+  //       console.log('失败')
+  //       console.log(err)
+  //     }
+  //   })
+  // },
 
-  startDraw: function () {
-    const ctx = wx.createCanvasContext('myCanvas');
+  // startDraw: function () {
+  //   const ctx = wx.createCanvasContext('myCanvas');
 
-    let windowWidth = wx.getSystemInfoSync().windowWidth;
-    let windowHeight = wx.getSystemInfoSync().windowHeight;
-    let _this = this;
-    this.setData({
-      scale: 1.6
-    });
+  //   let windowWidth = wx.getSystemInfoSync().windowWidth;
+  //   let windowHeight = wx.getSystemInfoSync().windowHeight;
+  //   let _this = this;
+  //   this.setData({
+  //     scale: 1.6
+  //   });
 
-    ctx.setFillStyle('#333');
-    ctx.fillRect(0, 0, windowWidth, 100);
-    ctx.setFontSize(20);
-    ctx.setFillStyle('#fff');
-    ctx.fillText('开始绘制图片', 30, 50);
-    ctx.setFillStyle('#FFF');
-    ctx.fillRect(0, 70, windowWidth, 600);
+  //   ctx.setFillStyle('#333');
+  //   ctx.fillRect(0, 0, windowWidth, 100);
+  //   ctx.setFontSize(20);
+  //   ctx.setFillStyle('#fff');
+  //   ctx.fillText('开始绘制图片', 30, 50);
+  //   ctx.setFillStyle('#FFF');
+  //   ctx.fillRect(0, 70, windowWidth, 600);
 
-    ctx.setFillStyle('#666');
-    ctx.setFontSize(19);
-    ctx.fillText('我是标题', 100, 140);
+  //   ctx.setFillStyle('#666');
+  //   ctx.setFontSize(19);
+  //   ctx.fillText('我是标题', 100, 140);
 
-    ctx.setFontSize(20);
-    ctx.fillText('微信小程序文本部分', 20, 170);
+  //   ctx.setFontSize(20);
+  //   ctx.fillText('微信小程序文本部分', 20, 170);
 
-    ctx.draw()
+  //   ctx.draw()
 
-    wx.canvasToTempFilePath({
-      x: 0,
-      y: 0,
-      width: windowWidth,
-      height: windowHeight,
-      destWidth: windowWidth,
-      destHeight: windowHeight,
-      canvasId: 'myCanvas',
-      success: function (res1) {
-        console.log('朋友圈分享图生成成功:' + res1.tempFilePath);
-      }
-    });
-  },
+  //   wx.canvasToTempFilePath({
+  //     x: 0,
+  //     y: 0,
+  //     width: windowWidth,
+  //     height: windowHeight,
+  //     destWidth: windowWidth,
+  //     destHeight: windowHeight,
+  //     canvasId: 'myCanvas',
+  //     success: function (res1) {
+  //       console.log('朋友圈分享图生成成功:' + res1.tempFilePath);
+  //     }
+  //   });
+  // },
 
   onSaveImg: function () {
     const ctx = wx.createCanvasContext('myCanvas');         //看回wxml里的canvas标签，这个的myCanvas要和标签里的canvas-id一致
@@ -877,39 +877,41 @@ Page({
         var status = res.data.status;
 
         if (status == 1) {
-            var pro = res.data.pro;
-            console.log('朋友圈分享图');
-            console.log(pro);
+          var pro = res.data.pro;
+          console.log('朋友圈分享图');
+          console.log(pro);
 
-            wx.downloadFile({
-                url: pro.img_arr[0],
-                success: function (res_img) {
-                    ctx.clearRect(0, 0, 644, 966);
-                    ctx.drawImage(res_img.tempFilePath, 0, 0, 644, 644);
-                    ctx.drawImage("/images/code.jpg", 50, 700, 250, 250);
+          wx.downloadFile({
+            url: pro.img_arr[0],
+            success: function (res_img) {
+              ctx.clearRect(0, 0, 1044, 1066);
 
-                    ctx.setFillStyle("#02446e");
-                    ctx.setFontSize(26);
-                    ctx.fillText("送菜娃 " + pro.name, 50, 660);
-                    ctx.setTextAlign("center");
+ 
+              ctx.drawImage(res_img.tempFilePath, 0, 60, 644, 844);
+              ctx.drawImage("/images/code.jpg", 50, 760, 250, 250);
+         
+              ctx.setFillStyle("#02446e");
+              ctx.setFontSize(36);
+              ctx.fillText("送菜娃商城 " + pro.name, 250, 40);
+              ctx.setTextAlign("center");
 
-                    ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下
-                        wx.canvasToTempFilePath({
-                            x: 0,
-                            y: 0,
-                            width: 646,
-                            height: 966,
-                            destWidth: 646,
-                            destHeight: 966,
-                            canvasId: 'myCanvas',
-                            success: function (res_cvs) {
-                                that.data.savedImgUrl = res_cvs.tempFilePath;
-                                that.saveImageToPhoto();
-                            }
-                        })
-                    }, 100))
-                }
-            });
+              ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下
+                wx.canvasToTempFilePath({
+                  x: 0,
+                  y: 0,
+                  width: 646,
+                  height: 966,
+                  destWidth: 646,
+                  destHeight: 966,
+                  canvasId: 'myCanvas',
+                  success: function (res_cvs) {
+                    that.data.savedImgUrl = res_cvs.tempFilePath;
+                    that.saveImageToPhoto();
+                  }
+                })
+              }, 100))
+            }
+          });
         } else {
           wx.showToast({
             title: res.data.err,
