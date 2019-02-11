@@ -443,4 +443,20 @@ class OrderController extends PublicController{
         $this->display();
     }
 
+    public function order_check() {
+        $max_id = intval($_POST['max_id']);
+        $count = 0;
+
+        if($max_id) {
+            $count = $this->order->where('id >'.intval($max_id))->field('id')->count();
+        }
+
+        $max_id = $this->order->order('id desc')->limit('1')->getField('id');
+
+        $json = array();
+        $json['max_id']=$max_id;
+        $json['count']=$count;
+        echo json_encode($json);
+        exit();
+    }
 }
