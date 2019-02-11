@@ -44,6 +44,7 @@
 
     <div class="pro_5"/>
         <input type="hidden" id="max_id" value="{$max_id}"/>
+        <embed id="order_check_audio" src="__PUBLIC__/admin/audio/new_order.mp3" hidden="true"></embed>
         <text id="check_order"/>
     </div>
 
@@ -198,6 +199,9 @@
     }
 
     function check_order() {
+        var music = new Audio();
+        music.src = '__PUBLIC__/admin/audio/new_order.mp3';
+
         setInterval(function () {
             $.ajax({
               type: "POST",
@@ -210,6 +214,7 @@
 
                 if (data.count > 0) {
                     $('#check_order').html('<text id="check_order"><font color="red">您有新的订单('+data.count+')</font></text><br><br>');
+                    music.play();
                 } else {
                     $('#check_order').html('<text id="check_order"/>');
                 }
