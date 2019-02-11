@@ -134,9 +134,12 @@ class OrderController extends PublicController{
         }
         //echo $where;
 
+        $max_id = $this->order->order('id desc')->limit('1')->getField('id');
+
         $this->assign('order_list',$order_list);// 赋值数据集
         $this->assign('page',$show);// 赋值分页输出
         $this->assign('admin_qx',$_SESSION['admininfo']['qx']);//后台用户权限，目前设置为超级管理员权限
+        $this->assign('max_id',$max_id);
         $this->display(); // 输出模板
 
     }
