@@ -884,25 +884,29 @@ Page({
           wx.downloadFile({
             url: pro.img_arr[0],
             success: function (res_img) {
-              ctx.clearRect(0, 0, 1044, 1066);
+              ctx.clearRect(0, 0, 1444, 1066);
+              ctx.fillStyle = "#ffffff";
+              //ctx.fillStyle = "rgba(255, 255, 255, 0)"; 
+              ctx.fillRect(0,0,1444,1066);
 
- 
-              ctx.drawImage(res_img.tempFilePath, 0, 60, 644, 844);
-              ctx.drawImage("/images/code.jpg", 50, 760, 250, 250);
-         
               ctx.setFillStyle("#02446e");
               ctx.setFontSize(36);
-              ctx.fillText("送菜娃商城 " + pro.name, 250, 40);
+              ctx.fillText("送菜娃商城  特惠商品" + pro.name, 100, 40);
               ctx.setTextAlign("center");
+ 
+              ctx.drawImage(res_img.tempFilePath, 0, 60, 644, 844);
+              ctx.drawImage("/images/code.jpg", 50, 710, 250, 250);
+         
+
 
               ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下
                 wx.canvasToTempFilePath({
                   x: 0,
                   y: 0,
                   width: 646,
-                  height: 966,
+                  height: 1066,
                   destWidth: 646,
-                  destHeight: 966,
+                  destHeight: 1066,
                   canvasId: 'myCanvas',
                   success: function (res_cvs) {
                     that.data.savedImgUrl = res_cvs.tempFilePath;
