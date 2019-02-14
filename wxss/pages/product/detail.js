@@ -891,12 +891,14 @@ Page({
 
               ctx.setFillStyle("#02446e");
               ctx.setFontSize(36);
-              ctx.fillText("送菜娃商城  特惠商品" + pro.name, 100, 40);
+              ctx.fillText("送菜娃商城  特惠商品" + pro.name, 220, 40);
               ctx.setTextAlign("center");
+              const codeText = '长按识别小程序码查看详情';
  
               ctx.drawImage(res_img.tempFilePath, 0, 60, 644, 844);
-              ctx.drawImage("/images/code.jpg", 50, 710, 250, 250);
-         
+              ctx.drawImage("/images/code.jpg", 20, 710, 250, 250);
+              ctx.setFontSize(26);
+              ctx.fillText("长按识别小程序码查看详情", 420, 935);
 
 
               ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下

@@ -52,10 +52,12 @@
       </view>
     </view>
   </view>
-<!--
-<canvas canvas-id='share' style='width:100vw;height:90vh;' hidden='{{canvasHidden}}'></canvas>  -->
 
-<canvas canvas-id="myCanvas" style="position:fixed;visibily:hidden;width: 646px; height: 966px;" />
+<!-- <canvas canvas-id='share' style='width:100vw;height:90vh;' hidden='{{canvasHidden}}'></canvas>  -->
+<!-- <view style='width: 646px; height: 966px;overflow:hidden;'>
+  <canvas canvas-id="myCanvas" style="position:fixed;width: 646px; height: 966px;" hidden='hidden'></canvas>
+</view> -->
+<canvas canvas-id="myCanvas" style="position:fixed;width: 646px; height: 966px;" hidden="{{canvasHidden}}" />
 
   <view class="gmxx">
     <view class="font_14 c6" style='color:#000'>规格: {{itemData.company}}</view>
