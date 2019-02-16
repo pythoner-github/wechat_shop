@@ -19,13 +19,33 @@
       </view>
   </view> -->
 
-<view><span class="title">{{itemData.name}}</span>
+  <!-- <view><span class="title">{{itemData.name}}</span>
  <span class="c6 fl_r font_12" >
       <button class="share" bindtap="powerDrawer" data-statu="open">
-        <image class="icon_sh" src="/images/share.png" style="margin-top:15px;"></image>
+        <image class="icon_sh" src="/images/share.png" ></image>
       </button>
   </span>
+</view> -->
+
+
+  <!-- <view><span class="title">{{itemData.name}}</span>
+ <span class="c6 fl_r font_12" >
+      <button class="share" bindtap="powerDrawer" data-statu="open">
+        <image class="icon_sh" src="/images/share.png" ></image>
+      </button>
+       <button class="share" bindtap="powerDrawer" data-statu="open" style="width:40px;height:40px;">
+  </span>
 </view>
+ -->
+  <view>
+    <span class="title">{{itemData.name}}</span>
+    <span class="c6 fl_r font_14" style='color:#ccc'>
+      <button class="share" bindtap="powerDrawer" data-statu="open" style="width:40px;height:40px;background:transparent;border: none;background-color:transparent;">
+        <image class="icon_sh" src="/images/share.png"></image>
+      </button>
+    </span>
+  </view>
+
 
   <!-- <view>
     <view class="title">{{itemData.name}}</view>
@@ -41,7 +61,7 @@
   <!--content-->
   <!--使用animation属性指定需要执行的动画-->
   <view animation="{{animationDataSh}}" class="drawer_attr_box" wx:if="{{showModalStatusSh}}">
-  <view class="close_icon" bindtap="powerDrawer" data-statu="close">×</view>
+    <view class="close_icon" bindtap="powerDrawer" data-statu="close">×</view>
     <!--drawer content-->
     <view class="drawer_content">
       <view class="drawer_title line">
@@ -53,11 +73,11 @@
     </view>
   </view>
 
-<!-- <canvas canvas-id='share' style='width:100vw;height:90vh;' hidden='{{canvasHidden}}'></canvas>  -->
-<!-- <view style='width: 646px; height: 966px;overflow:hidden;'>
+  <!-- <canvas canvas-id='share' style='width:100vw;height:90vh;' hidden='{{canvasHidden}}'></canvas>  -->
+  <!-- <view style='width: 646px; height: 966px;overflow:hidden;'>
   <canvas canvas-id="myCanvas" style="position:fixed;width: 646px; height: 966px;" hidden='hidden'></canvas>
 </view> -->
-<canvas canvas-id="myCanvas" style="position:fixed;width: 646px; height: 966px;" hidden="{{canvasHidden}}" />
+  <canvas canvas-id="myCanvas" style="position:fixed;width: 646px; height: 966px;" hidden="{{canvasHidden}}" />
 
   <view class="gmxx">
     <view class="font_14 c6" style='color:#000'>规格: {{itemData.company}}</view>

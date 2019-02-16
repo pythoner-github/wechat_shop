@@ -891,7 +891,7 @@ Page({
 
               ctx.setFillStyle("#02446e");
               ctx.setFontSize(36);
-              ctx.fillText("送菜娃商城  特惠商品" + pro.name, 220, 40);
+              ctx.fillText("送菜娃商城  特惠商品 " + pro.name, 180, 40);
               ctx.setTextAlign("center");
               const codeText = '长按识别小程序码查看详情';
  

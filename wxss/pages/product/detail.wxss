@@ -82,10 +82,10 @@
 }
 
 .icon_sh {
-  width         : 22px;
-  height        : 22px;
+  width         : 20px;
+  height        : 20px;
   display       : inline-block;
-  margin-top    : 5px;
+  margin-top    : 1px;
 }
 
 .ke {
@@ -367,6 +367,13 @@
   padding         : 10rpx 20rpx;
   margin          : 10rpx 0;
   border-left     : 4rpx solid #ccc;
+}
+
+/* 分类选择 */
+.sharebtn {
+  padding         : 10rpx 20rpx;
+  margin          : 10rpx 0;
+  border-right     : 4rpx solid;
 }
 
 /* 全部属性的主盒子 */
