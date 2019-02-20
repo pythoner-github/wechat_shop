@@ -68,7 +68,11 @@
 
         <volist name='order_pro' id="pro">
             <tr id="concent_tr_{$key}" class="text-left">
-				<td width="12%"><input id="pro_id_{$key}" value="{$pro.id}" style="display:none"/>{$pro.name}</td>
+                <td width="12%">
+                    <input id="pro_id_{$key}" value="{$pro.id}" style="display:none"/>
+                    <input id="pro_number_{$pro.pro_number}" value="{$key}" style="display:none"/>
+                    {$pro.name}
+                </td>
                 <!-- td width="10%">{$pro.brand}</td -->
                 <td width="10%">{$pro.ori_price}</td>
                 <td width="10%">{$pro.ori_guige}</td>
@@ -148,6 +152,9 @@
 
 
 <script>
+    var codestr = "";
+    document.addEventListener("keydown", keydown);
+
     //保存快递名称，快递单号
     function sms_message(){
         try{
@@ -171,19 +178,19 @@
             //    throw ('请输入快递信息或选择订单状态！');
             //};
 
-			var order_pro_update = [];
-			var length = eval(<?php echo count($order_pro); ?>);
+            var order_pro_update = [];
+            var length = eval(<?php echo count($order_pro); ?>);
 
-			for (var i = 0; i < length; i++)
-			{
-				order_pro_update.push([$('#pro_id_' + i).val(), $('#pro_full_guige_' + i).val()])
-			}
+            for (var i = 0; i < length; i++)
+            {
+                order_pro_update.push([$('#pro_id_' + i).val(), $('#pro_full_guige_' + i).val()])
+            }
 
             $.ajax({
                 type: "POST",
                 url: "{:U('sms_up')}",
                 data:{'order_status':order_status,'kuaidi_name':kuaidi_name,'kuaidi_num':kuaidi_num,'order_pro_update':order_pro_update,'oid':<?php echo $order_info['id'];?>},
-				dataType: "json",
+                dataType: "json",
                 success: function (data) {
                 if(data.returns){
                     alert('提交成功！');
@@ -203,8 +210,7 @@
         }
     }
 
-    function preview()
-    {
+    function preview() {
         bdhtml=window.document.body.innerHTML;                //获取当前页的html代码
         sprnstr="<!--startprint-->";                          //设置打印开始区域
         eprnstr="<!--endprint-->";                            //设置打印结束区域
@@ -213,6 +219,42 @@
         window.document.body.innerHTML=prnhtml;
         window.print();
         window.document.body.innerHTML=bdhtml;
+    }
+
+    // 监控键盘输入, 获取扫描枪输入
+    function keydown(event) {
+        var realkey = String.fromCharCode(event.keyCode);
+
+        if (event.keyCode == 13) {
+            console.log(codestr);
+
+            // codestr = "2000112009906";
+
+            // 编码长度为13, 并且以20开头
+            if (codestr.length == 13 && codestr.slice(0,2) == "20") {
+                var pro_number = codestr.slice(2,7);
+                var pro_guige = parseInt(codestr.slice(7,12)) / 1000;
+
+                console.log(pro_number);
+                console.log(pro_guige);
+
+                var key = $('#pro_number_' + pro_number).val();
+
+                if (key) {
+                    $('#pro_full_guige_' + key).val(pro_guige + "kg");
+                } else {
+                    alert("未找到产品编号为" + pro_number + "的菜品！");
+                }
+            }
+
+            codestr = "";
+        } else {
+            if (event.keyCode >= 48 && event.keyCode <= 57) {
+                codestr += realkey;
+            } else {
+                codestr = "";
+            }
+        }
     }
 </script>
 

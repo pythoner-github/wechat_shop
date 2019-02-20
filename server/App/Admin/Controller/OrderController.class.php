@@ -193,10 +193,11 @@ class OrderController extends PublicController{
                 $order_pro[$k]['g_name'] = '无';
             }
 
-            $brand_info = M('product')->where(''.$qz.'product.id='.intval($v['pid']))->join('LEFT JOIN __BRAND__ ON __PRODUCT__.brand_id=__BRAND__.id')   ->field(''.$qz.'product.id as id, '.$qz.'product.brand_id as brand_id, '.$qz.'brand.name as brand')->find();
+            $brand_info = M('product')->where(''.$qz.'product.id='.intval($v['pid']))->join('LEFT JOIN __BRAND__ ON __PRODUCT__.brand_id=__BRAND__.id')   ->field(''.$qz.'product.id as id, '.$qz.'product.brand_id as brand_id, '.$qz.'brand.name as brand, '.$qz.'product.pro_number as pro_number')->find();
 
             if ($brand_info) {
               $order_pro[$k]['brand'] = $brand_info['brand'];
+              $order_pro[$k]['pro_number'] = $brand_info['pro_number'];
             }
 
             if ($order_pro[$k]['ori_guige'] == '') {

@@ -33,7 +33,7 @@ class ProductController extends PublicController{
         $page<0?$page=0:'';
         $limit=$page*rows;
         $page_index=$this->page_index($count,$rows,$page);
-        $productlist=M('product')->where($where)->order('addtime desc')->limit($limit,rows)->select();
+        $productlist=M('product')->where($where)->order('pro_number desc')->limit($limit,rows)->select();
         //dump($productlist);exit;
         foreach ($productlist as $k => $v) {
             //$productlist[$k]['shangchang'] = M('shangchang')->where('id='.intval($v['shop_id']))->getField('name');
@@ -308,7 +308,7 @@ class ProductController extends PublicController{
         $rows=ceil($count/rows);
         $limit=$page*rows;
         $page_index=$this->page_index($count,$rows,$page);
-        $productlist=M('product')->where($where)->order('addtime desc')->limit($limit,rows)->select();
+        $productlist=M('product')->where($where)->order('pro_number desc')->limit($limit,rows)->select();
 
         foreach ($productlist as $k => $v) {
             $productlist[$k]['cname'] = M('category')->where('id='.intval($v['cid']))->getField('name');

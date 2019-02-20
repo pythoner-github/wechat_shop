@@ -45,6 +45,7 @@
 
         <tr class="text-c">
             <th width="20">ID</th>
+            <th width="50">产品编号</th>
             <th width="100">图片</th>
             <th width="80">所属品牌</th>
             <th width="180">产品名称</th>
@@ -62,6 +63,7 @@
         <volist name="productlist" id="v" empty="暂时没有数据">
             <tr class="text-c">
                 <td>{$v.id}</td>
+                <td>{$v.pro_number}</td>
                 <td style="padding:3px 0;"><img src="__DATA__/{$v.photo_x}" width="80px" height="80px"/></td>
                 <td>{$v.brand}</td>
                 <td>{$v.name}</td>
