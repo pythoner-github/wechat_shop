@@ -1,0 +1,107 @@
+/* pages/user/youhuiquan.wxss */
+
+.clearbutton {
+  background    : #fff;
+  display       : inline-block;
+  margin        : 3% 3% 2% 3%;
+  color         : #dd2727;
+  font-size     : 14px;
+  width         : 94%;
+}
+
+.shop {
+  background    : #fff;
+  padding       : 4%;
+  margin-bottom : 10px;
+}
+
+.sh_slt {
+  width         : 80px;
+  height        : 80px;
+  overflow      : hidden;
+  border-radius : 5px;
+  margin-right  : 4%;
+  float         : left;
+}
+
+.sp_text {
+  float         : left;
+  line-height   : 20px;
+  width         : 100%;
+}
+
+.sp_tit {
+  width         : 100%;
+  overflow      : hidden;
+  font-size     : 14px;
+}
+
+.sp_neb {
+  width         : 100%;
+  overflow      : hidden;
+  font-size     : 12px;
+  color         : #999;
+}
+
+.sp_jg {
+  width         : 100%;
+  overflow      : hidden;
+  font-size     : 14px;
+  color         : #fc0628;
+}
+
+.dle {
+  color         : #999;
+  font-size     : 12px;
+  float         : right;
+}
+
+.dle image {
+  width         : 18px;
+  height        : 18px;
+  vertical-align: sub;
+}
+
+.jk_bottom {
+  position      : fixed;
+  bottom        : 0;
+  background    : #fff;
+  width         : 100%;
+  display       : inline-flex;
+  border-bottom : 1px solid #eee;
+  font-size     : 14px;
+  color         : #999;
+}
+
+.coupon-list{width: 710rpx; margin:  0 auto}
+.coupon-list .item{width: 710rpx; height: 250rpx; margin-bottom: 20rpx;}
+.coupon-list .item .float-li{width: 450rpx; height: 100%; border-right: 2rpx dashed rgba(255,255,255,.3)}
+.coupon-list .item .float-li-rig{width: 220rpx; padding-right: 20rpx; height:100%; color: #fff}
+ 
+ 
+.coupon-left{position: relative}
+.coupon-left .t{position: absolute; color: #fff}
+.coupon-left .t1{left: 10rpx; top: 110rpx}
+.coupon-left .t2{left: 30rpx; top: 50rpx; font-size: 80rpx; font-weight: bold }
+.coupon-left .t3{left: 220rpx; top: 50rpx; width: 200rpx; font-size: 30rpx;}
+.coupon-left .t4{left: 10rpx; top:180rpx}
+
+.coupon-rig{position: relative}
+.coupon-rig .t{text-align: left;color: #fff}
+.coupon-rig .t1{font-size: 20rpx; padding: 10rpx 0 10rpx 0;}
+.coupon-rig .t3{padding-top:2rpx}
+.coupon-rig .t3 text{background: #fff; color: #333; border-radius: 7rpx; padding: 10rpx 40rpx}
+ 
+ 
+.note{background: #faeab7}
+ 
+ 
+.stamp{width:500rpx; height: 250rpx;margin-bottom:50rpx;position:relative;overflow:hidden}
+.stamp i{position: absolute;left: 20%;top: 90rpx;height: 500rpx;width: 500rpx;background-color: rgba(255,255,255,.15);transform: rotate(-30deg);
+}
+.stamp01{background:radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 30rpx, #F39B00 30rpx);background-size:10rpx 10rpx;background-position:9rpx 3rpx; background: #F39B00}
+.stamp02{background:radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 30rpx, #D24161 30rpx);background-size:10rpx 10rpx;background-position:9rpx 3rpx; background: #D24161}
+.stamp03{background:radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 30rpx, #D24161 30rpx);background-size:10rpx 10rpx;background-position:9rpx 3rpx; background: #7EAB1E }
+.stamp04{background:radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 30rpx, #D24161 30rpx);background-size:10rpx 10rpx;background-position:9rpx 3rpx; background: #50ADD3 }
+.stamp05{background:radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 30rpx, #D24161 30rpx);background-size:10rpx 10rpx;background-position:9rpx 3rpx; background: #f0229b}
+.stamp05{background:radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 30rpx, #D24161 30rpx);background-size:10rpx 10rpx;background-position:9rpx 3rpx; background: #f0229b}

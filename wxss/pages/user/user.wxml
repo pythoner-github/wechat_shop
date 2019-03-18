@@ -79,7 +79,7 @@
     </view>
 
     <view class="qbdd mt10">
-      <navigator url="../rituall/rituall">
+      <navigator url="/pages/user/youhuiquan">
         <span class="font_17 c3">优惠劵</span>
         <span class="fl_r c9 font_13 l_h20" hover-class="none"> ></span>
       </navigator>
