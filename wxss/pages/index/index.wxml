@@ -2,6 +2,25 @@
 
 <view class="page">
 
+  <view class="address df" style="font-size:15x;height:50rpx">
+    <!-- <button bindtap="doAddressSearch"><image class="dwcion" src="/images/map.png"></image></button>
+    <button bindtap="doAddressSearch">{{address}}</button> -->
+    <button style="width:60%;font-size:15px;text-align:left;height:50rpx" bindtap="doAddressSearch" ><image class="dwcion" src="/images/map.png" style="float:left;border-radius:17px"></image>{{address}}</button>
+    <view class="distance df"  wx:if="{{distance > 5000}}"  style="width:40%;font-size:40px;height:40rpx">
+    <text style="font-size:12px;width:200rpx;margin-top:-8rpx"class="distance">(未在配送范围)</text>
+    </view>
+
+    <!-- <button style="width:40%;border-radius:15px; border:10rpx;background:rgb(245, 244, 244);height:65rpx; " bindtap="doSearch" class="searchcion"><image class="searchcion" style="margin-right:80rpx" src="/images/search_gr.png"></image></button> -->
+
+    <!--contact-button class="kfcion" style="margin-right:5rpx;" type="default-light" size="30" session-from="weapp"/-->
+  </view>
+
+
+  <!-- <view class="distance df" wx:if="{{distance > 5000}}"  style="font-size:840px">
+    <text class="distance">您当前选择的“{{address}}”，未在配送范围，我们会为您尽快开通配送服务</text>
+  </view> -->
+
+
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
     <block wx:for="{{focus}}" wx:key="id">
       <swiper-item>
@@ -9,22 +28,15 @@
       </swiper-item>
     </block>
   </swiper>
-  <view class="address df" style="font-size:15x;">
-    <!-- <button bindtap="doAddressSearch"><image class="dwcion" src="/images/map.png"></image></button>
-    <button bindtap="doAddressSearch">{{address}}</button> -->
-    <button style="width:75%;font-size:15px;text-align:left" bindtap="doAddressSearch" ><image class="dwcion" src="/images/map.png" style="float:left;border-radius:17px"></image>{{address}}</button>
-    <button style="width:20%;border-radius:15px; border:10rpx;background:rgb(245, 244, 244);height:65rpx; " bindtap="doSearch" class="searchcion"><image class="searchcion" style="margin-right:40rpx" src="/images/search_gr.png"></image></button>
 
-    <!--contact-button class="kfcion" style="margin-right:5rpx;" type="default-light" size="30" session-from="weapp"/-->
-
-  <button open-type='contact'>
+  <view class="address df"> 
+       <button style="width:70%;border-radius:15px; border:10rpx;background:rgb(245, 244, 244);height:65rpx;margin-left:20rpx; " bindtap="doSearch" class="searchcion"><image class="searchcion" style="margin-right:400rpx;" src="/images/search_gr.png"></image></button> 
+        <button style="width:20%;;height:65rpx;"open-type='contact'>
     <image class='kfcion' src='/images/kefu.png'/>
   </button>
+
   </view>
 
-  <view class="distance df" wx:if="{{distance > 5000}}"  style="font-size:840px">
-    <text class="distance">您当前选择的“{{address}}”，未在配送范围，我们会为您尽快开通配送服务</text>
-  </view>
 
   <view class="address df" >
       <image class='xlbcion' src='/images/xlb.png'></image>

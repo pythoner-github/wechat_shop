@@ -86,7 +86,7 @@
 .coupon-left .t3{left: 220rpx; top: 50rpx; width: 200rpx; font-size: 30rpx;}
 .coupon-left .t4{left: 10rpx; top:180rpx}
 
-.coupon-rig{position: relative}
+.coupon-rig{position:relative}
 .coupon-rig .t{text-align: left;color: #fff}
 .coupon-rig .t1{font-size: 20rpx; padding: 10rpx 0 10rpx 0;}
 .coupon-rig .t3{padding-top:2rpx}
