@@ -607,12 +607,12 @@ Page({
     console.log(that);
 
     wx.request({
-      url: app.d.apiUrl + 'Shopping/add',
+      url   : app.d.apiUrl + 'Order/index',
       method: 'post',
-      data: {
-        uid: app.d.userId,
-        pid: that.data.productId,
-        num: that.data.buynum,
+      data  : {
+        uid       : app.d.userId,
+        order_type: "receive",
+        page      : 0,
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -620,35 +620,69 @@ Page({
 
       success: function(res) {
         // init data
-        var data = res.data;
+        var status = res.data.status;
+        var list = res.data.ord;
 
-        if (data.status == 1) {
-          var ptype = e.currentTarget.dataset.type;
-
-          if (ptype == 'buynow') {
-            wx.redirectTo({
-              url: '/pages/order/pay?cartId=' + data.cart_id
-            });
-            return;
-          } else {
+        if (list.length > 0) {
             wx.showToast({
-              title: '加入购物车成功',
-              icon: 'success',
-              duration: 2000
+              title   : '您有未支付的订单，请支付后再下单！',
+              duration: 5000
             });
-          }
         } else {
-          wx.showToast({
-            title: data.err,
-            duration: 2000
-          });
+            wx.request({
+              url: app.d.apiUrl + 'Shopping/add',
+              method: 'post',
+              data: {
+                uid: app.d.userId,
+                pid: that.data.productId,
+                num: that.data.buynum,
+              },
+              header: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+
+              success: function(res) {
+                // init data
+                var data = res.data;
+
+                if (data.status == 1) {
+                  var ptype = e.currentTarget.dataset.type;
+
+                  if (ptype == 'buynow') {
+                    wx.redirectTo({
+                      url: '/pages/order/pay?cartId=' + data.cart_id
+                    });
+                    return;
+                  } else {
+                    wx.showToast({
+                      title: '加入购物车成功',
+                      icon: 'success',
+                      duration: 2000
+                    });
+                  }
+                } else {
+                  wx.showToast({
+                    title: data.err,
+                    duration: 2000
+                  });
+                }
+              },
+
+              fail: function() {
+                // fail
+                wx.showToast({
+                  title: '网络异常！',
+                  duration: 2000
+                });
+              }
+            });
         }
       },
 
       fail: function() {
         // fail
         wx.showToast({
-          title: '网络异常！',
+          title   : '网络异常！',
           duration: 2000
         });
       }
@@ -886,7 +920,7 @@ Page({
             success: function (res_img) {
               ctx.clearRect(0, 0, 1444, 1066);
               ctx.fillStyle = "#ffffff";
-              //ctx.fillStyle = "rgba(255, 255, 255, 0)"; 
+              //ctx.fillStyle = "rgba(255, 255, 255, 0)";
               ctx.fillRect(0,0,1444,1066);
 
               ctx.setFillStyle("#02446e");
@@ -894,7 +928,7 @@ Page({
               ctx.fillText("送菜娃商城  特惠商品 " + pro.name, 180, 40);
               ctx.setTextAlign("center");
               const codeText = '长按识别小程序码查看详情';
- 
+
               ctx.drawImage(res_img.tempFilePath, 0, 60, 644, 844);
               ctx.drawImage("/images/code.jpg", 20, 710, 250, 250);
               ctx.setFontSize(26);
