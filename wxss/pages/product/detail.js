@@ -625,6 +625,7 @@ Page({
 
         if (list.length > 0) {
             wx.showToast({
+			  icon    : 'none',
               title   : '您有未支付的订单，请支付后再下单！',
               duration: 5000
             });
