@@ -340,6 +340,28 @@ Page ({
     });
   },
 
+  calling: function () {
+
+    wx.makePhoneCall({
+
+      phoneNumber: '15309219026',
+
+      success: function () {
+
+        console.log("拨打电话成功！")
+
+      },
+
+      fail: function () {
+
+        console.log("拨打电话失败！")
+
+      }
+
+    })
+
+  },
+
   getOrdermsg: function() {
     var that = this;
 
