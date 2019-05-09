@@ -924,16 +924,22 @@ Page({
               //ctx.fillStyle = "rgba(255, 255, 255, 0)";
               ctx.fillRect(0,0,1444,1066);
 
-              ctx.setFillStyle("#02446e");
+              ctx.setFillStyle("blue");
               ctx.setFontSize(36);
-              ctx.fillText("送菜娃商城  特惠商品 " + pro.name, 180, 40);
+              ctx.fillText("送菜娃商城  特惠商品 " + pro.name, 120, 30);
               ctx.setTextAlign("center");
               const codeText = '长按识别小程序码查看详情';
 
+              ctx.setFontSize(24);
+              ctx.setFillStyle('red');
+              ctx.fillText(pro.price + " 元/" + pro.company, 350, 55);
+
               ctx.drawImage(res_img.tempFilePath, 0, 60, 644, 844);
               ctx.drawImage("/images/code.jpg", 20, 710, 250, 250);
-              ctx.setFontSize(26);
-              ctx.fillText("长按识别小程序码查看详情", 420, 935);
+              // ctx.setFontSize(24);
+              // ctx.setFillStyle('red');
+              // ctx.fillText(pro.price +" 元/"+ pro.company, 420, 920);
+              ctx.fillText("长按识别小程序码查看详情", 420, 920);
 
 
               ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下
