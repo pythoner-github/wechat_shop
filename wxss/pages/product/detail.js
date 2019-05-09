@@ -554,9 +554,11 @@ Page({
     });
   },
   onShareAppMessage: function(res) {
+    that = this;
+    var productId = that.data.productId;
     return {
       title: '送菜娃商城，好货来袭，抓紧抢购啦', // 转发后 所显示的title
-      path: '/pages/index/index', // 相对的路径
+      path: '/pages/index/index' + productId, // 相对的路径
 
       success: function(res) {
         // 转发成功
@@ -936,9 +938,7 @@ Page({
 
               ctx.drawImage(res_img.tempFilePath, 0, 60, 644, 844);
               ctx.drawImage("/images/code.jpg", 20, 710, 250, 250);
-              // ctx.setFontSize(24);
-              // ctx.setFillStyle('red');
-              // ctx.fillText(pro.price +" 元/"+ pro.company, 420, 920);
+  
               ctx.fillText("长按识别小程序码查看详情", 420, 920);
 
 
