@@ -554,11 +554,15 @@ Page({
     });
   },
   onShareAppMessage: function(res) {
-    that = this;
+    var that = this;
+    console.log(that.data.itemData);
     var productId = that.data.productId;
+    var name = that.data.itemData.cat_name;
+
     return {
-      title: '送菜娃商城，好货来袭，抓紧抢购啦', // 转发后 所显示的title
-      path: '/pages/index/index' + productId, // 相对的路径
+
+      title: '送菜娃商城精品菜',  // 转发后 所显示的title
+      path: "/pages/product/detail??productId=" + productId,  // 相对的路径
 
       success: function(res) {
         // 转发成功
