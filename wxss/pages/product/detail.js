@@ -558,11 +558,14 @@ Page({
     console.log(that.data.itemData);
     var productId = that.data.productId;
     var name = that.data.itemData.cat_name;
+    var company = that.data.itemData.company;
+    var price_yh = that.data.itemData.price_yh;
 
     return {
 
-      title: '送菜娃商城精品菜',  // 转发后 所显示的title
-      path: "/pages/product/detail??productId=" + productId,  // 相对的路径
+      title: '送菜娃商城' + that.data.itemData.brand + ' ' + name + ':' + price_yh +'/' +company,  // 转发后 所显示的title
+      path: "/pages/product/detail?productId=" + productId,  // 相对的路径
+
 
       success: function(res) {
         // 转发成功
