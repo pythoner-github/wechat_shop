@@ -935,15 +935,15 @@ Page({
 
               ctx.setFillStyle("blue");
               ctx.setFontSize(36);
-              ctx.fillText("送菜娃商城  特惠商品 " + pro.name, 120, 30);
+              ctx.fillText("送菜娃商城  特惠商品 " + pro.name, 100,40);
               ctx.setTextAlign("center");
               const codeText = '长按识别小程序码查看详情';
 
               ctx.setFontSize(24);
               ctx.setFillStyle('red');
-              ctx.fillText(pro.price + " 元/" + pro.company, 350, 55);
+              ctx.fillText(pro.price_yh + " 元/" + pro.company, 350, 65);
 
-              ctx.drawImage(res_img.tempFilePath, 0, 60, 644, 844);
+              ctx.drawImage(res_img.tempFilePath, 0, 75, 644, 644);
               ctx.drawImage("/images/code.jpg", 20, 710, 250, 250);
   
               ctx.fillText("长按识别小程序码查看详情", 420, 920);
