@@ -93,5 +93,5 @@
     </view>
   </view>
 
-  <view class="clear mt10" bindtap="getMore">点击查看更多</view>
+  <!--view class="clear mt10" bindtap="getMore">点击查看更多</view-->
 </view>

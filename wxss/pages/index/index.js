@@ -146,6 +146,10 @@ Page ({
       }
     })
   },
+  
+  onReachBottom() {
+      this.getMore()
+  },
 
   // 点击加载更多
   getMore: function (e) {
